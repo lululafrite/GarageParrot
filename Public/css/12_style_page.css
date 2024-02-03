@@ -1,0 +1,39 @@
+.article__page--nbOfPage{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+  }
+
+  .BtPage
+  {
+    width: 20px;
+    height:25px;
+    /*padding: 5px;*/
+    text-align: center;
+  
+    vertical-align: middle;
+  }
+  
+  .labelPage
+  {
+    width: 40px;
+    height:25px;
+    vertical-align: middle;
+    font-size: 1.6rem;
+    text-align: left;
+    /*margin: 10px;*/
+    /*vertical-align: middle;*/
+  }
+  
+  .txtPage
+  {
+    width: 40px;
+    height: 25px;
+    font-size: 1.6rem;
+    text-align: right;
+    vertical-align: middle;
+    border:none;
+    background-color:white;
+    color:black;
+    /*margin: 10px;*/
+  }

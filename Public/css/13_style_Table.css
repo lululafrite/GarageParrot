@@ -1,0 +1,78 @@
+
+/***************************************************************
+table
+****************************************************************/
+
+[class*="table__product"]{
+    /*padding: 10px 15px 10px 15px;
+    margin: 10px;*/
+}
+
+th{
+    /*background-color:lightgrey;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    height: 30px;
+    border:1PX solid black;
+    color: black;
+    font-size: 1.6rem;*/
+}
+
+td{
+    /*background-color:white;
+    text-align: left;
+    vertical-align: middle;
+    overflow: auto;
+    height: 50px;
+    border:1PX solid black;*/
+}
+
+/***************************************************************
+    table add
+****************************************************************/
+
+.tdLineAdd{
+    width: 30px;
+    min-width: 15px;
+    max-width: 35px;
+    resize: vertical;
+    background-color:lightgrey;
+}
+  
+
+.tdLine{
+    width: 30px;
+    min-width: 15px;
+    max-width: 35px;
+    resize: vertical;
+    background-color:lightgrey;
+}
+  
+.tdUpdate, .tdDelete{
+/*width: 5%;*/
+    text-align: center;
+}
+
+.btUpdate, .btDelete{
+    width: 30px;
+    height: 30px;
+    border: 1PX solid white;
+}
+
+.iconeUpdate, .iconeDelete{
+    width: 100%;
+}
+
+/**********************************************/
+/* Input */
+/**********************************************/
+
+input, textarea{
+    border: none;
+    width: 100%;
+}
+/*
+[type=text], textarea{
+    padding: 0px 5px 0px 5px;
+}*/
