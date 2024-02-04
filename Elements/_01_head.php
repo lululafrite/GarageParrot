@@ -13,7 +13,7 @@
 	<meta name="description" content="Decouvrez sur ce site, les competences de ludovic follaco en tant que conseil et developpeur de solution de productivité pour l'industrie">
 	<meta name="keywords" content="industrie, système, qualité, application, interaction, gestion, productivité">
 
-    <link rel="icon" href="images/S&D_3.png" type="image/png">
+    <link rel="icon" href="img/icon/garage_75x75.png" type="image/png">
 
 	<!-- **************************************************************************** -->
 	<!-- ---------------------------- SETUP STYLE SHEETS ---------------------------- -->

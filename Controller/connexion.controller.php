@@ -1,9 +1,45 @@
 <?php
-	if (isset($_POST['envoyer'])) {
 
-        $myEmail = $_POST["email"];
-        $myPw = $_POST["password"];
+    if (isset($_POST['envoyer'])) {
+        
+        include_once('../Model/connexion.class.php');
+        $MyUserConnect = new userConnect();
 
-        echo $myEmail . ' , ' . $myPw;
+        if ($_POST["email"] != null && $_POST["password"] != null ) {
+
+            try {
+                
+                $data = $MyUserConnect->queryConnect($_POST["email"],$_POST["password"]);
+                
+                $MyUserConnect->SetUserConnect($data['type']);
+                $_SESSION['pseudoUser']=$data['pseudo'];
+                
+                $MyUserConnect->SetConnexion(true);
+
+            }catch (Exception $e){
+                
+                echo "error in the query : " . $e->getMessage();
+                $MyUserConnect->SetConnexion(false);
+
+            }
+
+        }else{
+
+            $MyUserConnect->SetUserConnect('guest');
+            $MyUserConnect->SetConnexion(false);
+
+        }
+
+        if($_SESSION['local']===true){
+
+            echo '<script>window.location.href = "http://garageparrot/index.php?page=home";</script>';
+
+        }else{
+
+            echo '<script>window.location.href = "https://www.follaco.fr/gp/index.php?page=home";</script>';
+
+        }
+        //exit();
+
     }
 ?>

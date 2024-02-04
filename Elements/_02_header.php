@@ -8,7 +8,7 @@
         
         <div class="container-fluid text-center m-auto">
             <h1 class="text-light">GARAGE PARROT</h1>
-            <h2 class="text-light">Des véhicules de qualités selectionnés par des experts</h2>
+            <h2 class="text-light">Des véhicules de qualité selectionnés par des experts</h2>
         </div>
 
     </div>

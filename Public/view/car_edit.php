@@ -1,10 +1,10 @@
 <?php
-    include_once('../Controller/userEdit.controller.php');
+    include_once('../Controller/carEdit.controller.php');
 ?>
 
 <section class="container">
 
-    <form action="" method="post" id="formUserEdit" onsubmit="return confirmDelete()">
+    <form action="" method="post" id="formUserEdit">
                 
         <table class="w-100">
 
@@ -278,7 +278,7 @@
                     <a href="index.php?page=user" class="btn btn-lg btn-warning fs-4" name="bt__userEdit--cancel">Retour</a>
                     <button type="submit" class="btn btn-lg btn-success fs-4" id="bt__userEdit_save" name="bt__userEdit_save">Enregistrer</button>
                     <button type="submit" class="btn btn-lg btn-info fs-4" id="bt__userEdit_new" name="bt__userEdit_new">Nouveau</button>
-                    <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt__userEdit_delete" name="bt__userEdit_delete">Supprimer</button>
+                    <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt__userEdit_delete" name="bt__userEdit_delete" onclick="confirmDelete()">Supprimer</button>
                 </td>
             </tr>
 
@@ -311,16 +311,14 @@
 
     // Affichez le message de confirmation avant suppression
     function confirmDelete() {
-    var userConfirmed = confirm("Êtes-vous sûr de vouloir supprimer cette enregistrement?");
-    
-    if (!userConfirmed) {
-        //alert("Suppression annulée par l'utilisateur.");
-        return false;  // Annule la soumission du formulaire
+
+        if (confirm("Êtes-vous sûr de vouloir supprimer cette enregistrement?")) {
+
+            //document.getElementById('confirmationForm').submit();
+            document.getElementById('formUserEdit').submit();
+
+        }
+
     }
-
-    // Si l'utilisateur a confirmé, le formulaire sera soumis normalement
-    return true;
-}
-
 
 </script>

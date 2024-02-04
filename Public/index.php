@@ -7,7 +7,7 @@
     require '../vendor/autoload.php';
     
     if (!isset($_SESSION['userConnected'])) {
-        $_SESSION['userConnected']='guest';
+        $_SESSION['userConnected']='Guest';
         $_SESSION['pseudoUser']='Guest';
         $_SESSION['theTable']='car';
         $_SESSION['laPage']=1;
@@ -17,7 +17,7 @@
         $_SESSION['addUser']=false;
         $_SESSION['addOrder']=false;
         $_SESSION['errorFormUser']=false;
-        $_SESSION['connected']=false;
+        $_SESSION['connexion']=false;
     }
 
     // La variable $_SESSION['local'] doit être changée manuellement : mettre à true si travail en local, sinon mettre à false.
@@ -41,31 +41,33 @@
     require '../Elements/_02_header.php';
 ?>
 <script>
+
     var pageTitle = document.title;
 
     if (window.location.href.includes("home")) {
-        pageTitle = "Le site de Ludovic - Accueil";
-    } else if (window.location.href.includes("car")) {
-        pageTitle = "Le site de Ludovic - Nos occasions";
-    } else if (window.location.href.includes("order")) {
-        pageTitle = "Le site de Ludovic - commande";
-    } else if (window.location.href.includes("contact_us")) {
-        pageTitle = "Le site de Ludovic - contact us";
-    } else if (window.location.href.includes("contact")) {
-        pageTitle = "Le site de Ludovic - contact";
+        pageTitle = "Garage V.PARROT - Accueil";
+    } else if (window.location.href.includes("user")) {
+        pageTitle = "Garage V.PARROT - contacts";
     } else if (window.location.href.includes("user_edit")) {
-        pageTitle = "Le site de Ludovic - Modifier Contact";
+        pageTitle = "Garage V.PARROT - Editer Contact";
+    } else if (window.location.href.includes("car")) {
+        pageTitle = "Garage V.PARROT - Nos occasions";
+    } else if (window.location.href.includes("car_edit")) {
+        pageTitle = "Garage V.PARROT - Editer occasion";
+    } else if (window.location.href.includes("contact_us")) {
+        pageTitle = "Garage V.PARROT - Nous contacter";
     } else if (window.location.href.includes("connexion")) {
-        pageTitle = "Le site de Ludovic - connexion";
+        pageTitle = "Garage V.PARROT - connexion";
+    } else if (window.location.href.includes("disconnect")) {
+        pageTitle = "Garage V.PARROT - Déconnexion";
     } else if (window.location.href.includes("error_page")) {
-        pageTitle = "Le site de Ludovic - error access page";
+        pageTitle = "Garage V.PARROT - Page inaccessible";
     } else if (window.location.href.includes("error_unknown_page")) {
-        pageTitle = "Le site de Ludovic - error access page";
-    }else if (window.location.href.includes("disconnect")) {
-        pageTitle = "Le site de Ludovic - déconnecter";
-    }
+        pageTitle = "Garage V.PARROT - Page inéxistante";
+    } 
 
     document.getElementById("pageTitle").innerText = pageTitle;
+    
 </script>
 
 <main>
@@ -73,41 +75,27 @@
     <?php
         if ($page === 'home'){
             require 'view/index.php';
-        }
-        elseif($page === 'product'){
-            require 'view/product.php';
-        }
-        elseif($page === 'offer'){
-            require 'view/offers.php';
-        }
-        elseif ($page === 'contact_us'){
-            require 'view/contact_us.php';
-        }
-        elseif ($page === 'connexion'){
-            require 'view/connexion.php';
-        }
-        elseif ($page === 'disconnect'){
-            require 'view/disconnect.php';
-        }
-        elseif ($page === 'user'){
+        }elseif ($page === 'user'){
             require 'view/user.php';
-        }
-        elseif ($page === 'user_edit'){
+        }elseif ($page === 'user_edit'){
             require 'view/user_edit.php';
-        }
-        elseif ($page === 'error_page'){
+        }elseif($page === 'car'){
+            require 'view/car.php';
+        }elseif ($page === 'car_edit'){
+            require 'view/car_edit.php';
+        }elseif ($page === 'contact_us'){
+            require 'view/contact_us.php';
+        }elseif ($page === 'connexion'){
+            require 'view/connexion.php';
+        }elseif ($page === 'disconnect'){
+            require 'view/disconnect.php';
+        }elseif ($page === 'error_page'){
             require 'view/error_access_page.php';
-        }
-        elseif ($page === 'error_unknown_page'){
+        }elseif ($page === 'error_unknown_page'){
             require 'view/error_unknown_page.php';
-        }
-        elseif($page === 'image'){
-            require 'view/testimg.php';
-        }
-        elseif($page === '404'){
+        }elseif($page === '404'){
             require 'view/error_unknown_page.php';
-        }
-        else {
+        }else {
             require 'view/error_unknown_page.php';
         }
     ?>

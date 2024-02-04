@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Intl\Scripts;
+
 use function PHPSTORM_META\type;
 
 	class User
@@ -107,6 +109,23 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
+		private $newUser;
+		public function getNewUser()
+		{
+			if(empty($_SESSION['newUser'])){
+				$_SESSION['newUser'] = false;
+				$this->newUser = false;
+			}
+			return $_SESSION['newUser'];
+		}
+		public function setNewUser($new)
+		{
+			$_SESSION['newUser'] = $new;
+			$this->newUser = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
 		private $listPseudo;
 		public function getPseudoUser()
 		{
@@ -207,28 +226,32 @@ use function PHPSTORM_META\type;
 
 			$bdd=null;
 		}
+
 		//-----------------------------------------------------------------------
 
 		public function addUser()
 		{
 			include("../Controller/ConfigConnGp.php");
+			$sql = $bdd->query("SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "'");
+			$id_type = $sql->fetch();
+			$idUser = intval($id_type['id_type']);
 
-			try
-			{
-			    $bdd->exec(
-							'INSERT INTO user("name", "surname", "pseudo",
-													"email", "phone", "password", "id_type") 
-							VALUES(
-									 "'. $this->name .'","'. $this->surname .'"
-									,"'. $this->pseudo .'","'. $this->email .'","'. $this->phone .'"
-									,"'. $this->password .'","'. $this->type .'")'
-						);
-			    return true;
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
-			    return false;
+			try {
+				$bdd->exec("INSERT INTO `user` (`name`, `surname`, `pseudo`, `email`, `phone`, `password`, `id_type`)
+							VALUES ('" . $this->name . "','" . $this->surname . "',
+									'" . $this->pseudo . "','" . $this->email . "',
+									'" . $this->phone . "','" . $this->password . "',
+									'" . $idUser . "')");
+			
+			$sql = $bdd->query("SELECT `id_user` FROM `user` WHERE `email`='" . $this->email . "'");
+			$id_user = $sql->fetch();
+			$this->id_user = intval($id_user['id_user']);
+			echo '<script>alert("L\'enregistrement est effectué!");</script>';
+
+			} catch (Exception $e) {
+				
+				echo "Erreur de la requête : " . $e->getMessage();
+
 			}
 
 			$bdd=null;
@@ -256,6 +279,8 @@ use function PHPSTORM_META\type;
 								`id_type` = " . intval($id_type[0]['id_type']) . "
 							WHERE `id_user` = " . $idUser . "
 							");
+				
+				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
 			catch (Exception $e)
 			{
@@ -263,21 +288,22 @@ use function PHPSTORM_META\type;
 			}
 
 			$this->setType('Administrator');
-			//$MyUser->setType('Administrator');
-			//$_SESSION['userType'] =  "Administrator";
 
 			$bdd=null;
 		}
 
 		//-----------------------------------------------------------------------
 
-		public function deleteUser()
+		public function deleteUser($id)
 		{
 			include("../Controller/ConfigConnGp.php");
 
 			try
 			{
-			    $bdd->exec('DELETE FROM user WHERE id_user=' . $this->id_user);
+			    $bdd->exec('DELETE FROM user WHERE id_user=' . $id);
+				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
+				echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
+				die();
 			}
 			catch (Exception $e)
 			{
@@ -287,7 +313,7 @@ use function PHPSTORM_META\type;
 			$bdd=null;
 		}
 
-        //__Ajouter produit?___________________________________________
+        //__Ajouter user?___________________________________________
         
         public function getAddUser()
         {

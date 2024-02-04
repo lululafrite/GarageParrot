@@ -1,14 +1,8 @@
-<?php
-    include_once('../Model/userConnect.class.php');
-    $MyUserConnect = new userConnect();
-    $_SESSION['userConnected'] = $MyUserConnect->getUserConnect();
-?>
-
-<div class="containe d-flex justify-content-between bg-body-tertiary p-5 py-2">
+<div class="d-flex justify-content-between bg-body-tertiary py-2">
 
     <div class="text-center my-auto">
         <a href="index.php?page=home">
-            <img class="img-fluid" src="img/Logo_Garage_Parrot_250x70_Dark.png" alt="logo du garage parrot">
+            <img class="img-fluid px-2" src="img/Logo_Garage_Parrot_250x70_Dark.png" alt="logo du garage parrot">
         </a>
     </div>
 
@@ -31,52 +25,74 @@
                             Accueil
                         </a>
                     </li>
-
                     <?php
-                    if ($_SESSION['userConnected'] === 'Guest')
+                    if ($_SESSION['userConnected'] === "Administrator")
                     {
                     ?>
-                    <!--
-                        <li class="nav-item">
-                            <a class="nav-link nav-link_" aria-current="page" href="index.php?page=connexion">Connexion</a>
-                        </li>
-                    -->
-                    <?php
-                    }
+                    <li class="nav-item dropdown custom-border-md-bottom">
 
-                    if ($_SESSION['userConnected'] ==="Administrator")
-                    {
-                    ?>
-                        <li class="nav-item dropdown custom-border-md-bottom">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="p-2 h-75" src="img/icon/search.svg" alt="icone du bouton s'identifier">
-                                Rechercher
+                            <img class="p-2 h-75" src="img/icon/people.svg" alt="icone du bouton s'identifier">    
+                                Contacts
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="index.php?page=user">Contacts</a></li>
+                                <li>    
+                                    <a class="dropdown-item" href="index.php?page=user">
+                                        <img class="p-2 h-75" src="img/icon/search.svg" alt="icone du bouton s'identifier">
+                                        Contacts
+                                    </a>
+                                </li>
+                                <li>
+                                    <form action="index.php?page=user_edit" method="post">
+                                        <button class="dropdown-item" id="nav_new_user" name="nav_new_user" type="submit">
+                                            <img class="p-2 h-75" src="img/icon/person-plus.svg" alt="icone du bouton s'identifier">
+                                            Nouveau
+                                        </button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
-                        <?php
-                    }
-
-                    if ($_SESSION['userConnected'] ==="Administrator")
-                    {
-                    ?>
-
+                    </li>
                     <?php
                     }
-
-                    if ($_SESSION['userConnected'] ==="Administrator")
+                    if ($_SESSION['userConnected'] ==="Administrator" || $_SESSION['userConnected'] === "User" || $_SESSION['userConnected'] ==="Guest")
                     {
                     ?>
-                    <!--
-                        <li class="nav-item">
-                            <a class="nav-link nav-link_" aria-current="page" href="index.php?page=disconnect">Disconnect</a>
-                        </li>
-                    -->
+                    <li class="nav-item dropdown custom-border-md-bottom">
+
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="p-2 h-75" src="img/icon/car-icon_71x75.png" alt="icone du bouton s'identifier">    
+                            <span class="Nav_Span1">Nos véhicules<br><span class="Nav_Span2">d'occasions</span></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>    
+                                <a class="dropdown-item" href="index.php?page=car">
+                                    <img class="p-2 h-75" src="img/icon/car-front.svg" alt="icone du bouton s'identifier">
+                                    Nos occasions
+                                </a>
+                            </li>
+                    <?php
+                    }
+                    if ($_SESSION['userConnected'] ==="Administrator" || $_SESSION['userConnected'] ==="User")
+                    {
+                    ?>
+                            <form action="index.php?page=car_edit" method="post">
+                                <li>
+                                    <button class="dropdown-item" id="nav_new_user" name="nav_new_user" type="submit">
+                                        <img class="p-2" src="img/icon/car-front-fill.svg" alt="icone du bouton s'identifier">
+                                        Nouveau
+                                    </button>
+                                </li>
+                            </form>
                     <?php
                     }
                     ?>
+                            
+                    </ul>
+
+                    </li>
 
                     <li class="nav-item dropdown custom-border-md-bottom">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -97,11 +113,22 @@
 
                     <li class="nav-item dropdown custom-border-md-bottom">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="p-2 h-75" src="img/icon/person.svg" alt="icone du menu s'identifier"> Mon compte
+                            <img class="p-2 h-75" src="img/icon/person.svg" alt="icone du menu s'identifier">
+                            <span class="Nav_Span1">Mon compte<br><span class="Nav_Span2">Hello <?php echo $_SESSION['pseudoUser'];?> !</span></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="index.php?page=connexion">S'identifier</a></li>
-                            <li><a class="dropdown-item" href="index.php?page=disconnect">Déconnexion</a></li>
+                            <li>
+                                <a class="dropdown-item" href="index.php?page=connexion">
+                                    <img class="p-2" src="img/icon/login_25x25.png" alt="icone du bouton s'identifier">    
+                                    S'identifier
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="index.php?page=disconnect">
+                                    <img class="p-2" src="img/icon/logout_25x25.png" alt="icone du bouton s'identifier">    
+                                    Déconnexion
+                                </a>
+                            </li>
                         </ul>
                     </li>
 

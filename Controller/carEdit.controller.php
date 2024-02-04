@@ -1,7 +1,7 @@
 <?php
 
     //---Load model user--------------------
-    require_once('../Model/user.class.php');
+    require_once('../Model/car.class.php');
     //---Configure object User--
     $MyUser = new User();
         
@@ -35,13 +35,8 @@
             // Si le champ est vide, définissez un message d'erreur
             $MessageName = "<span>Votre numéro d'identifiant. Ce numèro est incrémenté automatiquement par la robot.</span>";
             $inputId = "";
-
             if($_SESSION['newUser'] === false){
                 $_SESSION['errorFormUser']=true;
-            }
-
-            if(isset($_POST['nav_new_user'])){
-                $_SESSION['errorFormUser']=false;
             }
 
         }else{
@@ -231,19 +226,11 @@
         
         if ($_SESSION['errorFormUser'] === false){
             
-            if(isset($_POST['nav_new_user'])){
-                $valeurDefault = "User";
-                $_SESSION['userType'] = "User";
-                $MyUser->setType("User");
-            }else{
-                $MyUser->setType("");
-            }
-
-            $MyUser->setId("");
             $MyUser->setName("");
             $MyUser->setSurname("");
             $MyUser->setPseudo("");
             $MyUser->setEmail("");
+            $MyUser->setType("");
             $MyUser->setPhone("");
             $MyUser->setPassword("");
 
@@ -277,7 +264,7 @@
 
         }
 
-        if(!empty($id)){
+        if(isset($id) || !empty($id)){
 
             $users = $MyUser->getUser($id);
 

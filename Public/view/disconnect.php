@@ -1,6 +1,6 @@
 <?php
     
-    if ($user === "guest") {
+    if ($user === "Guest") {
         if($_SESSION['local']===true){
             echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
         }
@@ -10,13 +10,14 @@
         exit();
     }
     
-    include_once('../Model/userConnect.class.php');
+    include_once('../Model/connexion.class.php');
     $MyUserConnect = new userConnect();
     
     /*include_once('../Controller/page.controller.php');
     $MyPage = new Page();*/
 
-    $MyUserConnect->SetUserConnect('guest');
+    $MyUserConnect->SetUserConnect('Guest');
+    $_SESSION['pseudoUser']="Guest";
 
     if($_SESSION['local']===true){
         echo '<script>window.location.href = "http://garageparrot/index.php?page=home";</script>';

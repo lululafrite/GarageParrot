@@ -3,7 +3,7 @@
 //---Product page controller-------------------------------------
 //---------------------------------------------------------------
 //---Checking access permissions---
-    if ($_SESSION['userConnected'] != "Administrator") {
+    /*if ($_SESSION['userConnected'] === "Guest") {
         if($_SESSION['local']===true){
             echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
         }
@@ -11,7 +11,7 @@
             echo '<script>window.location.href = "https://www.follaco.fr/gp/index.php?page=error_page";</script>';
         }
         exit();
-    }
+    }*/
 
 //---Load model user--------------------
     require_once('../Model/user.class.php');
