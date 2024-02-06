@@ -4,7 +4,7 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
-	class User
+	class Car
 	{
 
 		function __construct()
@@ -13,143 +13,181 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		private $id_user;
+		private $id_car;
 		public function getId()
 		{
-			return $this->id_user;
+			return $this->id_car;
 		}
 		public function setId($new)
 		{
-			$this->id_user = $new;
+			$this->id_car = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $name;
-		public function getName()
+		private $brand;
+		public function getBrand()
 		{
-			return $this->name;
+			return $this->brand;
 		}
-		public function setName($new)
+		public function setBrand($new)
 		{
-			$this->name = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $surname;
-		public function getSurname()
-		{
-			return $this->surname;
-		}
-		public function setSurname($new)
-		{
-			$this->surname = $new;
+			$this->brand = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $pseudo;
-		public function getPseudo()
+		private $model;
+		public function getModel()
 		{
-			return $this->pseudo;
+			return $this->model;
 		}
-		public function setPseudo($new)
+		public function setModel($new)
 		{
-			$this->pseudo = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $email;
-		public function getEmail()
-		{
-			return $this->email;
-		}
-		public function setEmail($new)
-		{
-			$this->email = $new;
+			$this->model = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $phone;
-		public function getPhone()
+		private $motorization;
+		public function getMotorization()
 		{
-			return $this->phone;
+			return $this->motorization;
 		}
-		public function setPhone($new)
+		public function setMotorization($new)
 		{
-			$this->phone = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $password;
-		public function getPassword()
-		{
-			return $this->password;
-		}
-		public function setPassword($new)
-		{
-			$this->password = $new;
+			$this->motorization = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $type;
-		public function getType()
+		private $year;
+		public function getYear()
 		{
-			return $this->type;
+			return $this->year;
 		}
-		public function setType($new)
+		public function setYear($new)
 		{
-			$this->type = $new;
+			$this->year = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $newUser;
-		public function getNewUser()
+		private $mileage;
+		public function getMileage()
 		{
-			if(empty($_SESSION['newUser'])){
-				$_SESSION['newUser'] = false;
-				$this->newUser = false;
+			return $this->mileage;
+		}
+		public function setMileage($new)
+		{
+			$this->mileage = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $price;
+		public function getPrice()
+		{
+			return $this->price;
+		}
+		public function setPrice($new)
+		{
+			$this->price = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $sold;
+		public function getSold()
+		{
+			return $this->sold;
+		}
+		public function setSold($new)
+		{
+			$this->sold = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $image1;
+		public function getImage1()
+		{
+			return $this->image1;
+		}
+		public function setImage1($new)
+		{
+			$this->image1 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $image2;
+		public function getImage2()
+		{
+			return $this->image2;
+		}
+		public function setImage2($new)
+		{
+			$this->image2 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $image3;
+		public function getImage3()
+		{
+			return $this->image3;
+		}
+		public function setImage3($new)
+		{
+			$this->image3 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $image4;
+		public function getImage4()
+		{
+			return $this->image4;
+		}
+		public function setImage4($new)
+		{
+			$this->image4 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $image5;
+		public function getImage5()
+		{
+			return $this->image5;
+		}
+		public function setImage5($new)
+		{
+			$this->image5 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $newCar;
+		public function getNewCar()
+		{
+			if(empty($_SESSION['newCar'])){
+				$_SESSION['newCar'] = false;
+				$this->newCar = false;
 			}
-			return $_SESSION['newUser'];
+			return $_SESSION['newCar'];
 		}
-		public function setNewUser($new)
+		public function setNewCar($new)
 		{
-			$_SESSION['newUser'] = $new;
-			$this->newUser = $new;
+			$_SESSION['newCar'] = $new;
+			$this->newCar = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $listPseudo;
-		public function getPseudoUser()
-		{
-			include("../Controller/ConfigConnGp.php");
-
-			try
-			{
-			    $sql = $bdd->query("SELECT `pseudo` FROM `user` ORDER BY `pseudo` ASC");
-
-				while ($this->listPseudo[] = $sql->fetch());
-				return $this->listPseudo;
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
-			}
-
-			$bdd=null;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $theUser;
-		public function getUser($îdUser)
+		private $theCar;
+		public function getCar($îdCar)
 		{
 			include("../Controller/ConfigConnGp.php");
 
@@ -160,27 +198,36 @@ use function PHPSTORM_META\type;
 			try
 			{
 			    $sql = $bdd->query("SELECT
-										`user`.`id_user`,
-										`user`.`name`,
-										`user`.`surname`,
-										`user`.`pseudo`,
-										`user`.`email`,
-										`user`.`phone`,
-										`user`.`password`,
-										`user_type`.`type` AS `type`
+										`car`.`id_car`,
+										`brand`.`name` AS `brand`,
+										`model`.`name` AS `model`,
+										`motorization`.`name` AS `motorization`,
+										`car`.`year`,
+										`car`.`mileage`,
+										`car`.`price`,
+										`car`.`sold`,
+										`car`.`image1`,
+										`car`.`image2`,
+										`car`.`image3`,
+										`car`.`image4`,
+										`car`.`image5`
 
-									FROM `user`
+									FROM `car`
 
-									LEFT JOIN `user_type`
-										ON `user`.`id_type` = `user_type`.`id_type`
+									LEFT JOIN `brand`
+										ON `car`.`id_brand` = `brand`.`id_brand`
+									LEFT JOIN `model`
+										ON `car`.`id_model` = `model`.`id_model`
+									LEFT JOIN `motorization`
+										ON `car`.`id_motorization` = `motorization`.`id_motorization`
 									
-									WHERE `user`.`id_user`=$îdUser
+									WHERE `car`.`id_car`=$îdCar
 								");
 
 				
 				/*while ($this->theContact[] = $sql->fetch());*/
-				$this->theUser[] = $sql->fetch();
-				return $this->theUser;
+				$this->theCar[] = $sql->fetch();
+				return $this->theCar;
 			}
 			catch (Exception $e)
 			{
@@ -192,32 +239,44 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		private $userList;
-		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
+		private $carList;
+		public function get($whereClause, $orderBy = 'price', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
 			include("../Controller/ConfigConnGp.php");
 			
 			try
 			{
 			    $sql = $bdd->query("SELECT
-										`user`.`id_user`,
-										`user`.`name`,
-										`user`.`surname`,
-										`user`.`pseudo`,
-										`user`.`email`,
-										`user`.`phone`,
-										`user`.`password`,
-										`user_type`.`type` AS `type`
-									FROM
-										`user`
-									LEFT JOIN `user_type` ON `user`.`id_type` = `user_type`.`id_type`
+										`car`.`id_car`,
+										`brand`.`name` AS `brand`,
+										`model`.`name` AS `model`,
+										`motorization`.`name` AS `motorization`,
+										`car`.`year`,
+										`car`.`mileage`,
+										`car`.`price`,
+										`car`.`sold`,
+										`car`.`image1`,
+										`car`.`image2`,
+										`car`.`image3`,
+										`car`.`image4`,
+										`car`.`image5`
+
+									FROM `car`
+
+									LEFT JOIN `brand`
+										ON `car`.`id_brand` = `brand`.`id_brand`
+									LEFT JOIN `model`
+										ON `car`.`id_model` = `model`.`id_model`
+									LEFT JOIN `motorization`
+										ON `car`.`id_motorization` = `motorization`.`id_motorization`
+
 									WHERE $whereClause
-									ORDER BY $orderBy $ascOrDesc
+									ORDER BY `$orderBy` $ascOrDesc
 									LIMIT $firstLine, $linePerPage
 								");
 
-				while ($this->userList[] = $sql->fetch());
-				return $this->userList;
+				while ($this->carList[] = $sql->fetch());
+				return $this->carList;
 			}
 			catch (Exception $e)
 			{
@@ -229,23 +288,23 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		public function addUser()
+		public function addCar()
 		{
 			include("../Controller/ConfigConnGp.php");
-			$sql = $bdd->query("SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "'");
+			$sql = $bdd->query("SELECT `id_type` FROM `car_type` WHERE `type`='" . $this->type . "'");
 			$id_type = $sql->fetch();
-			$idUser = intval($id_type['id_type']);
+			$idCar = intval($id_type['id_type']);
 
 			try {
-				$bdd->exec("INSERT INTO `user` (`name`, `surname`, `pseudo`, `email`, `phone`, `password`, `id_type`)
+				$bdd->exec("INSERT INTO `car` (`name`, `surname`, `pseudo`, `email`, `phone`, `password`, `id_type`)
 							VALUES ('" . $this->name . "','" . $this->surname . "',
 									'" . $this->pseudo . "','" . $this->email . "',
 									'" . $this->phone . "','" . $this->password . "',
-									'" . $idUser . "')");
+									'" . $idCar . "')");
 			
-			$sql = $bdd->query("SELECT `id_user` FROM `user` WHERE `email`='" . $this->email . "'");
-			$id_user = $sql->fetch();
-			$this->id_user = intval($id_user['id_user']);
+			$sql = $bdd->query("SELECT `id_car` FROM `car` WHERE `email`='" . $this->email . "'");
+			$id_car = $sql->fetch();
+			$this->id_car = intval($id_car['id_car']);
 			echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
 			} catch (Exception $e) {
@@ -259,17 +318,17 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		public function updateUser($idUser)
+		public function updateCar($idCar)
 		{
 			include("../Controller/ConfigConnGp.php");
 			try
 			{
-				$sql = $bdd->query("SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "'");
+				$sql = $bdd->query("SELECT `id_type` FROM `car_type` WHERE `type`='" . $this->type . "'");
 				while ($id_type[] = $sql->fetch());
 
-				$idUser = intval($idUser);
+				$idCar = intval($idCar);
 				
-			    $bdd->exec("UPDATE `user` SET
+			    $bdd->exec("UPDATE `car` SET
 								`name` = '" . $this->name . "',
 								`surname` = '" . $this->surname . "',
 								`pseudo` = '" . $this->pseudo . "',
@@ -277,7 +336,7 @@ use function PHPSTORM_META\type;
 								`phone` = '" . $this->phone . "',
 								`password` = '" . $this->password . "',
 								`id_type` = " . intval($id_type[0]['id_type']) . "
-							WHERE `id_user` = " . $idUser . "
+							WHERE `id_car` = " . $idCar . "
 							");
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
@@ -287,22 +346,20 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$this->setType('Administrator');
-
 			$bdd=null;
 		}
 
 		//-----------------------------------------------------------------------
 
-		public function deleteUser($id)
+		public function deleteCar($id)
 		{
 			include("../Controller/ConfigConnGp.php");
 
 			try
 			{
-			    $bdd->exec('DELETE FROM user WHERE id_user=' . $id);
+			    $bdd->exec('DELETE FROM car WHERE id_car=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
-				echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
+				echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
 				die();
 			}
 			catch (Exception $e)
@@ -313,19 +370,19 @@ use function PHPSTORM_META\type;
 			$bdd=null;
 		}
 
-        //__Ajouter user?___________________________________________
+        //__Ajouter car?___________________________________________
         
-        public function getAddUser()
+        public function getAddCar()
         {
-            if(is_null($_SESSION['addUser']))
+            if(is_null($_SESSION['addCar']))
             {
-                $_SESSION['addUser']=false;
+                $_SESSION['addCar']=false;
             }
-            return $_SESSION['addUser'];
+            return $_SESSION['addCar'];
         }
-        public function setAddUser($new)
+        public function setAddCar($new)
         {
-            $_SESSION['addUser']=$new;
+            $_SESSION['addCar']=$new;
         }
 
 	}

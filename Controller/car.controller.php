@@ -3,7 +3,7 @@
 //---Product page controller-------------------------------------
 //---------------------------------------------------------------
 //---Checking access permissions---
-    /*if ($_SESSION['userConnected'] === "Guest") {
+    /*if ($_SESSION['carConnected'] === "Guest") {
         if($_SESSION['local']===true){
             echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
         }
@@ -13,117 +13,143 @@
         exit();
     }*/
 
-//---Load model user--------------------
-    require_once('../Model/user.class.php');
-//---Configure object User--
-    $MyUser = new User();
+//---Load model car--------------------
+    require_once('../Model/car.class.php');
+//---Configure object Car--
+    $MyCar = new Car();
     
 //---Configure the database table--
-    $_SESSION['theTable'] = "user";
+    $_SESSION['theTable'] = "car";
 
 //---------------------------------------------------------------
-//---Dynamic script of the user page--------------------------
+//---Dynamic script of the car page--------------------------
 //---------------------------------------------------------------
 
     // Initialiser les variables pour paramètrer la clause where afin d'executer la requete SELECT pour rechercher le ou les contacts
-    $name_umpty = true;
-    $pseudo_umpty = true;
-    $userType_umpty = true;
+    $brand_umpty = true;
+    $model_umpty = true;
+    $mileage_umpty = true;
+    $price_umpty = true;
 
     $whereClause = "";
     
-    $criteriaName = "";
-    $criteriaPseudo = "";
-    $criteriaUserType = "";
+    $criteriaBrand = "";
+    $criteriaModel = "";
+    $criteriaMileage = "";
+    $criteriaPrice = "";
 
-    if(isset($_POST['Text_User_Nom'])){
-        $_SESSION['criteriaName'] = $_POST['Text_User_Nom'];
+    if(isset($_POST['Text_Car_brand'])){
+        $_SESSION['criteriaBrand'] = $_POST['Text_Car_Brand'];
     }else if ($_SESSION['NextOrPrevious'] === false){
-        $_SESSION['criteriaName'] = "";
+        $_SESSION['criteriaBrand'] = "";
     }
 
-    if(isset($_POST['Text_User_Pseudo'])){
-        $_SESSION['criteriaPseudo'] = $_POST['Text_User_Pseudo'];
+    if(isset($_POST['Text_Car_Model'])){
+        $_SESSION['criteriaModel'] = $_POST['Text_Car_Model'];
     }else if ($_SESSION['NextOrPrevious'] === false){
-        $_SESSION['criteriaPseudo'] = "";
+        $_SESSION['criteriaModel'] = "";
     }
 
-    if(isset($_POST['Select_User_Type'])){
-        $_SESSION['criteriaUserType'] = $_POST['Select_User_Type'];
+    if(isset($_POST['Select_Car_Mileage'])){
+        $_SESSION['criteriaCarMileage'] = $_POST['Select_Car_Mileage'];
     }else if ($_SESSION['NextOrPrevious'] === false){
-        $_SESSION['criteriaUserType'] = "Select";
+        $_SESSION['criteriaCarMileage'] = "Select";
+    }
+
+    if(isset($_POST['Select_Car_Price'])){
+        $_SESSION['criteriaCarPrice'] = $_POST['Select_Car_Price'];
+    }else if ($_SESSION['NextOrPrevious'] === false){
+        $_SESSION['criteriaCarPrice'] = "Select";
     }
 
     // Vérifier quels sont les critères de recharche utilisés
-    if(isset($_SESSION['criteriaName']) && $_SESSION['criteriaName'] != ""){
-        //$_SESSION['criteriaName'] = $_POST["Text_User_Nom"];
-        $criteriaName = $_SESSION['criteriaName'];
-        $name_umpty = false;
-    }
-    if(isset($_SESSION['criteriaPseudo']) && $_SESSION['criteriaPseudo'] != ""){
-        //$_SESSION['criteriaPseudo'] = $_POST["Text_User_Pseudo"];
-        $criteriaPseudo = $_SESSION['criteriaPseudo'];
-        $pseudo_umpty = false;
-    }
-    if(isset($_SESSION['criteriaUserType']) && $_SESSION['criteriaUserType'] != ""){
-        //$_SESSION['criteriaUserType'] = $_POST["Select_User_Type"];
-        if($_SESSION['criteriaUserType'] === "Select"){
-            $criteriaUserType = "";
-            $userType_umpty = true;
+    if(isset($_SESSION['criteriaBrand']) && $_SESSION['criteriaBrand'] != ""){
+        if($_SESSION['criteriaCarBrand'] === "Select"){
+            $criteriaCarBrand = "";
+            $brand_umpty = true;
         }else{
-            $criteriaUserType = $_SESSION['criteriaUserType'];
-            $userType_umpty = false;
+            $criteriaCarBrand = $_SESSION['criteriaCarBrand'];
+            $brand_umpty = false;
+        }
+    }
+    if(isset($_SESSION['criteriaModel']) && $_SESSION['criteriaModel'] != ""){
+        if($_SESSION['criteriaCarModel'] === "Select"){
+            $criteriaCarModel = "";
+            $model_umpty = true;
+        }else{
+            $criteriaCarModel = $_SESSION['criteriaCarModel'];
+            $model_umpty = false;
+        }
+    }
+    if(isset($_SESSION['criteriaCarMileage']) && $_SESSION['criteriaCarMileage'] != ""){
+        if($_SESSION['criteriaCarMileage'] === "Select"){
+            $criteriaCarMileage = "";
+            $mileage_umpty = true;
+        }else{
+            $criteriaCarMileage = $_SESSION['criteriaCarMileage'];
+            $mileage_umpty = false;
+        }
+
+    }
+    if(isset($_SESSION['criteriaCarPrice']) && $_SESSION['criteriaCarPrice'] != ""){
+        if($_SESSION['criteriaCarPrice'] === "Select"){
+            $criteriaCarPrice = "";
+            $price_umpty = true;
+        }else{
+            $criteriaCarPrice = $_SESSION['criteriaCarPrice'];
+            $price_umpty = false;
         }
 
     }
 
     // Paramètrage de la clause WHERE pour executer la requete SELECT pour rechercher un ou plusieurs contacts
-    if($name_umpty === true && $pseudo_umpty === true && $userType_umpty === true){
+    if($brand_umpty === true && $model_umpty === true && $mileage_umpty === true && $price_umpty === true){
         
         $whereClause = 1;
 
-    }else if($name_umpty === false && $pseudo_umpty === false && $userType_umpty === false){
+    }else if($brand_umpty === false && $model_umpty === false && $mileage === false && $price === false){
 
-        $whereClause = "`user`.`name` LIKE '%$criteriaName%' AND
-                        `user`.`pseudo` LIKE '%$criteriaPseudo%' AND
-                        `user`.`id_type` = (SELECT `user_type`.`id_type` FROM `user_type` WHERE `user_type`.`type`='$criteriaUserType')";
+        $whereClause = "`car`.`brand` = (SELECT `brand`.`id_type` FROM `brand` WHERE `brand`.`name`='$criteriaCarBrand') AND
+                        `car`.`model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='$criteriaCarModel') AND
+                        `car`.`mileage` < '$criteriaCarMileage' AND
+                        `car`.`price` < '$criteriaCarType'";
 
-    }else if($name_umpty === true && $pseudo_umpty === false && $userType_umpty === false){
+    }else if($name_umpty === true && $pseudo_umpty === false && $carType_umpty === false){
 
-        $whereClause = "`user`.`pseudo` LIKE '%$criteriaPseudo%' AND
-                        `user`.`id_type` = (SELECT `user_type`.`id_type` FROM `user_type` WHERE `user_type`.`type`='$criteriaUserType')";
+        $whereClause = "`car`.`pseudo` LIKE '%$criteriaPseudo%' AND
+                        `car`.`id_type` = (SELECT `car_type`.`id_type` FROM `car_type` WHERE `car_type`.`type`='$criteriaCarType')";
         
-    }else if($name_umpty === true && $pseudo_umpty === true && $userType_umpty === false){
+    }else if($name_umpty === true && $pseudo_umpty === true && $carType_umpty === false){
 
-        $whereClause = "`user`.`id_type` = (SELECT `user_type`.`id_type` FROM `user_type` WHERE `user_type`.`type`='$criteriaUserType')";
+        $whereClause = "`car`.`id_type` = (SELECT `car_type`.`id_type` FROM `car_type` WHERE `car_type`.`type`='$criteriaCarType')";
         
-    }else if($name_umpty === true && $pseudo_umpty === false && $userType_umpty === true){
+    }else if($name_umpty === true && $pseudo_umpty === false && $carType_umpty === true){
 
-        $whereClause = "`user`.`pseudo` LIKE '%$criteriaPseudo%'";
+        $whereClause = "`car`.`pseudo` LIKE '%$criteriaPseudo%'";
 
-    }else if($name_umpty === false && $pseudo_umpty === true && $userType_umpty === false){
+    }else if($name_umpty === false && $pseudo_umpty === true && $carType_umpty === false){
 
-        $whereClause = "`user`.`name` LIKE '%$criteriaName%' AND
-                        `user`.`id_type` = (SELECT `user_type`.`id_type` FROM `user_type` WHERE `user_type`.`type`='$criteriaUserType')";
+        $whereClause = "`car`.`name` LIKE '%$criteriaName%' AND
+                        `car`.`id_type` = (SELECT `car_type`.`id_type` FROM `car_type` WHERE `car_type`.`type`='$criteriaCarType')";
         
-    }else if($name_umpty === false && $pseudo_umpty === true && $userType_umpty === true){
+    }else if($name_umpty === false && $pseudo_umpty === true && $carType_umpty === true){
 
-        $whereClause = "`user`.`name` LIKE '%$criteriaName%'";
+        $whereClause = "`car`.`name` LIKE '%$criteriaName%'";
         
-    }else if($name_umpty === false && $pseudo_umpty === false && $userType_umpty === true){
+    }else if($name_umpty === false && $pseudo_umpty === false && $carType_umpty === true){
 
-        $whereClause = "`user`.`name` LIKE '%$criteriaName%' AND
-                        `user`.`pseudo` LIKE '%$criteriaPseudo%'";
+        $whereClause = "`car`.`name` LIKE '%$criteriaName%' AND
+                        `car`.`pseudo` LIKE '%$criteriaPseudo%'";
 
     }
     
     $_SESSION['whereClause'] =  $whereClause;
 
     // Executer la requete SELECT pour rechercher les contacts en fonction de la clause WHERE
-    if($_SESSION['errorFormUser']===false && $MyUser->getNewUser() === false ){
+    if($_SESSION['errorFormCar']===false && $MyCar->getNewCar() === false ){
         
         require_once('../Controller/page.controller.php');
-        $users = $MyUser->get($whereClause, 'name', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
+        $Cars = $MyCar->get($whereClause, 'price', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
     
     }
 

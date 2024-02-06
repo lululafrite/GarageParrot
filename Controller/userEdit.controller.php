@@ -1,6 +1,9 @@
 <?php
 
     //---Load model user--------------------
+
+use Symfony\Component\Intl\Scripts;
+
     require_once('../Model/user.class.php');
     //---Configure object User--
     $MyUser = new User();
@@ -195,13 +198,11 @@
 //---------------------------------------------------------------
 //---Dynamic script of the user page--------------------------
 //---------------------------------------------------------------
+    
 
-    $confirmationNeeded = false;
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['bt__userEdit_delete']) && $_SESSION['errorFormUser'] === false) {
-            $confirmationNeeded = true;
-        }
+    $confirmationNeeded = 'false';
+    if(isset($_GET['deleteUser'])){
+        $confirmationNeeded = $_GET['deleteUser'];
     }
 
     if(isset($_POST['bt__userEdit_save']) && $_SESSION['errorFormUser'] === false)

@@ -4,7 +4,7 @@
 
 <section class="container">
 
-    <form action="" method="post" id="formUserEdit" onsubmit="return confirmDelete()">
+    <form action="" method="post" id="formUserEdit">
                 
         <table class="w-100">
 
@@ -299,7 +299,7 @@
 
         // Envoie la nouvelle valeur au serveur via une requête AJAX
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'update_user_type.php', true);
+        xhr.open('POST', 'userEdit.controller.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -309,18 +309,17 @@
         xhr.send('userType=' + selectedValue);
     });
 
-    // Affichez le message de confirmation avant suppression
-    function confirmDelete() {
-    var userConfirmed = confirm("Êtes-vous sûr de vouloir supprimer cette enregistrement?");
+    document.getElementById('bt__userEdit_delete').addEventListener('click', function() {
+        var userConfirmed = confirm("Êtes-vous sûr de vouloir supprimer cet enregistrement?");
     
-    if (!userConfirmed) {
-        //alert("Suppression annulée par l'utilisateur.");
-        return false;  // Annule la soumission du formulaire
-    }
-
-    // Si l'utilisateur a confirmé, le formulaire sera soumis normalement
-    return true;
-}
+            // Effectuer une requête AJAX pour communiquer avec le serveur
+        
+        if (userConfirmed === true) {
+            //window.location.href = 'http://garageparrot/index.php?page=user_edit&deleteUser=true';
+        }else{
+            //window.location.href = 'http://garageparrot/index.php?page=user_edit&deleteUser=false';
+        }
+    });
 
 
 </script>

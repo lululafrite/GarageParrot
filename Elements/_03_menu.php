@@ -45,7 +45,7 @@
                                 </li>
                                 <li>
                                     <form action="index.php?page=user_edit" method="post">
-                                        <button class="dropdown-item" id="nav_new_user" name="nav_new_user" type="submit">
+                                        <button class="dropdown-item" id="nav_new_user_" name="nav_new_user_" type="submit">
                                             <img class="p-2 h-75" src="img/icon/person-plus.svg" alt="icone du bouton s'identifier">
                                             Nouveau
                                         </button>
@@ -80,7 +80,7 @@
                     ?>
                             <form action="index.php?page=car_edit" method="post">
                                 <li>
-                                    <button class="dropdown-item" id="nav_new_user" name="nav_new_user" type="submit">
+                                    <button class="dropdown-item" id="nav_new_car" name="nav_new_car" type="submit">
                                         <img class="p-2" src="img/icon/car-front-fill.svg" alt="icone du bouton s'identifier">
                                         Nouveau
                                     </button>

@@ -1,15 +1,15 @@
 <?php
 
-    //---Load model user--------------------
+    //---Load model car--------------------
     require_once('../Model/car.class.php');
-    //---Configure object User--
-    $MyUser = new User();
+    //---Configure object Car--
+    $MyCar = new Car();
         
     //---Configure the database table--
-    $_SESSION['theTable'] = "user";
+    $_SESSION['theTable'] = "car";
 
 
-    //initialisez messages input Formulaire edition user
+    //initialisez messages input Formulaire edition car
     $MessageId = "<span>Votre numéro d'identifiant. Ce numèro est incrémenté automatiquement par la robot.</span>";
     $MessageName = "<span>Saisissez votre Nom d'une longueur de 50 caractères maximum.</span>";
     $MessageSurname = "<span>Saisissez votre Prénom d'une longueur de 50 caractères maximum.</span>";
@@ -20,79 +20,79 @@
     $MessagePassword = "<span>Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants /*-.!?@</span>";
     $MessageConfirm = "<span>Confirmez le mot de passe.</span>";
 
-    if(isset($_POST['bt__userEdit_save']))
+    if(isset($_POST['bt__carEdit_save']))
     {
         // Initialisez la variable d'erreur
-        //$_SESSION['errorFormUser']=false;
+        //$_SESSION['errorFormCar']=false;
         //if($_SESSION['connexion'] === true){
 
-        //    $_SESSION['userConnected']= 'Administrator';
+        //    $_SESSION['carConnected']= 'Administrator';
         //}
 
         // Vérifiez si le champ "txt--Name_idr" est vide
-        if (empty($_POST['txt__user--id'])) {
+        if (empty($_POST['txt__car--id'])) {
 
             // Si le champ est vide, définissez un message d'erreur
             $MessageName = "<span>Votre numéro d'identifiant. Ce numèro est incrémenté automatiquement par la robot.</span>";
             $inputId = "";
-            if($_SESSION['newUser'] === false){
-                $_SESSION['errorFormUser']=true;
+            if($_SESSION['newCar'] === false){
+                $_SESSION['errorFormCar']=true;
             }
 
         }else{
 
-            $inputId = $_POST['txt__user--id'];
+            $inputId = $_POST['txt__Car--id'];
 
         }
 
-        if (empty($_POST['txt--Name_User'])){
+        if (empty($_POST['txt--Name_Car'])){
 
             $MessageName = "<span style='color:red;'>Vous devez saisir votre nom!!!</span>";
             $inputName = "";
-            $_SESSION['errorFormUser']=true;
+            $_SESSION['errorFormCar']=true;
 
         }else{
 
-            $inputName = strtoupper($_POST['txt--Name_User']);
+            $inputName = strtoupper($_POST['txt--Name_Car']);
 
         }
 
-        if (empty($_POST['txt--Surname_User'])){
+        if (empty($_POST['txt--Surname_Car'])){
 
             $MessageSurname = "<span style='color:red;'>Vous devez saisir votre prénom!!!</span>";
             $inputSurname = "";
-            $_SESSION['errorFormUser']=true;
+            $_SESSION['errorFormCar']=true;
 
         }else{
 
-            $inputSurname = ucfirst(strtolower($_POST['txt--Surname_User']));
+            $inputSurname = ucfirst(strtolower($_POST['txt--Surname_Car']));
 
         }
 
-        if (empty($_POST['txt--Pseudo_User'])){
+        if (empty($_POST['txt--Pseudo_Car'])){
 
             $MessagePseudo = "<span style='color:red;'>Vous devez saisir un pseudonyme d'une longueur de 20 caractères maximum.!!!</span>";
             $inputPseudo = "";
-            $_SESSION['errorFormUser']=true;
+            $_SESSION['errorFormCar']=true;
 
         }else{
 
-            $inputPseudo = $_POST['txt--Pseudo_User'];
+            $inputPseudo = $_POST['txt--Pseudo_Car'];
 
         }
 
-        //$courriel = $_POST['txt--Email_User'];
-        if (empty($_POST['txt--Email_User'])){
+        //$courriel = $_POST['txt--Email_Car'];
+        if (empty($_POST['txt--Email_Car'])){
 
             $MessageEmail = "<span style='color:red;'>Vous devez saisir une adresse email!!!</span>";
             $inputEmail = "";
-            $_SESSION['errorFormUser']=true;
+            $_SESSION['errorFormCar']=true;
             
         }else{
 
-            if (filter_var($_POST['txt--Email_User'], FILTER_VALIDATE_EMAIL)){
+            if (filter_var($_POST['txt--Email_Car'], FILTER_VALIDATE_EMAIL)){
                 
-                $inputEmail = $_POST['txt--Email_User'];
+                $inputEmail = $_POST['txt--Email_Car'];
 
             }else{
 
@@ -103,50 +103,50 @@
 
         }
 
-        if (empty($_POST['txt--Phone_User'])){
+        if (empty($_POST['txt--Phone_Car'])){
 
             $MessagePhone = "<span style='color:red;'>Vous devez saisir votre numèro de téléphone !!! Exemple : 06 05 04 03 02</span>";
             $inputPhone = "";
-            $_SESSION['errorFormUser']=true;
+            $_SESSION['errorFormCar']=true;
 
         }else{
 
-            $inputPhone = $_POST['txt--Phone_User'];
+            $inputPhone = $_POST['txt--Phone_Car'];
 
         }
 
-        if (empty($_SESSION['userType'])){
+        if (empty($_SESSION['carType'])){
 
             $MessageType = "<span style='color:red;'>Vous devez selectionner un type d'utlisateur dans la liste de choix!!!";
             $inputType = "";
-            $_SESSION['errorFormUser']=true;
+            $_SESSION['errorFormCar']=true;
 
         }else{
 
-            $inputType = $_SESSION['userType'];
+            $inputType = $_SESSION['carType'];
 
         }
 
-        if (empty($_POST['txt--Password_User'])){
+        if (empty($_POST['txt--Password_Car'])){
 
             $MessagePassword = "<span style='color:red;'>Vous devez saisir un mot de passe!!!";
             $inputPassword = "";
-            $_SESSION['errorFormUser']=true;
+            $_SESSION['errorFormCar']=true;
 
         }else{
 
-            if($_POST['txt--Password_User'] === $_POST['txt--Confirm_User']){
+            if($_POST['txt--Password_Car'] === $_POST['txt--Confirm_Car']){
 
-                $pw = $_POST['txt--Password_User'];
+                $pw = $_POST['txt--Password_Car'];
                 if(preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\/\*\-\.\!\?@])[A-Za-z\d\/\*\-\.\!\?@]{8,}$/', $pw)){
 
-                    $inputPassword = $_POST['txt--Password_User'];
-                    $inputConfirm = $_POST['txt--Password_User'];
+                    $inputPassword = $_POST['txt--Password_Car'];
+                    $inputConfirm = $_POST['txt--Password_Car'];
 
                 }else{
 
                     $MessagePassword = "<span style='color:red;'>Vous devez respecter la syntaxe!!! Votre mot de passe doit contenir 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants /*-.!?@";
-                    $_SESSION['errorFormUser']=true;
+                    $_SESSION['errorFormCar']=true;
 
                 }
             }else{
@@ -154,7 +154,7 @@
                 $MessagePassword = "<span style='color:red;'>Le mot de passe et le mot de passe de confirmation ne correspondent pas!!! Votre mot de passe doit contenir 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants /*-.!?@";
                 $inputPassword = "";
                 $inputConfirm = "";
-                $_SESSION['errorFormUser']=true;
+                $_SESSION['errorFormCar']=true;
 
             }
         }
@@ -163,7 +163,7 @@
 //----------------------------------------------------------------------------------------
 
 
-    if ($_SESSION['userConnected'] === "Guest"){
+    if ($_SESSION['carConnected'] === "Guest"){
 
         if($_SESSION['local']===true){
 
@@ -177,88 +177,98 @@
         exit();
     }
     
-    //$MyUser = new user();
+    //$MyCar = new car();
 
     //if($_SESSION['connexion'] === false){
 
-    //    $MyUserConnect = new userConnect();
-    //    $_SESSION['userConnected'] = $MyUserConnect->getUserConnect();
+    //    $MyCarConnect = new carConnect();
+    //    $_SESSION['carConnected'] = $MyCarConnect->getCarConnect();
 
     //}
 
 
 //---------------------------------------------------------------
-//---Dynamic script of the user page--------------------------
+//---Dynamic script of the car page--------------------------
 //---------------------------------------------------------------
 
     $confirmationNeeded = false;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['bt__userEdit_delete']) && $_SESSION['errorFormUser'] === false) {
+        if (isset($_POST['bt__carEdit_delete']) && $_SESSION['errorFormCar'] === false) {
             $confirmationNeeded = true;
         }
     }
 
-    if(isset($_POST['bt__userEdit_save']) && $_SESSION['errorFormUser'] === false)
+    if(isset($_POST['bt__carEdit_save']) && $_SESSION['errorFormCar'] === false)
     {
-        //$MyUser = new User();
+        //$MyCar = new Car();
     
-        $MyUser->setName(strtoupper($_POST["txt--Name_User"]));
-        $MyUser->setSurname(ucfirst(strtolower($_POST["txt--Surname_User"])));
-        $MyUser->setPseudo($_POST["txt--Pseudo_User"]);
-        $MyUser->setEmail($_POST["txt--Email_User"]);
-        $MyUser->setType($_POST['list_User_Type']);
-        $MyUser->setPhone($_POST["txt--Phone_User"]);
-        $MyUser->setPassword($_POST["txt--Password_User"]);
+        $MyCar->setBrand(strtoupper($_POST["txt--Brand_Car"]));
+        $MyCar->setModel(ucfirst(strtolower($_POST["txt--Model_Car"])));
+        $MyCar->setMotorization($_POST["txt--Motorization_Car"]);
+        $MyCar->setYear($_POST["txt--Year_Car"]);
+        $MyCar->setMileage($_POST['list_Mieage_Type']);
+        $MyCar->setPrice($_POST["txt--Price_Car"]);
+        $MyCar->setSold($_POST["txt--Sold_Car"]);
+        $MyCar->setImage1($_POST["txt--Image1_Car"]);
+        $MyCar->setImage2($_POST["txt--Image2_Car"]);
+        $MyCar->setImage3($_POST["txt--Image3_Car"]);
+        $MyCar->setImage4($_POST["txt--Image4_Car"]);
+        $MyCar->setImage5($_POST["txt--Image5_Car"]);
         
-        if($_SESSION['newUser'] === true){
+        if($_SESSION['newCar'] === true){
 
-            $MyUser->addUser();
-            //$_SESSION['newUser'] = false;
+            $MyCar->addCar();
+            //$_SESSION['newCar'] = false;
 
         }else{
 
-            $MyUser->updateUser($_POST["txt__user--id"]);
+            $MyCar->updateCar($_POST["txt__car--id"]);
 
         }
 
-    }else if(isset($_POST['nav_new_user']) || isset($_POST['bt__userEdit_new'])){
+    }else if(isset($_POST['nav_new_car']) || isset($_POST['bt__carEdit_new'])){
         
-        if ($_SESSION['errorFormUser'] === false){
+        if ($_SESSION['errorFormCar'] === false){
             
-            $MyUser->setName("");
-            $MyUser->setSurname("");
-            $MyUser->setPseudo("");
-            $MyUser->setEmail("");
-            $MyUser->setType("");
-            $MyUser->setPhone("");
-            $MyUser->setPassword("");
+            $MyCar->setBrand("");
+            $MyCar->setModel("");
+            $MyCar->setMotorization("");
+            $MyCar->setYear("");
+            $MyCar->setMileage("");
+            $MyCar->setPrice("");
+            $MyCar->setSold("");
+            $MyCar->setImage1("");
+            $MyCar->setImage2("");
+            $MyCar->setImage3("");
+            $MyCar->setImage4("");
+            $MyCar->setImage5("");
 
-            $MyUser->setNewUser(true);
-            $_SESSION['newUser'] = true;
+            $MyCar->setNewCar(true);
+            $_SESSION['newCar'] = true;
             
         }
 
     }else if($confirmationNeeded === true)
     {
 
-        $MyUser->deleteUser($_POST["txt__user--id"]);
+        $MyCar->deleteCar($_POST["txt__car--id"]);
 
     }
 
-    if($_SESSION['errorFormUser']===false){
+    if($_SESSION['errorFormCar']===false){
 
-        //include_once('../Controller/user.controller.php');
-        if(!isset($_POST['bt__userEdit_new'])){
+        //include_once('../Controller/car.controller.php');
+        if(!isset($_POST['bt__carEdit_new'])){
             
-            if($MyUser->getNewUser() === true){ //$_SESSION['newUser'] === true){
+            if($MyCar->getNewCar() === true){ //$_SESSION['newCar'] === true){
 
-                $id = $MyUser->getId();
-                $MyUser->setNewUser(false);
+                $id = $MyCar->getId();
+                $MyCar->setNewCar(false);
                 
             }else{
 
-                $id = $_POST['txt__user--id'];
+                $id = $_POST['txt__car--id'];
 
             }
 
@@ -266,18 +276,20 @@
 
         if(isset($id) || !empty($id)){
 
-            $users = $MyUser->getUser($id);
-
-            $MyUser->setId($users[0]['id_user']);
-            $MyUser->setName($users[0]['name']);
-            $MyUser->setSurname($users[0]['surname']);
-            $MyUser->setPseudo($users[0]['pseudo']);
-            $MyUser->setEmail($users[0]['email']);
-            $MyUser->setPhone($users[0]['phone']);
-            $MyUser->setType($users[0]['type']);
-            $MyUser->setPassword($users[0]['password']);
-
-            $userPseudo = $MyUser->getPseudo();
+            $cars = $MyCar->getCar($id);
+            
+            $MyCar->setBrand($cars[0]['id_car']);
+            $MyCar->setModel($cars[0]['model']);
+            $MyCar->setMotorization($cars[0]['motorization']);
+            $MyCar->setYear($cars[0]['year']);
+            $MyCar->setMileage($cars[0]['mileage']);
+            $MyCar->setPrice($cars[0]['price']);
+            $MyCar->setSold($cars[0]['sold']);
+            $MyCar->setImage1($cars[0]['image1']);
+            $MyCar->setImage2($cars[0]['image2']);
+            $MyCar->setImage3($cars[0]['image3']);
+            $MyCar->setImage4($cars[0]['image4']);
+            $MyCar->setImage5($cars[0]['image5']);
 
         }
 

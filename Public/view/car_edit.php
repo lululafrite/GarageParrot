@@ -4,20 +4,20 @@
 
 <section class="container">
 
-    <form action="" method="post" id="formUserEdit">
+    <form action="" method="post">
                 
         <table class="w-100">
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt__user--id_">ID</label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt__Car--id_">ID</label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3" id="txt__user--id_" name="txt__user--id" type="text" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3" id="txt__Car--id_" name="txt__Car--id" type="text" style="font-size: 1.6rem;"
                         value=
                         "<?php
-                            if(!empty($MyUser->getId())){
-                                echo $MyUser->getId();
+                            if(!empty($MyCar->getId())){
+                                echo $MyCar->getId();
                             }else{
                                 echo isset($inputId) ? $inputId : '';
                             }
@@ -39,14 +39,14 @@
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Name_User">Nom<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt--Name_Car">Nom<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Name_User" name="txt--Name_User" type="text" placeholder="Saisissez votre NOM" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Name_Car" name="txt--Name_Car" type="text" placeholder="Saisissez votre NOM" style="font-size: 1.6rem;"
                         value=
                         "<?php
-                            if(!empty($MyUser->getName())){
-                                echo strtoupper($MyUser->getName());
+                            if(!empty($MyCar->getName())){
+                                echo strtoupper($MyCar->getName());
                             }else{
                                 echo isset($inputName) ? $inputName : '';
                             }
@@ -67,14 +67,14 @@
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Surname_User">Prénom<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt--Surname_Car">Prénom<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Surname_User" name="txt--Surname_User" type="text" placeholder="Saisissez votre Prénom" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Surname_Car" name="txt--Surname_Car" type="text" placeholder="Saisissez votre Prénom" style="font-size: 1.6rem;"
                         value=
                         "<?php
-                            if(!empty($MyUser->getSurname())){
-                                echo ucfirst(strtolower($MyUser->getSurname()));
+                            if(!empty($MyCar->getSurname())){
+                                echo ucfirst(strtolower($MyCar->getSurname()));
                             }else{
                                 echo isset($inputSurname) ? $inputSurname : '';
                             }
@@ -95,14 +95,14 @@
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Pseudo_User">Pseudo<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt--Pseudo_Car">Pseudo<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Pseudo_User" name="txt--Pseudo_User" type="text" placeholder="Saisissez votre Pseudo" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Pseudo_Car" name="txt--Pseudo_Car" type="text" placeholder="Saisissez votre Pseudo" style="font-size: 1.6rem;"
                     value=
                         "<?php
-                            if(!empty($MyUser->getPseudo())){
-                                echo $MyUser->getPseudo();
+                            if(!empty($MyCar->getPseudo())){
+                                echo $MyCar->getPseudo();
                             }else{
                                 echo isset($inputPseudo) ? $inputPseudo : '';
                             }
@@ -123,15 +123,15 @@
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Email_User">Email<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt--Email_Car">Email<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Email_User" name="txt--Email_User" type="email" placeholder="Saisissez votre courriel" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Email_Car" name="txt--Email_Car" type="email" placeholder="Saisissez votre courriel" style="font-size: 1.6rem;"
                         value=
                         "<?php
-                            if(!empty($MyUser->getEmail())){
-                                if(filter_var($MyUser->getEmail(), FILTER_VALIDATE_EMAIL)){
-                                    echo $MyUser->getEmail();
+                            if(!empty($MyCar->getEmail())){
+                                if(filter_var($MyCar->getEmail(), FILTER_VALIDATE_EMAIL)){
+                                    echo $MyCar->getEmail();
                                 }else{
                                     echo isset($inputEmail) ? $inputEmail : '';
                                 }
@@ -155,14 +155,14 @@
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Phone_User">Phone<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt--Phone_Car">Phone<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Phone_User" name="txt--Phone_User" type="tel" placeholder="## ## ## ## ##" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Phone_Car" name="txt--Phone_Car" type="tel" placeholder="## ## ## ## ##" style="font-size: 1.6rem;"
                         value=
                         "<?php
-                            if(!empty($MyUser->getPhone())){
-                                echo $MyUser->getPhone();
+                            if(!empty($MyCar->getPhone())){
+                                echo $MyCar->getPhone();
                             }else{
                                 echo isset($inputPhone) ? $inputPhone : '';
                             }
@@ -183,22 +183,22 @@
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="list--User_Type">Utilisateur<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="list--Car_Type">Utilisateur<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <select class="form-control-lg m-0 p-0 ps-3 w-100 border border-black" id="list_User_Type" name="list_User_Type" style="font-size: 1.6rem;">
+                    <select class="form-control-lg m-0 p-0 ps-3 w-100 border border-black" id="list_Car_Type" name="list_Car_Type" style="font-size: 1.6rem;">
                         <?php
-                            $valeurDefault = isset($_POST['list_User_Type']) ? htmlspecialchars($_POST['list_User_Type']) : '';
-                            if (!empty($MyUser->getType())){
-                                $valeurDefault = $MyUser->getType();
-                                $_SESSION['userType'] = $MyUser->getType();
+                            $valeurDefault = isset($_POST['list_Car_Type']) ? htmlspecialchars($_POST['list_Car_Type']) : '';
+                            if (!empty($MyCar->getType())){
+                                $valeurDefault = $MyCar->getType();
+                                $_SESSION['carType'] = $MyCar->getType();
                             }
                             echo "<option value=\"$valeurDefault\">$valeurDefault</option>";
                         ?>
                     <option value="Administrator">Administrator</option>
                     <option value="Customer">Customer</option>
                     <option value="Guest">Guest</option>
-                    <option value="User">User</option>
+                    <option value="Car">Car</option>
                     <!-- </datalist> -->
                 </td>
             </tr>
@@ -215,14 +215,14 @@
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Password_User">Mot de passe<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt--Password_Car">Mot de passe<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Password_User" name="txt--Password_User" type="password" placeholder=""style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Password_Car" name="txt--Password_Car" type="password" placeholder=""style="font-size: 1.6rem;"
                         value=
                         "<?php
-                            if(!empty($MyUser->getPassword())){
-                                echo $MyUser->getPassword();
+                            if(!empty($MyCar->getPassword())){
+                                echo $MyCar->getPassword();
                             }else{
                                 echo isset($inputPassword) ? $inputPassword : '';
                             }
@@ -243,16 +243,16 @@
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Confirm_User">
+                    <label class="form-label m-0 p-0 pe-3" for="txt--Confirm_Car">
                         Confirmation<span style="color:red;">*</span>
                     </label>
                 </td>
                 <td class="m-0 p-0 w-90">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Confirm_User" name="txt--Confirm_User" type="password" placeholder="" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Confirm_Car" name="txt--Confirm_Car" type="password" placeholder="" style="font-size: 1.6rem;"
                         value=
                         "<?php
-                            if(!empty($MyUser->getPassword())){
-                                echo $MyUser->getPassword();
+                            if(!empty($MyCar->getPassword())){
+                                echo $MyCar->getPassword();
                             }else{
                                 echo isset($inputConfirm) ? $inputConfirm : '';
                             }
@@ -275,10 +275,10 @@
                 <td class="m-0 p-0">
                 </td>
                 <td class="m-0 p-0">
-                    <a href="index.php?page=user" class="btn btn-lg btn-warning fs-4" name="bt__userEdit--cancel">Retour</a>
-                    <button type="submit" class="btn btn-lg btn-success fs-4" id="bt__userEdit_save" name="bt__userEdit_save">Enregistrer</button>
-                    <button type="submit" class="btn btn-lg btn-info fs-4" id="bt__userEdit_new" name="bt__userEdit_new">Nouveau</button>
-                    <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt__userEdit_delete" name="bt__userEdit_delete" onclick="confirmDelete()">Supprimer</button>
+                    <a href="index.php?page=car" class="btn btn-lg btn-warning fs-4" name="bt__carEdit--cancel">Retour</a>
+                    <button type="submit" class="btn btn-lg btn-success fs-4" id="bt__carEdit_save" name="bt__carEdit_save">Enregistrer</button>
+                    <button type="submit" class="btn btn-lg btn-info fs-4" id="bt__carEdit_new" name="bt__carEdit_new">Nouveau</button>
+                    <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt__carEdit_delete" name="bt__carEdit_delete" onclick="confirmDelete()">Supprimer</button>
                 </td>
             </tr>
 
@@ -289,24 +289,24 @@
 </section>
 
 <?php
-    $_SESSION['errorFormUser']=false;
+    $_SESSION['errorFormCar']=false;
 ?>
 
 <script>
     
-    document.getElementById('list_User_Type').addEventListener('change', function() {
+    document.getElementById('list_Car_Type').addEventListener('change', function() {
         var selectedValue = this.value;
 
         // Envoie la nouvelle valeur au serveur via une requête AJAX
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'update_user_type.php', true);
+        xhr.open('POST', 'update_Car_type.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 console.log(xhr.responseText); // Affichez la réponse du serveur dans la console pour le débogage
             }
         };
-        xhr.send('userType=' + selectedValue);
+        xhr.send('carType=' + selectedValue);
     });
 
     // Affichez le message de confirmation avant suppression
@@ -315,7 +315,7 @@
         if (confirm("Êtes-vous sûr de vouloir supprimer cette enregistrement?")) {
 
             //document.getElementById('confirmationForm').submit();
-            document.getElementById('formUserEdit').submit();
+            document.getElementById('formCarEdit').submit();
 
         }
 
