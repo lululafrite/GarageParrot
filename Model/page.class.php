@@ -104,13 +104,9 @@
 			$this->countLine;
 			return $this->countLine;
 		}
-		public function setCountLine($theTable, $req = "")
+		public function setCountLine($theTable)
 		{
-			if ($theTable==="produit"){
-				include("../Controller/ConfigConnBd.php");
-			}else{
-				include("../Controller/ConfigConnGp.php");
-			}
+			include_once('../Controller/ConfigConnGP.php');
 
 			try
 			{
@@ -118,7 +114,6 @@
                     $this->countLine = $bdd->query('SELECT count(*) FROM ' . $theTable)->fetchColumn();
                 }else{
                     $this->countLine = $bdd->query("SELECT count(*) FROM `" . $theTable . "` WHERE " . $_SESSION['whereClause'])->fetchColumn();
-                    //$_SESSION['whereClause'] = "";
                 }
 			}
 			catch (Exception $e)

@@ -33,13 +33,14 @@
         if($_SESSION['local']===true){
 
             echo '<script>window.location.href = "http://garageparrot/index.php?page=home";</script>';
+            
 
         }else{
 
-            echo '<script>window.location.href = "https://www.follaco.fr/gp/index.php?page=home";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=home";</script>';
 
         }
-        //exit();
+        exit();
 
     }
 ?>

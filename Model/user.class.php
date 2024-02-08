@@ -129,7 +129,7 @@ use function PHPSTORM_META\type;
 		private $listPseudo;
 		public function getPseudoUser()
 		{
-			include("../Controller/ConfigConnGp.php");
+			include('../Controller/ConfigConnGp.php');
 
 			try
 			{
@@ -151,7 +151,7 @@ use function PHPSTORM_META\type;
 		private $theUser;
 		public function getUser($îdUser)
 		{
-			include("../Controller/ConfigConnGp.php");
+			include('../Controller/ConfigConnGp.php');
 
             $_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
@@ -195,7 +195,7 @@ use function PHPSTORM_META\type;
 		private $userList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include("../Controller/ConfigConnGp.php");
+			include('../Controller/ConfigConnGp.php');
 			
 			try
 			{
@@ -231,22 +231,22 @@ use function PHPSTORM_META\type;
 
 		public function addUser()
 		{
-			include("../Controller/ConfigConnGp.php");
-			$sql = $bdd->query("SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "'");
-			$id_type = $sql->fetch();
-			$idUser = intval($id_type['id_type']);
+			include('../Controller/ConfigConnGp.php');
 
 			try {
-				$bdd->exec("INSERT INTO `user` (`name`, `surname`, `pseudo`, `email`, `phone`, `password`, `id_type`)
-							VALUES ('" . $this->name . "','" . $this->surname . "',
-									'" . $this->pseudo . "','" . $this->email . "',
-									'" . $this->phone . "','" . $this->password . "',
-									'" . $idUser . "')");
-			
-			$sql = $bdd->query("SELECT `id_user` FROM `user` WHERE `email`='" . $this->email . "'");
-			$id_user = $sql->fetch();
-			$this->id_user = intval($id_user['id_user']);
-			echo '<script>alert("L\'enregistrement est effectué!");</script>';
+					$bdd->exec("INSERT INTO `user`(`name`,`surname`,`pseudo`,`email`,`phone`,`password`,`id_type`)
+							VALUES('" . $this->name . "',
+									'" . $this->surname . "',
+									'" . $this->pseudo . "',
+									'" . $this->email . "',
+									'" . $this->phone . "',
+									'" . $this->password . "',
+									(SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "'))");
+
+				$sql = $bdd->query("SELECT `id_user` FROM `user` WHERE `email`='" . $this->email . "'");
+				$id_user = $sql->fetch();
+				$this->id_user = intval($id_user['id_user']);
+				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
 			} catch (Exception $e) {
 				
@@ -261,23 +261,18 @@ use function PHPSTORM_META\type;
 
 		public function updateUser($idUser)
 		{
-			include("../Controller/ConfigConnGp.php");
+			include('../Controller/ConfigConnGp.php');
 			try
 			{
-				$sql = $bdd->query("SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "'");
-				while ($id_type[] = $sql->fetch());
-
-				$idUser = intval($idUser);
-				
-			    $bdd->exec("UPDATE `user` SET
+				$bdd->exec("UPDATE `user` SET
 								`name` = '" . $this->name . "',
 								`surname` = '" . $this->surname . "',
 								`pseudo` = '" . $this->pseudo . "',
 								`email` = '" . $this->email . "',
 								`phone` = '" . $this->phone . "',
 								`password` = '" . $this->password . "',
-								`id_type` = " . intval($id_type[0]['id_type']) . "
-							WHERE `id_user` = " . $idUser . "
+								`id_type` = (SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "')
+							WHERE `id_user` = " . intval($idUser) . "
 							");
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
@@ -296,14 +291,13 @@ use function PHPSTORM_META\type;
 
 		public function deleteUser($id)
 		{
-			include("../Controller/ConfigConnGp.php");
+			include('../Controller/ConfigConnGp.php');
 
 			try
 			{
 			    $bdd->exec('DELETE FROM user WHERE id_user=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
-				echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
-				die();
+				include_once('view/user.php');
 			}
 			catch (Exception $e)
 			{

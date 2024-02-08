@@ -1,6 +1,6 @@
 <?php
-    require('../Controller/car.controller.php');
-    require('../Elements/_05_select_page.php');
+    include_once('../Controller/car.controller.php');
+    include_once('../Elements/_05_select_page.php');
 ?>
 
 <section class="m-5 d-flex flex-wrap justify-content-around">
@@ -8,7 +8,7 @@
 <?php for($i=0;$i != count($Cars)-1;$i++) { ?>
 
 <article class="mb-5 p-3 border rounded-4">
-    <form action="/index.php?page=Car_edit" method="post">
+    <form action="/index.php?page=car_edit" method="post">
         <div class="d-flex justify-content-center div__Car--img">
             <a href="../img/vehicle/<?php echo $Cars[$i]['image1']; ?>" class="popup-gallery" data-fancybox="car-gallery-<?php echo $i; ?>">
                 <img src="../img/vehicle/<?php echo $Cars[$i]['image1']; ?>" alt="Image du véhicule" style="width:350px;">
@@ -65,7 +65,7 @@
 
 </section>
 
-<?php require('../Elements/_05_select_page.php');?>
+<?php include_once('../Elements/_05_select_page.php');?>
 
 <script>
     $(document).ready(function () {

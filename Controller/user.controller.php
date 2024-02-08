@@ -8,13 +8,13 @@
             echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
         }
         else{
-            echo '<script>window.location.href = "https://www.follaco.fr/gp/index.php?page=error_page";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
         }
         exit();
     }
 
 //---Load model user--------------------
-    require_once('../Model/user.class.php');
+    include_once('../Model/user.class.php');
 //---Configure object User--
     $MyUser = new User();
     
@@ -122,7 +122,7 @@
     // Executer la requete SELECT pour rechercher les contacts en fonction de la clause WHERE
     if($_SESSION['errorFormUser']===false && $MyUser->getNewUser() === false ){
         
-        require_once('../Controller/page.controller.php');
+        include_once('../Controller/page.controller.php');
         $users = $MyUser->get($whereClause, 'name', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
     
     }

@@ -189,11 +189,10 @@ use function PHPSTORM_META\type;
 		private $theCar;
 		public function getCar($îdCar)
 		{
-			include("../Controller/ConfigConnGp.php");
+			include('../Controller/ConfigConnGp.php');
 
             $_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
 			
 			try
 			{
@@ -224,7 +223,6 @@ use function PHPSTORM_META\type;
 									WHERE `car`.`id_car`=$îdCar
 								");
 
-				
 				/*while ($this->theContact[] = $sql->fetch());*/
 				$this->theCar[] = $sql->fetch();
 				return $this->theCar;
@@ -242,8 +240,8 @@ use function PHPSTORM_META\type;
 		private $carList;
 		public function get($whereClause, $orderBy = 'price', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include("../Controller/ConfigConnGp.php");
-			
+			include('../Controller/ConfigConnGp.php');
+
 			try
 			{
 			    $sql = $bdd->query("SELECT
@@ -290,22 +288,32 @@ use function PHPSTORM_META\type;
 
 		public function addCar()
 		{
-			include("../Controller/ConfigConnGp.php");
-			$sql = $bdd->query("SELECT `id_type` FROM `car_type` WHERE `type`='" . $this->type . "'");
-			$id_type = $sql->fetch();
-			$idCar = intval($id_type['id_type']);
+			include('../Controller/ConfigConnGp.php');
 
 			try {
-				$bdd->exec("INSERT INTO `car` (`name`, `surname`, `pseudo`, `email`, `phone`, `password`, `id_type`)
-							VALUES ('" . $this->name . "','" . $this->surname . "',
-									'" . $this->pseudo . "','" . $this->email . "',
-									'" . $this->phone . "','" . $this->password . "',
-									'" . $idCar . "')");
-			
-			$sql = $bdd->query("SELECT `id_car` FROM `car` WHERE `email`='" . $this->email . "'");
-			$id_car = $sql->fetch();
-			$this->id_car = intval($id_car['id_car']);
-			echo '<script>alert("L\'enregistrement est effectué!");</script>';
+					$bdd->exec("INSERT INTO `car`(`id_brand`,`id_model`,`id_motorization`,`year`,`mileage`,
+											`price`,`sold`,`image1`,`image2`,`image3`,`image4`,`image5`)
+								VALUES(
+										(SELECT `id_brand` FROM `brand` WHERE `name`= '" . $this->brand . "'),
+										(SELECT `id_model` FROM `model` WHERE `name`= '" . $this->model . "'),
+										(SELECT `id_motorization` FROM `motorization` WHERE `name`= '" . $this->motorization . "'),
+										'" . $this->year . "',
+										'" . $this->mileage . "',
+										'" . $this->price . "',
+										'" . $this->sold . "',
+										'" . $this->image1 . "',
+										'" . $this->image2 . "',
+										'" . $this->image3 . "',
+										'" . $this->image4 . "',
+										'" . $this->image5 . "'
+									)
+								");
+								
+				$sql = $bdd->query("SELECT MAX(`id_car`) FROM `car`");
+				$id_car = $sql->fetch();
+				$this->id_car = intval($id_car['id_car']);
+
+				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
 			} catch (Exception $e) {
 				
@@ -320,23 +328,27 @@ use function PHPSTORM_META\type;
 
 		public function updateCar($idCar)
 		{
-			include("../Controller/ConfigConnGp.php");
+			include('../Controller/ConfigConnGp.php');
+			
 			try
 			{
-				$sql = $bdd->query("SELECT `id_type` FROM `car_type` WHERE `type`='" . $this->type . "'");
-				while ($id_type[] = $sql->fetch());
-
 				$idCar = intval($idCar);
 				
 			    $bdd->exec("UPDATE `car` SET
-								`name` = '" . $this->name . "',
-								`surname` = '" . $this->surname . "',
-								`pseudo` = '" . $this->pseudo . "',
-								`email` = '" . $this->email . "',
-								`phone` = '" . $this->phone . "',
-								`password` = '" . $this->password . "',
-								`id_type` = " . intval($id_type[0]['id_type']) . "
-							WHERE `id_car` = " . $idCar . "
+								`id_brand` = (SELECT 'id_brand' FROM 'brand' WHERE `name`= '" . $this->brand . "'),
+								`id_model` = (SELECT 'id_model' FROM 'model' WHERE `name`= '" . $this->model . "'),
+								`id_motorization` = (SELECT 'id_motorisation' FROM 'motorisation' WHERE `name`= '" . $this->motorization . "'),
+								`year` =  '" . $this->year . "',
+								`mileage` =  '" . $this->mileage . "',
+								`price` =  '" . $this->price . "',
+								`sold` =  '" . $this->sold . "',
+								`image1` =  '" . $this->image1 . "',
+								`image2` =  '" . $this->image2 . "',
+								`image3` =  '" . $this->image3 . "',
+								`image4` =  '" . $this->image4 . "',
+								`image5` =  '" . $this->image5 . "'
+
+								WHERE `id_car` = " . $idCar . "
 							");
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
@@ -353,14 +365,14 @@ use function PHPSTORM_META\type;
 
 		public function deleteCar($id)
 		{
-			include("../Controller/ConfigConnGp.php");
+			include('../Controller/ConfigConnGp.php');
 
 			try
 			{
 			    $bdd->exec('DELETE FROM car WHERE id_car=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
-				echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
-				die();
+				header("Location: index.php?page=car");
+				exit;
 			}
 			catch (Exception $e)
 			{

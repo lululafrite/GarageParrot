@@ -1,20 +1,6 @@
 <?php
-//---------------------------------------------------------------
-//---Product page controller-------------------------------------
-//---------------------------------------------------------------
-//---Checking access permissions---
-    /*if ($_SESSION['carConnected'] === "Guest") {
-        if($_SESSION['local']===true){
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
-        }
-        else{
-            echo '<script>window.location.href = "https://www.follaco.fr/gp/index.php?page=error_page";</script>';
-        }
-        exit();
-    }*/
-
 //---Load model car--------------------
-    require_once('../Model/car.class.php');
+    include_once('../Model/car.class.php');
 //---Configure object Car--
     $MyCar = new Car();
     
@@ -150,7 +136,7 @@
         
         require_once('../Controller/page.controller.php');
         $Cars = $MyCar->get($whereClause, 'price', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
-    
+        
     }
 
     if (isset($_POST['nbOfLine'])){

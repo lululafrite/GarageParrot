@@ -1,5 +1,5 @@
 <?php
-    include_once('../Controller/carEdit.controller.php');
+    include('../Controller/carEdit.controller.php');
 ?>
 
 <section class="container">
@@ -38,20 +38,24 @@
             </tr>
 
             <tr class="m-0 p-0">
-                <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Name_Car">Nom<span style="color:red;">*</span></label>
+                <<td class="text-end m-0 p-0">
+                    <label class="form-label m-0 p-0 pe-3" for="list--Car_Brand">Marque<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Name_Car" name="txt--Name_Car" type="text" placeholder="Saisissez votre NOM" style="font-size: 1.6rem;"
-                        value=
-                        "<?php
-                            if(!empty($MyCar->getName())){
-                                echo strtoupper($MyCar->getName());
-                            }else{
-                                echo isset($inputName) ? $inputName : '';
+                    <select class="form-control-lg m-0 p-0 ps-3 w-100 border border-black" id="list_Car_Brand" name="list_Car_Brand" style="font-size: 1.6rem;">
+                        <?php
+                            $valeurDefault = isset($_POST['list_Car_Brand']) ? htmlspecialchars($_POST['list_Car_Brand']) : '';
+                            if (!empty($MyCar->getBrand())){
+                                $valeurDefault = $MyCar->getBrand();
+                                $_SESSION['carBrand'] = $MyCar->getBrand();
                             }
-                        ?>"
-                    >
+                            echo "<option value=\"$valeurDefault\">$valeurDefault</option>";
+                        ?>
+                    <option value="Administrator">Administrator</option>
+                    <option value="Customer">Customer</option>
+                    <option value="Guest">Guest</option>
+                    <option value="Car">Car</option>
+                    <!-- </datalist> -->
                 </td>
             </tr>
 

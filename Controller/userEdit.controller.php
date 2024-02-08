@@ -4,7 +4,7 @@
 
 use Symfony\Component\Intl\Scripts;
 
-    require_once('../Model/user.class.php');
+    include_once('../Model/user.class.php');
     //---Configure object User--
     $MyUser = new User();
         
@@ -179,7 +179,7 @@ use Symfony\Component\Intl\Scripts;
         
         }else{
 
-            echo '<script>window.location.href = "https://www.follaco.fr/gp/index.php?page=error_page";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
 
         }
         exit();
@@ -253,7 +253,7 @@ use Symfony\Component\Intl\Scripts;
             
         }
 
-    }else if($confirmationNeeded === true)
+    }else if(isset($_POST['bt__userEdit_delete']))
     {
 
         $MyUser->deleteUser($_POST["txt__user--id"]);

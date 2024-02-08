@@ -1,7 +1,7 @@
 <?php
 
     //---Load model car--------------------
-    require_once('../Model/car.class.php');
+    include_once('../Model/car.class.php');
     //---Configure object Car--
     $MyCar = new Car();
         
@@ -163,7 +163,7 @@
 //----------------------------------------------------------------------------------------
 
 
-    if ($_SESSION['carConnected'] === "Guest"){
+    if ($_SESSION['userConnected'] === "Guest"){
 
         if($_SESSION['local']===true){
 
@@ -171,7 +171,7 @@
         
         }else{
 
-            echo '<script>window.location.href = "https://www.follaco.fr/gp/index.php?page=error_page";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
 
         }
         exit();
@@ -219,7 +219,6 @@
         if($_SESSION['newCar'] === true){
 
             $MyCar->addCar();
-            //$_SESSION['newCar'] = false;
 
         }else{
 
@@ -268,7 +267,7 @@
                 
             }else{
 
-                $id = $_POST['txt__car--id'];
+                $id = $_POST['txt__Car--id'];
 
             }
 
@@ -278,7 +277,8 @@
 
             $cars = $MyCar->getCar($id);
             
-            $MyCar->setBrand($cars[0]['id_car']);
+            $MyCar->setID($cars[0]['id_car']);
+            $MyCar->setBrand($cars[0]['brand']);
             $MyCar->setModel($cars[0]['model']);
             $MyCar->setMotorization($cars[0]['motorization']);
             $MyCar->setYear($cars[0]['year']);

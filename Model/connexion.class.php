@@ -40,7 +40,7 @@
         private $dataConnect;
         public function queryConnect($email,$pw){
 
-            include("../Controller/ConfigConnGp.php");
+            require('../Controller/ConfigConnGP.php');
 
             $resultat2 = $bdd->query("SELECT `pseudo`, `user_type`.`type` AS `type`
                                         FROM `user`

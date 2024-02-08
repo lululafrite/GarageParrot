@@ -1,10 +1,12 @@
 <?php
-
+    error_reporting(E_ALL);
+    ini_set('display_errors', 'On');
+    
     xdebug_break();
 
     session_start();
 
-    require '../vendor/autoload.php';
+    include_once '../vendor/autoload.php';
     
     if (!isset($_SESSION['userConnected'])) {
         $_SESSION['userConnected']='Guest';
@@ -23,7 +25,7 @@
 
     // La variable $_SESSION['local'] doit être changée manuellement : mettre à true si travail en local, sinon mettre à false.
     $_SESSION['local']=true;
-    if ($_SESSION['local']=true){
+    if ($_SESSION['local']===true){
         $_SESSION['db']='garage_parrot';
     }
     else{
@@ -33,13 +35,13 @@
     //$page = $_GET['page']?? 'home';
     //La syntaxe ci-dessus est équivalente celle ci-dessous
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-    require '../Elements/_01_head.php';
+    include_once '../Elements/_01_head.php';
 ?>
 
 <body>
 
 <?php
-    require '../Elements/_02_header.php';
+    include_once '../Elements/_02_header.php';
 ?>
 <script>
 
@@ -75,35 +77,35 @@
     
     <?php
         if ($page === 'home'){
-            require 'view/index.php';
+            include_once 'view/index.php';
         }elseif ($page === 'user'){
-            require 'view/user.php';
+            include_once 'view/user.php';
         }elseif ($page === 'user_edit'){
-            require 'view/user_edit.php';
+            include_once 'view/user_edit.php';
         }elseif($page === 'car'){
-            require 'view/car.php';
+            require_once 'view/car.php';
         }elseif ($page === 'car_edit'){
-            require 'view/car_edit.php';
+            include_once 'view/car_edit.php';
         }elseif ($page === 'contact_us'){
-            require 'view/contact_us.php';
+            include_once 'view/contact_us.php';
         }elseif ($page === 'connexion'){
-            require 'view/connexion.php';
+            include_once 'view/connexion.php';
         }elseif ($page === 'disconnect'){
-            require 'view/disconnect.php';
+            include_once 'view/disconnect.php';
         }elseif ($page === 'error_page'){
-            require 'view/error_access_page.php';
+            include_once 'view/error_access_page.php';
         }elseif ($page === 'error_unknown_page'){
-            require 'view/error_unknown_page.php';
+            include_once 'view/error_unknown_page.php';
         }elseif($page === '404'){
-            require 'view/error_unknown_page.php';
+            include_once 'view/error_unknown_page.php';
         }else {
-            require 'view/error_unknown_page.php';
+            include_once 'view/error_unknown_page.php';
         }
     ?>
 </main>
 
 <?php
-    require '../Elements/_04_footer.php';
+    include_once '../Elements/_04_footer.php';
     $_SESSION['NextOrPrevious'] = false;
 ?>
 

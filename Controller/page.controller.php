@@ -2,7 +2,7 @@
     
     $_SESSION['NextOrPrevious'] = false;
 
-    include_once('../Model/page.class.php');
+    require_once('../Model/page.class.php');
     
     $MyPage = new Page();
 
