@@ -14,7 +14,7 @@
         exit();
     }
     
-    include_once('../Model/connexion.class.php');
+    include('../Model/connexion.class.php');
     $MyUserConnect = new userConnect();
     
     /*include_once('../Controller/page.controller.php');

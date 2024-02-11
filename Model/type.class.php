@@ -40,7 +40,7 @@ use function PHPSTORM_META\type;
 		private $theType;
 		public function getType($îdType)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
             date_default_timezone_set($_SESSION['timeZone']);
 			
@@ -71,7 +71,7 @@ use function PHPSTORM_META\type;
 		private $userTypeList;
 		public function get($whereClause, $orderBy = 'type', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			
 			try
 			{
@@ -100,7 +100,7 @@ use function PHPSTORM_META\type;
 
 		public function addUserType()
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try{
 				$bdd->exec("INSERT INTO `user_type`(`type`)
@@ -125,7 +125,7 @@ use function PHPSTORM_META\type;
 
 		public function updateUserType($idType)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			try
 			{
 				$bdd->exec("UPDATE `user_type` SET `name` = '" . $this->type . "'
@@ -146,7 +146,7 @@ use function PHPSTORM_META\type;
 
 		public function deleteUserType($id)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{

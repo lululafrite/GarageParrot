@@ -40,7 +40,7 @@ use function PHPSTORM_META\type;
 		private $theModel;
 		public function getmodel($îdModel)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
             //$_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
@@ -74,7 +74,7 @@ use function PHPSTORM_META\type;
 		private $modelList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			
 			try
 			{
@@ -103,7 +103,7 @@ use function PHPSTORM_META\type;
 
 		public function addModel()
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try{
 				$bdd->exec("INSERT INTO `model`(`name`)
@@ -128,7 +128,7 @@ use function PHPSTORM_META\type;
 
 		public function updatemodel($idModel)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			try
 			{
 				$bdd->exec("UPDATE `model` SET `name` = '" . $this->name . "'
@@ -149,7 +149,7 @@ use function PHPSTORM_META\type;
 
 		public function deleteModel($id)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{

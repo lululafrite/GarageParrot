@@ -189,7 +189,7 @@ use function PHPSTORM_META\type;
 		private $theCar;
 		public function getCar($îdCar)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
             //$_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
@@ -240,7 +240,7 @@ use function PHPSTORM_META\type;
 		private $carList;
 		public function get($whereClause, $orderBy = 'price', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{
@@ -288,7 +288,7 @@ use function PHPSTORM_META\type;
 
 		public function addCar()
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try {
 					$bdd->exec("INSERT INTO `car`(`id_brand`,`id_model`,`id_motorization`,`year`,`mileage`,
@@ -327,7 +327,7 @@ use function PHPSTORM_META\type;
 
 		public function updateCar($idCar)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			
 			try
 			{
@@ -364,7 +364,7 @@ use function PHPSTORM_META\type;
 
 		public function deleteCar($id)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{
@@ -385,7 +385,7 @@ use function PHPSTORM_META\type;
 		private $carExist;
 		public function verifCar($brand, $model, $motorization, $year, $mileage, $price)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{

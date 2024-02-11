@@ -24,7 +24,7 @@
 
     $changeImage = false;
 
-    include_once('../Model/car.class.php');
+    include('../Model/car.class.php');
     $MyCar = new Car();
     
     $Cars = array();

@@ -40,7 +40,7 @@ use function PHPSTORM_META\type;
 		private $theMotorization;
 		public function getmotorization($îdMotorization)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
             //$_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
@@ -74,7 +74,7 @@ use function PHPSTORM_META\type;
 		private $motorizationList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			
 			try
 			{
@@ -103,7 +103,7 @@ use function PHPSTORM_META\type;
 
 		public function addMotorization()
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try{
 				$bdd->exec("INSERT INTO `motorization`(`name`)
@@ -128,7 +128,7 @@ use function PHPSTORM_META\type;
 
 		public function updatemotorization($idMotorization)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			try
 			{
 				$bdd->exec("UPDATE `motorization` SET `name` = '" . $this->name . "'
@@ -149,7 +149,7 @@ use function PHPSTORM_META\type;
 
 		public function deleteMotorization($id)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{

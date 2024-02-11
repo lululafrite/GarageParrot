@@ -14,7 +14,7 @@
     }
 
 //---Load model user--------------------
-    include_once('../Model/user.class.php');
+    include('../Model/user.class.php');
 //---Configure object User--
     $MyUser = new User();
     

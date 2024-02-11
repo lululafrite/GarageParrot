@@ -133,7 +133,7 @@
         }
         
         //Traiment de la BD pour récupérer les données destinées à l'input liste type
-        include_once('../Model/type.class.php');
+        include('../Model/type.class.php');
         $Types = new Type();
         $MyType = $Types->get(1,'type', 'ASC', 0, 50);
         unset($Types);

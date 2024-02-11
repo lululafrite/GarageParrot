@@ -40,7 +40,7 @@ use function PHPSTORM_META\type;
 		private $theBrand;
 		public function getBrand($îdBrand)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
             //$_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
@@ -74,7 +74,7 @@ use function PHPSTORM_META\type;
 		private $brandList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			
 			try
 			{
@@ -103,7 +103,7 @@ use function PHPSTORM_META\type;
 
 		public function addBrand()
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try{
 				$bdd->exec("INSERT INTO `brand`(`name`)
@@ -128,7 +128,7 @@ use function PHPSTORM_META\type;
 
 		public function updateBrand($idBrand)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			try
 			{
 				$bdd->exec("UPDATE `brand` SET `name` = '" . $this->name . "'
@@ -149,7 +149,7 @@ use function PHPSTORM_META\type;
 
 		public function deleteBrand($id)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{

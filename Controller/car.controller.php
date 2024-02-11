@@ -1,6 +1,6 @@
 <?php
 //---Load model car--------------------
-    include_once('../Model/car.class.php');
+    include('../Model/car.class.php');
 //---Configure object Car--
     $MyCar = new Car();
     

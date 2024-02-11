@@ -129,7 +129,7 @@ use function PHPSTORM_META\type;
 		private $listPseudo;
 		public function getPseudoUser()
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{
@@ -151,7 +151,7 @@ use function PHPSTORM_META\type;
 		private $theUser;
 		public function getUser($îdUser)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
             //$_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
@@ -195,7 +195,7 @@ use function PHPSTORM_META\type;
 		private $userList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			
 			try
 			{
@@ -231,7 +231,7 @@ use function PHPSTORM_META\type;
 
 		public function addUser()
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try {
 					$bdd->exec("INSERT INTO `user`(`name`,`surname`,`pseudo`,`email`,`phone`,`password`,`id_type`)
@@ -261,7 +261,7 @@ use function PHPSTORM_META\type;
 
 		public function updateUser($idUser)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 			try
 			{
 				$bdd->exec("UPDATE `user` SET
@@ -291,7 +291,7 @@ use function PHPSTORM_META\type;
 
 		public function deleteUser($id)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{
@@ -311,7 +311,7 @@ use function PHPSTORM_META\type;
 		private $userExist;
 		public function verifUser($email)
 		{
-			include('../Controller/ConfigConnGp.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{

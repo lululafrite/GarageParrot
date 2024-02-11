@@ -1,5 +1,5 @@
 <?php
-    include_once('../Controller/car.controller.php');
+    include('../Controller/car.controller.php');
     include('../Elements/_05_select_page.php');
 ?>
 

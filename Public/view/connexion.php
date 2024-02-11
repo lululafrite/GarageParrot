@@ -1,4 +1,4 @@
-<?php include_once('../Controller/connexion.controller.php'); ?>
+<?php include('../Controller/connexion.controller.php'); ?>
 
 <section class="section__connexion">
 
