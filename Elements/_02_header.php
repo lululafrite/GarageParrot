@@ -16,14 +16,14 @@
     <?php
         
         if (isset($_POST['next']) || isset($_POST['previous'])){
-            include_once('../Controller/page.controller.php');
+            include('../Controller/page.controller.php');
         }
         
         if ($page === 'car'){
-            include_once('../Elements/_06_searchCar.php');
+            include('../Elements/_06_searchCar.php');
         }
         if ($page === 'user'){
-            include_once('../Elements/_07_searchUser.php');
+            include('../Elements/_07_searchUser.php');
         }
     ?>
 

@@ -1,6 +1,6 @@
 <?php
     include_once('../Controller/car.controller.php');
-    include_once('../Elements/_05_select_page.php');
+    include('../Elements/_05_select_page.php');
 ?>
 
 <section class="m-5 d-flex flex-wrap justify-content-around">
@@ -23,7 +23,7 @@
             <table class='table__Car--data'>
                 <tr>
                     <td class="tdLabel text-end border border-0 pe-1">ID:</td>
-                    <td class="tdText border border-0"><input type="text" name='txt__Car--id'  class="bgDark text-light text-start ps-2" readonly value='<?php echo $Cars[$i]['id_car'];?>'></td>
+                    <td class="tdText border border-0"><input type="text" name='txt_carEdit_id'  class="bgDark text-light text-start ps-2" readonly value='<?php echo $Cars[$i]['id_car'];?>'></td>
                 </tr>
                 <tr>
                     <td class="tdLabel text-end border border-0 pe-1">Marque:</td>
@@ -65,9 +65,10 @@
 
 </section>
 
-<?php include_once('../Elements/_05_select_page.php');?>
+<?php include('../Elements/_05_select_page.php');?>
 
 <script>
+    //Gére l'ouverture du diaporama
     $(document).ready(function () {
         // Sélectionnez toutes les images avec la classe 'popup-gallery'
         $(".popup-gallery").on("click", function (e) {
@@ -75,16 +76,10 @@
 
             // Ouvrez la fenêtre popup avec le diaporama
             $.fancybox.open({
-                // Spécifiez ici les options du diaporama si nécessaire
+                // Possibilité de Spécifier ici les options du diaporama
                 src: $(this).attr("href"),
                 type: "image"
             });
         });
     });
-    
-    /*$(document).ready(function () {
-        $('[data-fancybox]').fancybox({
-            // Options Fancybox si nécessaire
-        });
-    });*/
 </script>

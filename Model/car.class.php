@@ -191,7 +191,7 @@ use function PHPSTORM_META\type;
 		{
 			include('../Controller/ConfigConnGp.php');
 
-            $_SESSION['timeZone']="Europe/Paris";
+            //$_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
@@ -310,10 +310,9 @@ use function PHPSTORM_META\type;
 								");
 								
 				$sql = $bdd->query("SELECT MAX(`id_car`) FROM `car`");
-				$id_car = $sql->fetch();
-				$this->id_car = intval($id_car['id_car']);
-
-				echo '<script>alert("L\'enregistrement est effectué!");</script>';
+				$id_car_ = $sql->fetch();
+				$this->id_car = intval($id_car_[0]);
+				return intval($id_car_[0]);
 
 			} catch (Exception $e) {
 				
@@ -334,10 +333,10 @@ use function PHPSTORM_META\type;
 			{
 				$idCar = intval($idCar);
 				
-			    $bdd->exec("UPDATE `car` SET
-								`id_brand` = (SELECT 'id_brand' FROM 'brand' WHERE `name`= '" . $this->brand . "'),
-								`id_model` = (SELECT 'id_model' FROM 'model' WHERE `name`= '" . $this->model . "'),
-								`id_motorization` = (SELECT 'id_motorisation' FROM 'motorisation' WHERE `name`= '" . $this->motorization . "'),
+			    $bdd->exec("UPDATE `car`
+							SET `id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name`= '" . $this->brand . "'),
+								`id_model` = (SELECT `id_model` FROM `model` WHERE `name`= '" . $this->model . "'),
+								`id_motorization` = (SELECT `id_motorization` FROM `motorization` WHERE `name`= '" . $this->motorization . "'),
 								`year` =  '" . $this->year . "',
 								`mileage` =  '" . $this->mileage . "',
 								`price` =  '" . $this->price . "',
@@ -348,7 +347,7 @@ use function PHPSTORM_META\type;
 								`image4` =  '" . $this->image4 . "',
 								`image5` =  '" . $this->image5 . "'
 
-								WHERE `id_car` = " . $idCar . "
+								WHERE `id_car` = $idCar
 							");
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
@@ -371,8 +370,40 @@ use function PHPSTORM_META\type;
 			{
 			    $bdd->exec('DELETE FROM car WHERE id_car=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
-				header("Location: index.php?page=car");
-				exit;
+				echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
+			}
+			catch (Exception $e)
+			{
+				echo "Erreur de la requete :" . $e->GetMessage();
+			}
+
+			$bdd=null;
+		}
+
+		//-----------------------------------------------------------------------
+		private $carExist;
+		public function verifCar($brand, $model, $motorization, $year, $mileage, $price)
+		{
+			include('../Controller/ConfigConnGp.php');
+
+			try
+			{
+			    $sql = $bdd->query("SELECT COUNT(*) AS `number`
+									FROM
+										`car`
+									WHERE
+										`id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name` = '" . $brand . "')
+										AND `id_model` = (SELECT `id_model` FROM `model` WHERE `name` = '" . $model . "')
+										AND `id_motorization` = (SELECT `id_motorization` FROM `motorization` WHERE `name` = '" . $motorization . "')
+										AND `year` = '" . $year . "'
+										AND `mileage` = '" . $mileage . "'
+										AND `price` = '" . $price . "';
+								");
+
+				while ($this->carExist[] = $sql->fetch());
+				return $this->carExist[0][0];
+				//$id_car_ = $sql->fetch();
+				//$this->id_car = intval($id_car_[0]);
 			}
 			catch (Exception $e)
 			{

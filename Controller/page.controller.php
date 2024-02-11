@@ -1,6 +1,6 @@
 <?php
     
-    $_SESSION['NextOrPrevious'] = false;
+    //$_SESSION['NextOrPrevious'] = false;
 
     require_once('../Model/page.class.php');
     

@@ -10,8 +10,8 @@
 
         public function __construct()
         {
-            $_SESSION['timeZone']="Europe/Paris";
-            date_default_timezone_set($_SESSION['timeZone']);
+            //$_SESSION['timeZone']="Europe/Paris";
+            //date_default_timezone_set($_SESSION['timeZone']);
         }
         
         // __Nombre de ligne__________________________________________
@@ -106,7 +106,7 @@
 		}
 		public function setCountLine($theTable)
 		{
-			include_once('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConnGP.php');
 
 			try
 			{

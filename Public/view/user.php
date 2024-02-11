@@ -56,4 +56,4 @@
 
 </section>
 
-<?php include_once('../Elements/_05_select_page.php');?>
+<?php include('../Elements/_05_select_page.php');?>

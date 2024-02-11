@@ -3,8 +3,8 @@
     {
         public function __construct()
         {
-            $_SESSION['timeZone']="Europe/Paris";
-            date_default_timezone_set($_SESSION['timeZone']);
+            //$_SESSION['timeZone']="Europe/Paris";
+            //date_default_timezone_set($_SESSION['timeZone']);
         }
         
         private $userConnected;

@@ -1,5 +1,5 @@
 <?php
-    include_once('../Controller/userEdit.controller.php');
+    include('../Controller/userEdit.controller.php');
 ?>
 
 <section class="container">

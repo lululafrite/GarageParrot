@@ -9,28 +9,50 @@
     include_once '../vendor/autoload.php';
     
     if (!isset($_SESSION['userConnected'])) {
-        $_SESSION['userConnected']='Guest';
-        $_SESSION['pseudoUser']='Guest';
-        $_SESSION['theTable']='car';
-        $_SESSION['laPage']=1;
-        $_SESSION['firstLine']=0;
-        $_SESSION['ligneParPage']=4;
-        $_SESSION['addCar']=false;
-        $_SESSION['addUser']=false;
-        $_SESSION['addOrder']=false;
-        $_SESSION['errorFormUser']=false;
-        $_SESSION['errorFormCar']=false;
-        $_SESSION['connexion']=false;
+        
+        $_SESSION['userConnected'] = 'Guest';
+        $_SESSION['pseudoUser'] = 'Guest';
+        $_SESSION['connexion'] = false;
+
+        $_SESSION['laPage'] = 1;
+        $_SESSION['firstLine'] = 0;
+        $_SESSION['ligneParPage'] = 4;
+        $_SESSION['nbOfPage'] = 1;
+        $_SESSION['NextOrPrevious'] = false;
+
+        $_SESSION['theTable'] = 'car';
+
+        $_SESSION['addCar'] = false;
+        $_SESSION['newCar'] = false;
+        $_SESSION['errorFormCar'] = false;
+        $_SESSION['carBrand'] = '_';
+        $_SESSION['carModel'] = '_';
+        $_SESSION['carMotorization'] = '_';
+        $_SESSION['carSold'] = 'Oui';
+
+        $_SESSION['addBrand'] = false;
+        $_SESSION['addModel']=false;
+        $_SESSION['addMotorization']=false;
+
+        $_SESSION['addUser'] = false;
+        $_SESSION['newUser'] = false;
+        $_SESSION['userType'] = '_';
+        $_SESSION['errorFormUser'] = false;
+
+        $_SESSION['uploadImage1'] = "";
+        $_SESSION['uploadImage2'] = "";
+        $_SESSION['uploadImage3'] = "";
+        $_SESSION['uploadImage4'] = "";
+        $_SESSION['uploadImage5'] = "";
+
+        $_SESSION['whereClause'] = 1;
+
+        $_SESSION['local']=true;
+        $_SESSION['timeZone']="Europe/Paris";
     }
 
     // La variable $_SESSION['local'] doit être changée manuellement : mettre à true si travail en local, sinon mettre à false.
     $_SESSION['local']=true;
-    if ($_SESSION['local']===true){
-        $_SESSION['db']='garage_parrot';
-    }
-    else{
-        $_SESSION['db']='dbs12361402';
-    }
 
     //$page = $_GET['page']?? 'home';
     //La syntaxe ci-dessus est équivalente celle ci-dessous
@@ -57,6 +79,8 @@
         pageTitle = "Garage V.PARROT - Nos occasions";
     } else if (window.location.href.includes("car_edit")) {
         pageTitle = "Garage V.PARROT - Editer occasion";
+    } else if (window.location.href.includes("image")) {
+        pageTitle = "Garage V.PARROT - Charger image";
     } else if (window.location.href.includes("contact_us")) {
         pageTitle = "Garage V.PARROT - Nous contacter";
     } else if (window.location.href.includes("connexion")) {
@@ -86,6 +110,10 @@
             require_once 'view/car.php';
         }elseif ($page === 'car_edit'){
             include_once 'view/car_edit.php';
+        }elseif ($page === 'image'){
+            include_once 'view/image.php';
+        }elseif ($page === 'upload'){
+            include_once 'view/upload.php';
         }elseif ($page === 'contact_us'){
             include_once 'view/contact_us.php';
         }elseif ($page === 'connexion'){
