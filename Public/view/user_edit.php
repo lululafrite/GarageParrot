@@ -4,22 +4,22 @@
 
 <section class="container">
 
-    <form action="" method="post" id="formUserEdit">
+    <form action="" method="post" id="formUserEdit" enctype="multipart/form-data">
                 
         <table class="w-100">
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt__user--id_">ID</label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_id">ID</label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3" id="txt__user--id_" name="txt__user--id" type="text" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3" id="txt_userEdit_id" name="txt_userEdit_id" type="text" style="font-size: 1.6rem;"
                         value=
                         "<?php
                             if(!empty($MyUser->getId())){
                                 echo $MyUser->getId();
                             }else{
-                                echo isset($inputId) ? $inputId : '';
+                                echo $Users[0]['id_user'];
                             }
                         ?>"
                         aria-label="Disabled input example" readonly
@@ -32,24 +32,20 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0">
-                        <?php echo isset($MessageId) ? $MessageId : ''; ?>
+                        Numéro d'identifiant. Ce numèro est incrémenté automatiquement par la robot.
                     </label>
                 </td>
             </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Name_User">Nom<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_name">Nom<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Name_User" name="txt--Name_User" type="text" placeholder="Saisissez votre NOM" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_name" name="txt_userEdit_name" type="text" placeholder="Saisissez votre NOM" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_name','','labelMessageName','Saisissez votre Nom d\'une longueur de 50 caractères maximum.')"
                         value=
                         "<?php
-                            if(!empty($MyUser->getName())){
-                                echo strtoupper($MyUser->getName());
-                            }else{
-                                echo isset($inputName) ? $inputName : '';
-                            }
+                            echo $Users[0]['name'];
                         ?>"
                     >
                 </td>
@@ -60,24 +56,20 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageName">
-                        <?php echo isset($MessageName) ? $MessageName : ''; ?>
+                        Saisissez le Nom (50 caractères maximum).
                     </label>
                 </td>
             </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Surname_User">Prénom<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_surname">Prénom<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Surname_User" name="txt--Surname_User" type="text" placeholder="Saisissez votre Prénom" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_surname" name="txt_userEdit_surname" type="text" placeholder="Saisissez votre Prénom" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_surname','','labelMessageSurname','Saisissez votre Prénom d\'une longueur de 50 caractères maximum.')"
                         value=
                         "<?php
-                            if(!empty($MyUser->getSurname())){
-                                echo ucfirst(strtolower($MyUser->getSurname()));
-                            }else{
-                                echo isset($inputSurname) ? $inputSurname : '';
-                            }
+                            echo $Users[0]['surname'];
                         ?>"
                     >
                 </td>
@@ -88,24 +80,20 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageSurname">
-                        <?php echo isset($MessageSurname) ? $MessageSurname : ''; ?>
+                        Saisissez le Prénom (50 caractères maximum).
                     </label>
                 </td>
             </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Pseudo_User">Pseudo<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_pseudo">Pseudo<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Pseudo_User" name="txt--Pseudo_User" type="text" placeholder="Saisissez votre Pseudo" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_pseudo" name="txt_userEdit_pseudo" type="text" placeholder="Saisissez votre Pseudo" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_pseudo','','labelMessagePseudo','Saisissez votre pseudonyme d\'une longueur de 20 caractères maximum.')"
                     value=
                         "<?php
-                            if(!empty($MyUser->getPseudo())){
-                                echo $MyUser->getPseudo();
-                            }else{
-                                echo isset($inputPseudo) ? $inputPseudo : '';
-                            }
+                            echo $Users[0]['pseudo'];
                         ?>"
                     >
                 </td>
@@ -116,28 +104,20 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0">
-                        <?php echo isset($MessagePseudo) ? $MessagePseudo : ''; ?>
+                        Saisissez le pseudonyme (20 caractères maximum).
                     </label>
                 </td>
             </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Email_User">Email<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_email">Email<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Email_User" name="txt--Email_User" type="email" placeholder="Saisissez votre courriel" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_email" name="txt_userEdit_email" type="email" placeholder="Saisissez votre courriel" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_pseudo','','labelMessagePseudo','Saisissez votre adresse de courriel d\'une longueur maximum de 255 caractères.')"
                         value=
                         "<?php
-                            if(!empty($MyUser->getEmail())){
-                                if(filter_var($MyUser->getEmail(), FILTER_VALIDATE_EMAIL)){
-                                    echo $MyUser->getEmail();
-                                }else{
-                                    echo isset($inputEmail) ? $inputEmail : '';
-                                }
-                            }else{
-                                echo isset($inputEmail) ? $inputEmail : '';
-                            }
+                            echo $Users[0]['email'];
                         ?>"
                     > 
                 </td>
@@ -148,24 +128,20 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0">
-                        <?php echo isset($MessageEmail) ? $MessageEmail : ''; ?>
+                        Saisissez l'adresse email (255 caractères maximum).
                     </label>
                 </td>
             </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Phone_User">Phone<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_phone">Phone<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Phone_User" name="txt--Phone_User" type="tel" placeholder="## ## ## ## ##" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_phone" name="txt_userEdit_phone" type="tel" placeholder="## ## ## ## ##" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_pseudo','','labelMessagePseudo','Saisissez votre N° de téléphone.')"
                         value=
                         "<?php
-                            if(!empty($MyUser->getPhone())){
-                                echo $MyUser->getPhone();
-                            }else{
-                                echo isset($inputPhone) ? $inputPhone : '';
-                            }
+                            echo $Users[0]['phone'];
                         ?>"
                     >
                 </td>
@@ -176,30 +152,28 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0">
-                        <?php echo isset($MessagePhone) ? $MessagePhone : ''; ?>
+                        Saisissez le N° de téléphone.
                     </label>
                 </td>
             </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="list--User_Type">Utilisateur<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="list_userEdit_type">Utilisateur<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <select class="form-control-lg m-0 p-0 ps-3 w-100 border border-black" id="list_User_Type" name="list_User_Type" style="font-size: 1.6rem;">
+                    <input list="datalist_userEdit_type" name="list_userEdit_type" id="list_userEdit_type" class="form-control-lg m-0 p-0 ps-3 border border-black fs-4" placeholder="Selectionnez un type" oninput="validateInput('list_userEdit_type','datalist_userEdit_type','labelMessageType','Selectionnez le type d\'utilisateur dans la liste de choix.')"
+                        value=
+                        "<?php
+                            echo $Users[0]['type'];
+                        ?>"
+                    >
+                    <datalist id="datalist_userEdit_type">
                         <?php
-                            $valeurDefault = isset($_POST['list_User_Type']) ? htmlspecialchars($_POST['list_User_Type']) : '';
-                            if (!empty($MyUser->getType())){
-                                $valeurDefault = $MyUser->getType();
-                                $_SESSION['userType'] = $MyUser->getType();
-                            }
-                            echo "<option value=\"$valeurDefault\">$valeurDefault</option>";
-                        ?>
-                    <option value="Administrator">Administrator</option>
-                    <option value="Customer">Customer</option>
-                    <option value="Guest">Guest</option>
-                    <option value="User">User</option>
-                    <!-- </datalist> -->
+                            for($i=0;$i != count($MyType)-1;$i++) { ?>
+                            <option value="<?php echo $MyType[$i]['type']; ?>">
+                        <?php } ?>
+                    </datalist>
                 </td>
             </tr>
 
@@ -208,24 +182,20 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0">
-                        <?php echo isset($MessageType) ? $MessageType : ''; ?>
+                        Selectionnez le type d'utilisateur dans la liste de choix.
                     </label>
                 </td>
             </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Password_User">Mot de passe<span style="color:red;">*</span></label>
+                    <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_password">Mot de passe<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Password_User" name="txt--Password_User" type="password" placeholder=""style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_password" name="txt_userEdit_password" type="password" placeholder=""style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_password','','labelMessagePassword','Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants \/\*-.!?@')"
                         value=
                         "<?php
-                            if(!empty($MyUser->getPassword())){
-                                echo $MyUser->getPassword();
-                            }else{
-                                echo isset($inputPassword) ? $inputPassword : '';
-                            }
+                            echo $Users[0]['password'];
                         ?>"
                     >
                 </td>
@@ -236,26 +206,22 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0">
-                        <?php echo isset($MessagePassword) ? $MessagePassword : ''; ?>
+                        Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants /*-.!?@
                     </label>
                 </td>
             </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt--Confirm_User">
+                    <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_confirm">
                         Confirmation<span style="color:red;">*</span>
                     </label>
                 </td>
                 <td class="m-0 p-0 w-90">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt--Confirm_User" name="txt--Confirm_User" type="password" placeholder="" style="font-size: 1.6rem;"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_confirm" name="txt_userEdit_confirm" type="password" placeholder="" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_confirm','','labelMessageConfirm','Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants \/\*-.!?@')"
                         value=
                         "<?php
-                            if(!empty($MyUser->getPassword())){
-                                echo $MyUser->getPassword();
-                            }else{
-                                echo isset($inputConfirm) ? $inputConfirm : '';
-                            }
+                            echo $Users[0]['password'];
                         ?>"
                     >
                 </td>
@@ -266,7 +232,7 @@
                 </td>
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0">
-                        <?php echo isset($MessageConfirm) ? $MessageConfirm : ''; ?>
+                        Confirmez le mot de passe.
                     </label>
                 </td>
             </tr>
@@ -275,10 +241,10 @@
                 <td class="m-0 p-0">
                 </td>
                 <td class="m-0 p-0">
-                    <a href="index.php?page=user" class="btn btn-lg btn-warning fs-4" name="bt__userEdit--cancel">Retour</a>
-                    <button type="submit" class="btn btn-lg btn-success fs-4" id="bt__userEdit_save" name="bt__userEdit_save">Enregistrer</button>
-                    <button type="submit" class="btn btn-lg btn-info fs-4" id="bt__userEdit_new" name="bt__userEdit_new">Nouveau</button>
-                    <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt__userEdit_delete" name="bt__userEdit_delete">Supprimer</button>
+                    <button type="submit" class="btn btn-lg btn-warning fs-4" id="bt_userEdit_cancel" name="bt_userEdit_cancel" onclick="retour();">Retour</button>
+                    <button type="submit" class="btn btn-lg btn-success fs-4" id="bt_userEdit_save" name="bt_userEdit_save">Enregistrer</button>
+                    <button type="submit" class="btn btn-lg btn-info fs-4" id="bt_userEdit_new" name="bt_userEdit_new">Nouveau</button>
+                    <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt_userEdit_delete" name="bt_userEdit_delete">Supprimer</button>
                 </td>
             </tr>
 
@@ -288,38 +254,132 @@
 
 </section>
 
-<?php
-    $_SESSION['errorFormUser']=false;
-?>
-
 <script>
-    
-    document.getElementById('list_User_Type').addEventListener('change', function() {
-        var selectedValue = this.value;
+    //Permet de remplir les input avec une valeur quelquonque. Utile si l'on a cliqué sur le bouton nouveau et que l'on veut annuler. 
+    function retour() {        
+        setInputValue('txt_userEdit_name', '_');
+        setInputValue('txt_userEdit_surname', '_');
+        setInputValue('txt_userEdit_pseudo', '_');
+        setInputValue('txt_userEdit_email', 'guest@gmail.com');
+        setInputValue('txt_userEdit_phone', '00 00 00 00 00');
+        setInputValue('list_userEdit_type', 'Guest');
+        setInputValue('txt_userEdit_password', 'Abc123/*-');
+        setInputValue('txt_userEdit_confirm', 'Abc123/*-');
 
-        // Envoie la nouvelle valeur au serveur via une requête AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'userEdit.controller.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                console.log(xhr.responseText); // Affichez la réponse du serveur dans la console pour le débogage
-            }
-        };
-        xhr.send('userType=' + selectedValue);
+        return;
+    }
+    function setInputValue(inputId, value) {
+        const monInput = document.getElementById(inputId);
+        if (monInput) {
+            monInput.value = value;
+        }
+    }
+
+    //Initialise les couleurs input list
+    document.addEventListener('DOMContentLoaded', function() {
+        var myInput = document.getElementById('list_userEdit_type');
+        myInput.style.backgroundColor = '#DADADA';
     });
 
-    document.getElementById('bt__userEdit_delete').addEventListener('click', function() {
-        var userConfirmed = confirm("Êtes-vous sûr de vouloir supprimer cet enregistrement?");
-    
-            // Effectuer une requête AJAX pour communiquer avec le serveur
+    //vérifier si la valeur saisie existe dans la liste de choix
+    function validateInput(input , datalist, myLabel, myMessage){
         
-        if (userConfirmed === true) {
-            //window.location.href = 'http://garageparrot/index.php?page=user_edit&deleteUser=true';
+        var myInput = document.getElementById(input);
+        var errorMessage = document.getElementById(myLabel);
+        var isError = false;
+        
+        if(datalist!=''){
+            
+            var myDatalist = document.getElementById(datalist);
+
+            var isValid = Array.from(myDatalist.options).some(function(option) {
+                return option.value === myInput.value;
+            });
+
+            if(!isValid){isError = true;}
+
+        }else if(myInput.value.trim() === ''){
+            
+            isError = true;
+
+        }
+
+        if(isError){
+
+            errorMessage.textContent = myMessage;
+            errorMessage.style.color = 'red';
+            myInput.style.background = '#FFB4B4';
+            return false;
+
         }else{
-            //window.location.href = 'http://garageparrot/index.php?page=user_edit&deleteUser=false';
+
+            errorMessage.textContent = myMessage;
+            errorMessage.style.color = '#000000';
+            
+            if(datalist!=''){
+                myInput.style.background = '#DADADA';
+            }else{
+                myInput.style.background = '#ffffff';
+            }
+
+            return true;
+        }
+    }
+
+    /*********************************************************************************************
+    ****** Annuler la soumission du formulaire si une erreur subsiste dans l'un des champs *******
+    *********************************************************************************************/
+
+    document.getElementById('formUserEdit').addEventListener('submit', function (event) {
+
+        var MessageName = "Saisissez le Nom (50 caractères maximum).";
+        var MessageSurname = "Saisissez le Prénom (50 caractères maximum).";
+        var MessagePseudo = "Saisissez le pseudonyme (20 caractères maximum).";
+        var MessageEmail = "Saisissez l'adresse email (255 caractères maximum).";
+        var MessagePhone = "Saisissez le N° de téléphone.";
+        var MessageType = "Selectionnez le type d'utilisateur dans la liste de choix.";
+        var MessagePassword = "Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants /*-.!?@";
+        
+        var isError = false;
+        
+        if (!validateInput('txt_userEdit_name', '', 'labelMessageName', MessageName)){
+            isError = true;
+        }
+        
+        if (!validateInput('txt_userEdit_surname', '', 'labelMessageSurname', MessageSurname)){
+            isError = true;
+        }
+
+        if (!validateInput('txt_userEdit_pseudo', '', 'labelMessagePseudo', MessagePseudo)) {
+            isError = true;
+        }
+
+        if (!validateInput('txt_userEdit_email', '', 'labelMessageEmail', MessageEmail)) {
+            isError = true;
+        }
+
+        if (!validateInput('txt_userEdit_phone', '', 'labelMessagePhone', MessagePhone)) {
+            isError = true;
+        }
+
+        if (!validateInput('list_userEdit_type', 'datalist_userEdit_type', 'labelMessageType', MessageType)) {
+            isError = true;
+        }
+
+        if (!validateInput('txt_userEdit_password', '', 'labelMessagePassword', MessagePassword)) {
+            isError = true;
+        }
+
+        if (!validateInput('txt_userEdit_confirm', '', 'labelMessageConfirm', MessagePassword)) {
+            isError = true;
+        }
+
+        var messageAlerte = 'Vous avez un ou plusieurs champs dont la valeur n\'est pas conforme. Veuillez vérifier et corriger le ou les champs concernés';
+        
+        if (isError === true){
+            event.preventDefault();
+            alert (messageAlerte)
+            isError = false;
         }
     });
-
-
 </script>

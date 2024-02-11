@@ -153,7 +153,7 @@ use function PHPSTORM_META\type;
 		{
 			include('../Controller/ConfigConnGp.php');
 
-            $_SESSION['timeZone']="Europe/Paris";
+            //$_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
 			//$labd = $_SESSION['db'];
 			
@@ -246,7 +246,7 @@ use function PHPSTORM_META\type;
 				$sql = $bdd->query("SELECT `id_user` FROM `user` WHERE `email`='" . $this->email . "'");
 				$id_user = $sql->fetch();
 				$this->id_user = intval($id_user['id_user']);
-				echo '<script>alert("L\'enregistrement est effectué!");</script>';
+				return intval($id_user['id_user']);
 
 			} catch (Exception $e) {
 				
@@ -297,7 +297,33 @@ use function PHPSTORM_META\type;
 			{
 			    $bdd->exec('DELETE FROM user WHERE id_user=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
-				include_once('view/user.php');
+				echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
+				echo '<script>window.location.href = "http://www.follaco.fr/index.php?page=user";</script>';
+			}
+			catch (Exception $e)
+			{
+				echo "Erreur de la requete :" . $e->GetMessage();
+			}
+
+			$bdd=null;
+		}
+		
+		private $userExist;
+		public function verifUser($email)
+		{
+			include('../Controller/ConfigConnGp.php');
+
+			try
+			{
+			    $sql = $bdd->query("SELECT COUNT(*) AS `number`
+									FROM
+										`user`
+									WHERE
+										`email` = '" . $email . "'
+								");
+
+				while ($this->userExist[] = $sql->fetch());
+				return $this->userExist[0][0];
 			}
 			catch (Exception $e)
 			{

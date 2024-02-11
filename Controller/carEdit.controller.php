@@ -23,7 +23,6 @@
 //***********************************************************************************************
 
     $changeImage = false;
-    //$_SESSION['theTable'] = "car";
 
     include_once('../Model/car.class.php');
     $MyCar = new Car();
