@@ -3,16 +3,27 @@
         <form id="form__nbOfLine" method="post" action=<?php $pageActive ?>>
             <label for="nbOfLine" style="color: white;">ligne par page : </label>
             <select id="nbOfLine" name="nbOfLine" onchange="this.form.submit()">
-                <option value=""<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='') echo 'selected';?>>Select</option>
-                <option value="4"<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='4') echo 'selected';?>>4</option>
-                <option value="8"<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='8') echo 'selected';?>>8</option>
-                <option value="12"<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='12') echo 'selected';?>>12</option>
-                <option value="16"<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='16') echo 'selected';?>>16</option>
-                <option value="20"<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='20') echo 'selected';?>>20</option>
-                <option value="24"<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='24') echo 'selected';?>>24</option>
-                <option value="48"<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='48') echo 'selected';?>>48</option>
-                <option value="100"<?php if (isset($_POST['nbOfLine']) && $_POST['nbOfLine']=='100') echo 'selected';?>>100</option>
+                <option value="<?php
+                    if(isset($_POST['nbOfLine']) && !isset($_POST['nbOfLine'])){
+                        $value = $_POST['nbOfLine'];
+                        $_SESSION['ligneParPage'] = $_POST['nbOfLine'];
+                    }else{
+                        $value = $_SESSION['ligneParPage'];
+                    }
+                    echo $value ;
+                ?>">
+                    <?php echo $value; ?>
+                </option>
+                <option value="1">1</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
             </select>
+
         </form>
     </div>
 

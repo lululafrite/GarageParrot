@@ -16,7 +16,7 @@
 
         $_SESSION['laPage'] = 1;
         $_SESSION['firstLine'] = 0;
-        $_SESSION['ligneParPage'] = 4;
+        $_SESSION['ligneParPage'] = 3;
         $_SESSION['nbOfPage'] = 1;
         $_SESSION['NextOrPrevious'] = false;
 
@@ -29,6 +29,16 @@
         $_SESSION['carModel'] = '_';
         $_SESSION['carMotorization'] = '_';
         $_SESSION['carSold'] = 'Oui';
+        $_SESSION['uploadImage1'] = '_.png';
+        $_SESSION['uploadImage2'] = '_.png';
+        $_SESSION['uploadImage3'] = '_.png';
+        $_SESSION['uploadImage4'] = '_.png';
+        $_SESSION['uploadImage5'] = '_.png';
+        //Variable critères de recharche car
+        $_SESSION['criteriaBrand'] = 'Selectionnez une marque';
+        $_SESSION['criteriaModel'] = 'Selectionnez un modele';
+        $_SESSION['criteriaMileage'] = 'Selectionnez un kilometrage maxi';
+        $_SESSION['criteriaPrice'] = 'Selectionnez un prix maxi';
 
         $_SESSION['addBrand'] = false;
         $_SESSION['addModel']=false;
@@ -38,12 +48,10 @@
         $_SESSION['newUser'] = false;
         $_SESSION['userType'] = '_';
         $_SESSION['errorFormUser'] = false;
-
-        $_SESSION['uploadImage1'] = "";
-        $_SESSION['uploadImage2'] = "";
-        $_SESSION['uploadImage3'] = "";
-        $_SESSION['uploadImage4'] = "";
-        $_SESSION['uploadImage5'] = "";
+        //Variable critères de recharche user
+        $_SESSION['criteriaName'] = '';
+        $_SESSION['criteriaPseudo'] = '';
+        $_SESSION['criteriaType'] = 'Selectionnez un type';
 
         $_SESSION['whereClause'] = 1;
 
