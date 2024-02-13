@@ -181,7 +181,7 @@
 
     if($_SESSION['errorFormCar']===false){
 
-        if(!$_SESSION['newCar']){
+        if($_SESSION['newCar'] != true){
             // Traitement de récupération de l'id du véhicule en fonction des conditions
             if(isset($_POST['txt_carEdit_id']) && !empty($_POST['txt_carEdit_id'])){
                 
@@ -194,45 +194,55 @@
             }
             // Requete SELECT permettant de récupérer les données du véhicule en fonction de l'id traité ci-dessus
             $Cars = $MyCar->getCar($MyCar->getId());
-            //Traitement des input image si une nouvelle image est téléchargée 
-            if($changeImage === true){
+        }
+        //Traitement des input image si une nouvelle image est téléchargée 
+        if($changeImage === true){
+
+            $Cars[0]['id_car'] = '0';
+            $Cars[0]['brand'] = $_POST['list_carEdit_brand'];
+            $Cars[0]['model'] = $_POST['list_carEdit_model'];
+            $Cars[0]['motorization'] = $_POST['list_carEdit_motorization'];
+            $Cars[0]['year'] = $_POST['txt_carEdit_year'];
+            $Cars[0]['mileage'] = $_POST['txt_carEdit_mileage'];
+            $Cars[0]['price'] = $_POST['txt_carEdit_price'];
+            $Cars[0]['sold'] = $_POST['list_carEdit_sold'];
+
+            $Cars[0]['image1'] = $_SESSION['uploadImage1'];
+            $Cars[0]['image2'] = $_SESSION['uploadImage2'];
+            $Cars[0]['image3'] = $_SESSION['uploadImage3'];
+            $Cars[0]['image4'] = $_SESSION['uploadImage4'];
+            $Cars[0]['image5'] = $_SESSION['uploadImage5'];
+
+            if(isset($_POST['btn_image1'])){
 
                 $Cars[0]['image1'] = $_SESSION['uploadImage1'];
+                unset($_POST['btn_image1']);
+
+            }else if(isset($_POST['btn_image2'])){
+
                 $Cars[0]['image2'] = $_SESSION['uploadImage2'];
+                unset($_POST['btn_image2']);
+
+            }else if(isset($_POST['btn_image3'])){
+
                 $Cars[0]['image3'] = $_SESSION['uploadImage3'];
+                unset($_POST['btn_image3']);
+
+            }else if(isset($_POST['btn_image4'])){
+
                 $Cars[0]['image4'] = $_SESSION['uploadImage4'];
+                unset($_POST['btn_image4']);
+
+            }else if(isset($_POST['btn_image5'])){
+
                 $Cars[0]['image5'] = $_SESSION['uploadImage5'];
+                unset($_POST['btn_image5']);
 
-                if(isset($_POST['btn_image1'])){
-
-                    $Cars[0]['image1'] = $_SESSION['uploadImage1'];
-                    unset($_POST['btn_image1']);
-
-                }else if(isset($_POST['btn_image2'])){
-
-                    $Cars[0]['image2'] = $_SESSION['uploadImage2'];
-                    unset($_POST['btn_image2']);
-
-                }else if(isset($_POST['btn_image3'])){
-
-                    $Cars[0]['image3'] = $_SESSION['uploadImage3'];
-                    unset($_POST['btn_image3']);
-
-                }else if(isset($_POST['btn_image4'])){
-
-                    $Cars[0]['image4'] = $_SESSION['uploadImage4'];
-                    unset($_POST['btn_image4']);
-
-                }else if(isset($_POST['btn_image5'])){
-
-                    $Cars[0]['image5'] = $_SESSION['uploadImage5'];
-                    unset($_POST['btn_image5']);
-
-                }
-
-                $changeImage = false;
             }
+
+            $changeImage = false;
         }
+    }
         
         //Traiment de la BD pour récupérer les données destinées à l'input liste brand
         include_once('../Model/brand.class.php');
@@ -251,6 +261,6 @@
         $Motorizations = new Motorization();
         $MyMotorization = $Motorizations->get(1,'name', 'ASC', 0, 50);
         unset($Motorizations);
-    }
+    
 
 ?>

@@ -38,6 +38,24 @@ main{
   background-color: #343a40;
 }
 
+.rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rating i {
+  font-size: 24px;
+  color: #ffd700; /* Couleur jaune pour les étoiles */
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.rating i:hover,
+.rating i.active {
+  color: #ffcc00; /* Couleur jaune clair au survol */
+}
+
 /*-----------------------------------------------------------------------*/
 /*--------PARAMETRES ECRANS SUPERIEURs A 767px---------------------------*/
 /*-----------------------------------------------------------------------*/
@@ -128,13 +146,13 @@ aside{
   }
 
   .article__section{
-    width: 65%;
-    height: auto;
+    /*width: 65%;
+    height: auto;*/
   }
 
   .aside__section{
-    width: 35%;
-    height: auto;
+    /*width: 35%;
+    height: auto;*/
   }
 
 }
@@ -151,15 +169,15 @@ aside{
   }
 
   .article__section{
-    width: 100%;
-    height: auto;
+    /*width: 100%;
+    height: auto;*/
     /*padding: 0;
     margin: 0;*/
   }
 
   .aside__section{
-    width: 100%;
-    height: auto;
+    /*width: 100%;
+    height: auto;*/
     /*padding: 0;
     margin: 10px 0px 0px 0px;*/
   }

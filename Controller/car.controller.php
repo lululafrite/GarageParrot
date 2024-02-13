@@ -16,6 +16,9 @@
         $_SESSION['firstLine'] = 0;
         $_SESSION['ligneParPage'] = 3;
         $_SESSION['nbOfPage'] = 1;
+    }else if(isset($_POST['nbOfPage'])){
+        $_SESSION['laPage'] = 1;
+        $_SESSION['firstLine']=0;
     }
 
     // Initialiser les variables pour paramètrer la clause where afin d'executer la requete SELECT pour rechercher le ou les contacts
@@ -30,12 +33,9 @@
         $_SESSION['criteriaBrand'] = $_POST['select_car_brand'];
         $brand_umpty = false;
     }else if(!empty($_SESSION['criteriaBrand']) && $_SESSION['criteriaBrand'] === 'Selectionnez une marque'){
-            //$_SESSION['criteriaBrand'] = "";
-    }else if($_SESSION['NextOrPrevious'] === false){
-        //$_SESSION['criteriaBrand'] = "";
+        $brand_umpty = true;
     }else{
         $brand_umpty = false;
-        //$_SESSION['criteriaBrand'] = "Selectionnez une marque";
     }
 
     if(isset($_POST['select_car_model']) && !empty($_POST['select_car_model']) && $_POST['select_car_model'] != "Selectionnez un modele"){
@@ -43,8 +43,6 @@
         $model_umpty = false;
     }else if(!empty($_SESSION['criteriaModel']) && $_SESSION['criteriaModel'] === 'Selectionnez un modele'){
             //$_SESSION['criteriaModel'] = "";
-    }else if($_SESSION['NextOrPrevious'] === false){
-        //$_SESSION['criteriaModel'] = "";
     }else{
         $model_umpty = false;
         //$_SESSION['criteriaModel'] = 'Selectionnez un modele';
@@ -54,8 +52,6 @@
         $_SESSION['criteriaMileage'] = $_POST['select_car_mileage'];
         $mileage_umpty = false;
     }else if(!empty($_SESSION['criteriaMileage']) && $_SESSION['criteriaMileage'] === 'Selectionnez un kilometrage maxi'){
-        //$_SESSION['criteriaMileage'] = "";
-    }else if($_SESSION['NextOrPrevious'] === false){
         //$_SESSION['criteriaMileage'] = "";
     }else{
         $mileage_umpty = false;
@@ -67,11 +63,13 @@
         $price_umpty = false;
     }else if(!empty($_SESSION['criteriaPrice']) && $_SESSION['criteriaPrice'] === 'Selectionnez un prix maxi'){
         //$_SESSION['criteriaPrice'] = "";
-    }else if($_SESSION['NextOrPrevious'] === false){
-        //$_SESSION['criteriaPrice'] = "";
     }else{
         $price_umpty = false;
         //$_SESSION['criteriaPrice'] = 'Selectionnez un prix maxi';
+    }
+
+    if(isset($_POST['nbOfLine'])){
+
     }
 
     // Paramètrage de la clause WHERE pour executer la requete SELECT pour rechercher un ou plusieurs contacts
