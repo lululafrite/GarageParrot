@@ -115,6 +115,7 @@
         $MyCar->setMileage($_POST['txt_carEdit_mileage']);
         $MyCar->setPrice($_POST["txt_carEdit_price"]);
         $MyCar->setSold(ucfirst(strtolower($_POST["list_carEdit_sold"])));
+        $MyCar->setDescription(ucfirst(strtolower($_POST["txt_carEdit_description"])));
         $MyCar->setImage1($_POST["txt_carEdit_image1"]);
         $MyCar->setImage2($_POST["txt_carEdit_image2"]);
         $MyCar->setImage3($_POST["txt_carEdit_image3"]);
@@ -156,6 +157,7 @@
                 "mileage" => '',
                 "price" => '',
                 "sold" => '',
+                "description" => '',
                 "image1" => '',
                 "image2" => '',
                 "image3" => '',
@@ -206,6 +208,7 @@
             $Cars[0]['mileage'] = $_POST['txt_carEdit_mileage'];
             $Cars[0]['price'] = $_POST['txt_carEdit_price'];
             $Cars[0]['sold'] = $_POST['list_carEdit_sold'];
+            $Cars[0]['description'] = $_POST['txt_carEdit_description'];
 
             $Cars[0]['image1'] = $_SESSION['uploadImage1'];
             $Cars[0]['image2'] = $_SESSION['uploadImage2'];

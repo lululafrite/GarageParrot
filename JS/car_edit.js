@@ -7,6 +7,7 @@ function retour() {
     setInputValue('txt_carEdit_mileage', '0');
     setInputValue('txt_carEdit_price', '0');
     setInputValue('list_carEdit_sold', 'Oui');
+    setInputValue('list_carEdit_sold', 'option');
     setInputValue('txt_carEdit_image1', '_.png');
     setInputValue('txt_carEdit_image2', '_.png');
     setInputValue('txt_carEdit_image3', '_.png');

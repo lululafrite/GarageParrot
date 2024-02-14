@@ -224,6 +224,25 @@
                     </label>
                 </td>
             </tr>
+
+            <tr class="m-0 p-0">
+                <td class="text-end m-0 p-0">
+                    <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_description">Description.<span style="color:red;">*</span></label>
+                </td>
+                <td class="m-0 p-0">
+                    <textarea class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_carEdit_description" name="txt_carEdit_description" rows="3" placeholder="Saisissez les options et une description" oninput="validateInput('txt_carEdit_description','','labelMessageDescription','Saisissez les options et une description.')"><?php echo $Cars[0]['description'];?></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="m-0 p-0">
+                </td>
+                <td class="m-0 p-0">
+                    <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageDescription">
+                        Saisissez les options et une description..
+                    </label>
+                </td>
+            </tr>
             
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">

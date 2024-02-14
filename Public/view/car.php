@@ -23,7 +23,7 @@
             <table class='table__Car--data'>
                 <tr>
                     <td class="tdLabel text-end border border-0 pe-1">ID:</td>
-                    <td class="tdText border border-0"><input type="text" name='txt_carEdit_id'  class="bgDark text-light text-start ps-2" readonly value='<?php echo $Cars[$i]['id_car'];?>'></td>
+                    <td class="tdText border border-0"><input type="text" id='txt_carEdit_id' name='txt_carEdit_id'  class="bgDark text-light text-start ps-2" readonly value='<?php echo $Cars[$i]['id_car'];?>'></td>
                 </tr>
                 <tr>
                     <td class="tdLabel text-end border border-0 pe-1">Marque:</td>
@@ -46,19 +46,40 @@
                     <td class="tdText border border-0"><input type="text" name="txt__Car--mileage" class="bg-secondary text-light text-start ps-2" readonly value='<?php echo $Cars[$i]['mileage'];?> kms'></td>
                 </tr>
                 <tr>
-                    <td class="tdLabel text-end border border-0 pe-1">Price:</td>
+                    <td class="tdLabel text-end border border-0 pe-1">Prix:</td>
                     <td class="tdText border border-0"><input type="text" name="txt__Car--price" class="bg-secondary text-light text-start ps-2" readonly value='<?php echo $Cars[$i]['price'];?> € TTC'></td>
                 </tr>
                 <tr>
-                    <td class="tdLabel text-end border border-0 pe-1">Etat:</td>
+                    <td class="tdLabel text-end border border-0 pe-1">Disponible:</td>
                     <td class="tdText border border-0"><input type="text" name="txt__Car--sold" class="bg-secondary text-light text-start ps-2" readonly value='<?php echo $Cars[$i]['sold'];?>'></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel text-end border border-0 pe-1">Description:</td>
+                    <td class="tdText border border-0"><textarea class="bg-secondary text-light text-start ps-2" id="txt__Car--description" name="txt__Car--description" rows="3" placeholder="Options et description" readonly><?php echo $Cars[$i]['description'];?></textarea></td>
                 </tr>
             </table>
         </div>
-        <div class="d-flex justify-content-center my-2">
-            <button type="submit" class='btn btn-primary fs-3 mt-3' name='bt__Car--edit'>Editer</button>
-        </div>
+        <?php
+        if($_SESSION['userConnected'] != 'Guest'){
+
+        ?>
+            <div class="d-flex justify-content-center my-2">
+                <button type="submit" class='btn btn-primary fs-3 mt-3' name='bt__Car--edit'>Editer</button>
+            </div>
+        <?php
+        }
+        ?>
     </form>
+        <?php
+        if($_SESSION['userConnected'] === 'Guest'){
+
+        ?>
+            <div class="d-flex justify-content-center my-2">
+            <button type="button" class="btn btn-lg btn-primary" id="bt_car_contact" onclick="focusOnInput()">Nous contacter</button>
+            </div>
+        <?php
+        }
+        ?>
 </article>
 
 <?php } ?>
@@ -68,3 +89,12 @@
 <?php include('../Elements/_05_select_page.php');?>
 
 <script src="../JS/car.js"></script>
+
+<script>
+    
+function focusOnInput(){
+    document.getElementById('contact_description').value = "Bonjour, je souhaite prendre rendez-vous pour une présentation détaillé et un essai du véhicule xxxxxxxx ";
+    document.getElementById('contact_name').focus();
+    document.getElementById('bottom').scrollIntoView({ behavior: 'smooth' });
+}
+</script>

@@ -109,6 +109,17 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
+		private $description;
+		public function getDescription()
+		{
+			return $this->description;
+		}
+		public function setDescription($new)
+		{
+			$this->description = $new;
+		}
+		//-----------------------------------------------------------------------
+
 		private $image1;
 		public function getImage1()
 		{
@@ -204,6 +215,7 @@ use function PHPSTORM_META\type;
 										`car`.`year`,
 										`car`.`mileage`,
 										`car`.`price`,
+										`car`.`description`,
 										`car`.`sold`,
 										`car`.`image1`,
 										`car`.`image2`,
@@ -253,6 +265,7 @@ use function PHPSTORM_META\type;
 										`car`.`mileage`,
 										`car`.`price`,
 										`car`.`sold`,
+										`car`.`description`,
 										`car`.`image1`,
 										`car`.`image2`,
 										`car`.`image3`,
@@ -301,6 +314,7 @@ use function PHPSTORM_META\type;
 										'" . $this->mileage . "',
 										'" . $this->price . "',
 										'" . $this->sold . "',
+										'" . $this->description . "',
 										'" . $this->image1 . "',
 										'" . $this->image2 . "',
 										'" . $this->image3 . "',
@@ -341,6 +355,7 @@ use function PHPSTORM_META\type;
 								`mileage` =  '" . $this->mileage . "',
 								`price` =  '" . $this->price . "',
 								`sold` =  '" . $this->sold . "',
+								`description` =  '" . $this->description . "',
 								`image1` =  '" . $this->image1 . "',
 								`image2` =  '" . $this->image2 . "',
 								`image3` =  '" . $this->image3 . "',

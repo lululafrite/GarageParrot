@@ -45,7 +45,7 @@
                         </tr>
                         </tr>
                             <td class="text-center" colspan="2">
-                                <button class="btn btn-primary fs-3" type="submit" id="bt_contact" name="bt_contact">Envoyer</button>
+                                <button class="btn btn btn-primary fs-3" type="submit" id="bt_contact" name="bt_contact">Envoyer</button>
                             </td>
                         </tr>
                     </tbody>
