@@ -1,11 +1,11 @@
-<footer class="container-fluid pt-3 mt-5" style="background-image: url('img/baniere/carbone_1920x450.jpg'); background-size: cover; background-position: center; height: auto; width:auto;">
+<footer class="container-fluid pt-5 mt-5" style="background-image: url('img/baniere/carbone_1920x450.jpg'); background-size: cover; background-position: center; height: auto; width:auto;">
     <div class="d-flex justify-content-center">
         <div class="container">
             <div class="row">
-                <div class="col-10 col-md-5 mx-auto text-center ">
+                <div class="col-10 col-lg-5 mx-auto text-center ">
                     <?php include ('../Elements/_04_schedules.php'); ?>
                 </div>
-                <div class="col-10 col-md-6 mx-auto text-center ">
+                <div class="col-10 col-lg-6 mx-auto text-center ">
                     <?php include ('../Elements/_08_contact.php'); ?>
                 </div>
             </div>

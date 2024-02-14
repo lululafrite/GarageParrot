@@ -3,7 +3,7 @@
 </div>
 <div class="container d-flex justify-content-center">
     <div class="row">
-        <div class="col-12 col-lg-6 mx-0 px-0">
+        <div class="col-12 col-lg-6 mx-0 px-0 mb-md-3">
             <table class="table table-dark table-bordered p-0 m-0">
                 <thead>
                     <tr>
@@ -45,15 +45,15 @@
                         </tr>
                         </tr>
                             <td class="text-center" colspan="2">
-                                <button class="btn btn btn-primary fs-3" type="submit" id="bt_contact" name="bt_contact">Envoyer</button>
+                                <button class="btn btn btn-primary fs-4" type="submit" id="bt_contact" name="bt_contact">Envoyer</button>
                             </td>
                         </tr>
                     </tbody>
                 </form>
             </table>
         </div>
-        <div class="col-12 col-lg-6 mx-0 px-0 ps-3">
-            <div class="col-12 bg-dark d-flex justify-content-center text-light mx-0 px-0 py-3 rounded-3">
+        <div class="col-12 col-lg-5 ms-auto mx-0 px-0">
+            <div class="col-12 bg-dark d-flex justify-content-center text-light mx-0 px-0 rounded-3">
                 Ils témoignent
             </div>
             <div class="overflow-auto p-0 m-0" style="max-height: 280px;">
@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0 fs-3">
+                                    <blockquote class="blockquote mb-0 fs-4">
                                         <p>Top!</p>
                                     </blockquote>
                                 </div>
@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0 fs-3">
+                                    <blockquote class="blockquote mb-0 fs-4">
                                         <p>Accueillant professionnel et honnête. Je recommande!</p>
                                     </blockquote>
                                 </div>
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0 fs-3">
+                                    <blockquote class="blockquote mb-0 fs-4">
                                         <p>Rapide, efficace et prêt de voiture. Trop bien!</p>
                                     </blockquote>
                                 </div>
@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0 fs-3">
+                                    <blockquote class="blockquote mb-0 fs-4">
                                         <p>Un pationné de bagnol! Ca fait plasir!</p>
                                     </blockquote>
                                 </div>
@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0 fs-3">
+                                    <blockquote class="blockquote mb-0 fs-4">
                                         <p>Top!</p>
                                     </blockquote>
                                 </div>
@@ -149,7 +149,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0 fs-3">
+                                    <blockquote class="blockquote mb-0 fs-4">
                                         <p>Accueillant professionnel et honnête. Je recommande!</p>
                                     </blockquote>
                                 </div>
@@ -165,7 +165,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0 fs-3">
+                                    <blockquote class="blockquote mb-0 fs-4">
                                         <p>Rapide, efficace et prêt de voiture. Trop bien!</p>
                                     </blockquote>
                                 </div>
@@ -181,7 +181,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0 fs-3">
+                                    <blockquote class="blockquote mb-0 fs-4">
                                         <p>Un pationné de bagnol! Ca fait plasir!</p>
                                     </blockquote>
                                 </div>
