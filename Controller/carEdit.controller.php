@@ -115,7 +115,7 @@
         $MyCar->setMileage($_POST['txt_carEdit_mileage']);
         $MyCar->setPrice($_POST["txt_carEdit_price"]);
         $MyCar->setSold(ucfirst(strtolower($_POST["list_carEdit_sold"])));
-        $MyCar->setDescription(ucfirst(strtolower($_POST["txt_carEdit_description"])));
+        $MyCar->setDescription($_POST["txt_carEdit_description"]);
         $MyCar->setImage1($_POST["txt_carEdit_image1"]);
         $MyCar->setImage2($_POST["txt_carEdit_image2"]);
         $MyCar->setImage3($_POST["txt_carEdit_image3"]);

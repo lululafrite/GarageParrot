@@ -103,7 +103,7 @@
                 <td class="m-0 p-0">
                 </td>
                 <td class="m-0 p-0">
-                    <label class="form-control-lg m-0 mb-2 p-0">
+                    <label class="form-control-lg m-0 mb-2 p-0" id="labelMessagePseudo" name="labelMessagePseudo">
                         Saisissez le pseudonyme (20 caractères maximum).
                     </label>
                 </td>
@@ -114,7 +114,7 @@
                     <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_email">Email<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_email" name="txt_userEdit_email" type="email" placeholder="Saisissez votre courriel" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_pseudo','','labelMessagePseudo','Saisissez votre adresse de courriel d\'une longueur maximum de 255 caractères.')"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_email" name="txt_userEdit_email" type="email" placeholder="Saisissez votre courriel" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_email','','labelMessageEmail','Saisissez votre adresse de courriel d\'une longueur maximum de 255 caractères.')"
                         value=
                         "<?php
                             echo $Users[0]['email'];
@@ -127,7 +127,7 @@
                 <td class="m-0 p-0">
                 </td>
                 <td class="m-0 p-0">
-                    <label class="form-control-lg m-0 mb-2 p-0">
+                    <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageEmail" name="labelMessageEmail">
                         Saisissez l'adresse email (255 caractères maximum).
                     </label>
                 </td>
@@ -138,7 +138,7 @@
                     <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_phone">Phone<span style="color:red;">*</span></label>
                 </td>
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_phone" name="txt_userEdit_phone" type="tel" placeholder="## ## ## ## ##" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_pseudo','','labelMessagePseudo','Saisissez votre N° de téléphone.')"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_phone" name="txt_userEdit_phone" type="tel" placeholder="## ## ## ## ##" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_phone','','labelMessagePhone','Saisissez votre N° de téléphone.')"
                         value=
                         "<?php
                             echo $Users[0]['phone'];
@@ -151,7 +151,7 @@
                 <td class="m-0 p-0">
                 </td>
                 <td class="m-0 p-0">
-                    <label class="form-control-lg m-0 mb-2 p-0">
+                    <label class="form-control-lg m-0 mb-2 p-0" id="labelMessagePhone" name="labelMessagePhone">
                         Saisissez le N° de téléphone.
                     </label>
                 </td>
@@ -181,7 +181,7 @@
                 <td class="m-0 p-0">
                 </td>
                 <td class="m-0 p-0">
-                    <label class="form-control-lg m-0 mb-2 p-0">
+                    <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageType" name="labelMessageType">
                         Selectionnez le type d'utilisateur dans la liste de choix.
                     </label>
                 </td>
@@ -205,7 +205,7 @@
                 <td class="m-0 p-0">
                 </td>
                 <td class="m-0 p-0">
-                    <label class="form-control-lg m-0 mb-2 p-0">
+                    <label class="form-control-lg m-0 mb-2 p-0" id="labelMessagePassword"  name="labelMessagePassword">
                         Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants /*-.!?@
                     </label>
                 </td>
@@ -218,7 +218,7 @@
                     </label>
                 </td>
                 <td class="m-0 p-0 w-90">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_confirm" name="txt_userEdit_confirm" type="password" placeholder="" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_confirm','','labelMessageConfirm','Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants \/\*-.!?@')"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_confirm" name="txt_userEdit_confirm" type="password" placeholder="" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_confirm','','labelMessageConfirm','Le mot de passe de confirmation doit-être équivalent au mot de passe.')"
                         value=
                         "<?php
                             echo $Users[0]['password'];
@@ -231,7 +231,7 @@
                 <td class="m-0 p-0">
                 </td>
                 <td class="m-0 p-0">
-                    <label class="form-control-lg m-0 mb-2 p-0">
+                    <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageConfirm" name="labelMessageConfirm">
                         Confirmez le mot de passe.
                     </label>
                 </td>
@@ -302,6 +302,39 @@
             
             isError = true;
 
+        }else if(input === 'txt_userEdit_password'){
+
+            var passwordInput = document.getElementById(input).value;
+
+            // Vérifier que la longueur est de 8 caractères
+            if (passwordInput.length < 8) {
+                //alert("Le mot de passe doit contenir au moins 8 caractères dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi les suivants (_-/*-@!)");
+                isError=true;
+            }else{
+                isError=false;
+            }
+
+            //Vérifier au moins une majuscule, une minuscule, un chiffre, et un caractère spécial
+            var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[_\-/*-@!])[\w\-/*-@!]{8,255}$/;
+            
+            if (!regex.test(passwordInput)) {
+                //alert("Le mot de passe doit contenir au moins 8 caractères dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi les suivants (_-/*-@!)");
+                isError=true;
+            }
+            
+        }else if(input === 'txt_userEdit_confirm'){
+
+            var password = document.getElementById('txt_userEdit_password').value;
+            var passwordConfirm = document.getElementById(input).value;
+
+            if(passwordConfirm === password){
+                isError=false;
+                console.log(isError);
+            }
+            else{
+                isError=true;
+                console.log(isError);
+            }
         }
 
         if(isError){

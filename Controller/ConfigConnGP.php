@@ -18,7 +18,8 @@
 
 	try
 	{
-		$bdd = new PDO("mysql:host=$DB_HOST; dbname=$DB_NAME;port=$BD_PORT", $DB_USER, $DB_PASS);
+		$bdd = new PDO("mysql:host=$DB_HOST; dbname=$DB_NAME;charset=utf8mb4;port=$BD_PORT", $DB_USER, $DB_PASS);
+		//$bdd->exec("set names utf8");
 	}
 	catch (PDOException $e)
 	{

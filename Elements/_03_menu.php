@@ -97,7 +97,7 @@
                     <li class="nav-item dropdown custom-border-md-bottom">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img class="p-2 h-75" src="img/icon/geo-alt.svg" alt="icone du bouton s'identifier">
-                            <span class="Nav_Span1">Mon agence<br><span class="Nav_Span2">La plus proche</span></span>
+                            <span class="Nav_Span1">Accéder<br><span class="Nav_Span2">sur notre site</span></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2630.24423898798!2d1.9261959762272913!3d48.75813197131868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6833bfca28e57%3A0x21655bf96adbbf29!2s1%20Rue%20Marie%20Curie%2C%2078310%20Maurepas!5e0!3m2!1sfr!2sfr!4v1706091603720!5m2!1sfr!2sfr" width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></li>
@@ -114,7 +114,7 @@
                     <li class="nav-item dropdown custom-border-md-bottom">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img class="p-2 h-75" src="img/icon/person.svg" alt="icone du menu s'identifier">
-                            <span class="Nav_Span1">Mon compte<br><span class="Nav_Span2">Hello <?php echo $_SESSION['pseudoUser'];?> !</span></span>
+                            <span class="Nav_Span1">Mon compte<br><span class="Nav_Span2"><?php if($_SESSION['pseudoUser']!= 'Guest'){echo 'Hello ' . $_SESSION['pseudoUser'] . ' !';}?></span></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>

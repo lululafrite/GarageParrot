@@ -47,7 +47,7 @@
                 </td>
             </tr>
             <tr class="table-active">
-                <td colspan="2">
+                <td class="text-center" colspan="2">
                     <button class="btn btn-lg btn-primary fs-4" type="submit" id="bt_contact" name="bt_contact">Envoyer</button>
                 </td>
             </tr>

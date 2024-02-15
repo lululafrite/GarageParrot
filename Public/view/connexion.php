@@ -1,27 +1,40 @@
 <?php include('../Controller/connexion.controller.php'); ?>
 
-<section class="section__connexion">
 
-    <form class="form__connexion" action="/index.php?page=connexion" method="post">
+<div class="container">
+
+    <div class="row">
         
-        <fieldset class="fieldset__connexion">
-            <legend >Connexion</legend>
-            
-            <fieldset class="fieldset__email">
-                <legend class="legend__connexion">email</legend>
-                <input class="email__connexion" type="email" name="email" placeholder="Saisissez votre email">
-            </fieldset>
+        <div class="mx-auto d-flex justify-content-center">
 
-            <fieldset class="fieldset__password">
-                <legend class="legend__connexion">mot de passe</legend>
-                <input class="password__connexion" type="password" name="password" placeholder="Saisissez votre mot de passe">
-            </fieldset>
+            <form class="bg-dark bg-opacity-75 m-5 p-5 rounded-4" action="/index.php?page=connexion" method="post">
+                
+                <fieldset class="">
+                    
+                    <legend class="text-center fs-1 text-light mb-3" >Connexion</legend>
 
-            <input class="button__connexion" type="submit" name="envoyer" id="envoyer" value="ok">
-        </fieldset>
+                    <div class="form-group mb-3">
+                        <label class="text-light w-100" for="email">email</label>
+                        <input class="text-light" type="email" id="email" name="email" placeholder="Saisissez votre email">
+                    </div>
 
-    </form>
+                    <div class="form-group mb-3">
+                        <label class="text-light w-100" for="password">mot de passe</label>
+                        <input class="text-light" type="password" id="password" name="password" placeholder="Saisissez votre mot de passe">
+                    </div>
 
-    <p class="para_pw--oublie"><a class="link_pw--oublie" href="/index.php?page=connexion">Mot de passe oublié ?</a></p>
+                    <div class="form-group my-5">
+                        <input class="btn btn-lg btn-primary fs-3" type="submit" name="envoyer" id="envoyer" value="Se connecter">
+                    </div>
 
-</section>
+                </fieldset>
+                
+                <p ><a href="/index.php?page=connexion">Mot de passe oublié ?</a></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

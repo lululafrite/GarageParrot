@@ -1,5 +1,5 @@
 //Gére l'ouverture du diaporama
-$(document).ready(function () {
+/*$(document).ready(function () {
     // Sélectionnez toutes les images avec la classe 'popup-gallery'
     $(".popup-gallery").on("click", function (e) {
         e.preventDefault(); // Empêche le comportement de clic par défaut
@@ -11,4 +11,4 @@ $(document).ready(function () {
             type: "image"
         });
     });
-});
+});*/

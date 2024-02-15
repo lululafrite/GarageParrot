@@ -2,22 +2,24 @@
     <div class="d-flex justify-content-center">
         <div class="container">
             <div class="row">
-                <div class="col-10 col-lg-5 mx-auto text-center ">
+                <!-- <div class="col-12 col-lg-5 mx-auto ms-lg-0 text-center "> -->
+                <div class="col-12 col-lg-5 mx-auto ms-lg-0">
                     <?php include ('../Elements/_04_schedules.php'); ?>
                 </div>
-                <div class="col-10 col-lg-6 mx-auto text-center ">
+                <!-- <div class="col-12 col-lg-5 mx-auto me-lg-0 text-center "> -->
+                <div class="col-12 col-lg-5 mx-auto me-lg-0">
                     <?php include ('../Elements/_08_contact.php'); ?>
                 </div>
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div  class="col-10 col-md-5 mx-auto text-center bg-dark bg-gradient px-0 py-2 mx-0">
-                <img class="text-center" src="img/icon/youtube_white_77x60.webp" alt="logo youtube" style="height: 40px;">
-                <img class="text-center" src="img/icon/twitter_white_60x60.webp" alt="logo txitter ou x" style="height: 40px;">
-                <img class="text-center" src="img/icon/twitter_white_60x60.webp" alt="logo txitter ou x" style="height: 40px;">
-                <img class="text-center" src="img/icon/twitter_white_60x60.webp" alt="logo txitter ou x" style="height: 40px;">
+        <div class="row d-flex justify-content-center">
+            <div  class="col-3 text-center bg-dark bg-gradient rounded-5 px-0 py-2 mx-0 mt-5">
+                <img class="pe-3" src="img/icon/youtube_white_77x60.webp" alt="logo youtube" style="height: 40px;">
+                <img class="pe-3" src="img/icon/twitter_white_60x60.webp" alt="logo txitter ou x" style="height: 40px;">
+                <img class="pe-3" src="img/icon/instagram.png" alt="logo instagram" style="height: 40px;">
+                <img class="" src="img/icon/tiktok.webp" alt="logo txitter ou x" style="height: 40px;">
             </div>
         </div>
     </div>

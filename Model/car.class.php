@@ -304,25 +304,29 @@ use function PHPSTORM_META\type;
 			include('../Controller/ConfigConnGP.php');
 
 			try {
-					$bdd->exec("INSERT INTO `car`(`id_brand`,`id_model`,`id_motorization`,`year`,`mileage`,
-											`price`,`sold`,`image1`,`image2`,`image3`,`image4`,`image5`)
-								VALUES(
-										(SELECT `id_brand` FROM `brand` WHERE `name`= '" . $this->brand . "'),
-										(SELECT `id_model` FROM `model` WHERE `name`= '" . $this->model . "'),
-										(SELECT `id_motorization` FROM `motorization` WHERE `name`= '" . $this->motorization . "'),
-										'" . $this->year . "',
-										'" . $this->mileage . "',
-										'" . $this->price . "',
-										'" . $this->sold . "',
-										'" . $this->description . "',
-										'" . $this->image1 . "',
-										'" . $this->image2 . "',
-										'" . $this->image3 . "',
-										'" . $this->image4 . "',
-										'" . $this->image5 . "'
-									)
-								");
-								
+					$stmt = $bdd->prepare("INSERT INTO `car` 
+											(`id_brand`, `id_model`, `id_motorization`, `year`, `mileage`, `price`, `sold`, `description`, `image1`, `image2`, `image3`, `image4`, `image5`)
+											VALUES (
+													(SELECT `id_brand` FROM `brand` WHERE `name` = ?),
+													(SELECT `id_model` FROM `model` WHERE `name` = ?),
+													(SELECT `id_motorization` FROM `motorization` WHERE `name` = ?),
+													?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+													)");
+
+											$stmt->execute([$this->brand,
+													$this->model,
+													$this->motorization,
+													$this->year,
+													$this->mileage,
+													$this->price,
+													$this->sold,
+													$this->description,
+													$this->image1,
+													$this->image2,
+													$this->image3,
+													$this->image4,
+													$this->image5]);
+
 				$sql = $bdd->query("SELECT MAX(`id_car`) FROM `car`");
 				$id_car_ = $sql->fetch();
 				$this->id_car = intval($id_car_[0]);
@@ -347,23 +351,39 @@ use function PHPSTORM_META\type;
 			{
 				$idCar = intval($idCar);
 				
-			    $bdd->exec("UPDATE `car`
-							SET `id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name`= '" . $this->brand . "'),
-								`id_model` = (SELECT `id_model` FROM `model` WHERE `name`= '" . $this->model . "'),
-								`id_motorization` = (SELECT `id_motorization` FROM `motorization` WHERE `name`= '" . $this->motorization . "'),
-								`year` =  '" . $this->year . "',
-								`mileage` =  '" . $this->mileage . "',
-								`price` =  '" . $this->price . "',
-								`sold` =  '" . $this->sold . "',
-								`description` =  '" . $this->description . "',
-								`image1` =  '" . $this->image1 . "',
-								`image2` =  '" . $this->image2 . "',
-								`image3` =  '" . $this->image3 . "',
-								`image4` =  '" . $this->image4 . "',
-								`image5` =  '" . $this->image5 . "'
+			    $stmt = $bdd->prepare("UPDATE `car`
+										SET 
+												`id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name` = ?),
+												`id_model` = (SELECT `id_model` FROM `model` WHERE `name` = ?),
+												`id_motorization` = (SELECT `id_motorization` FROM `motorization` WHERE `name` = ?),
+												`year` = ?,
+												`mileage` = ?,
+												`price` = ?,
+												`sold` = ?,
+												`description` = ?,
+												`image1` = ?,
+												`image2` = ?,
+												`image3` = ?,
+												`image4` = ?,
+												`image5` = ?
 
-								WHERE `id_car` = $idCar
-							");
+										WHERE `id_car` = ?"
+									);
+
+						$stmt->execute([$this->brand,
+								$this->model,
+								$this->motorization,
+								$this->year,
+								$this->mileage,
+								$this->price,
+								$this->sold,
+								$this->description,
+								$this->image1,
+								$this->image2,
+								$this->image3,
+								$this->image4,
+								$this->image5,
+								$idCar]);
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}

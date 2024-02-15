@@ -1,6 +1,6 @@
 <?php
     
-    if ($user === "Guest") {
+    if ($_SESSION['pseudoUser'] === "Guest") {
         if($_SESSION['local']===true){
             echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
             header("Location: index.php?page=error_page");
