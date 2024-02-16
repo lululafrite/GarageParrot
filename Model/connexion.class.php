@@ -3,8 +3,6 @@
     {
         public function __construct()
         {
-            //$_SESSION['timeZone']="Europe/Paris";
-            //date_default_timezone_set($_SESSION['timeZone']);
         }
         
         private $userConnected;
@@ -49,9 +47,6 @@
                                         WHERE `email`='" . $email . "' AND `password`='" . $pw . "'");
 
             $this->dataConnect = $resultat2->fetch();
-            
-            //$this->SetUserConnect($this->dataConnect['type']);
-            //$_SESSION['pseudoUser']=$this->dataConnect['pseudo'];
 
             return $this->dataConnect;
 

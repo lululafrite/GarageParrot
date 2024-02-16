@@ -16,9 +16,6 @@
     
     include('../Model/connexion.class.php');
     $MyUserConnect = new userConnect();
-    
-    /*include_once('../Controller/page.controller.php');
-    $MyPage = new Page();*/
 
     $MyUserConnect->SetUserConnect('Guest');
     $_SESSION['pseudoUser']="Guest";

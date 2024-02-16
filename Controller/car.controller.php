@@ -160,6 +160,12 @@
 
     }
     
+    if($MyCar->getNewCar() === true){
+        $_SESSION['newCars'] = false;
+        $whereClause = 1;
+        $MyCar->setNewCar(false);
+    }
+
     $_SESSION['whereClause'] =  $whereClause;
 
     // Executer la requete SELECT pour rechercher les contacts en fonction de la clause WHERE

@@ -197,10 +197,7 @@ use function PHPSTORM_META\type;
 		public function getSchedules($îdSchedules)
 		{
 			include('../Controller/ConfigConnGP.php');
-
-            //$_SESSION['timeZone']="Europe/Paris";
             date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
 			
 			try
 			{

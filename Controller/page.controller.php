@@ -1,7 +1,5 @@
 <?php
     
-    //$_SESSION['NextOrPrevious'] = false;
-
     require('../Model/page.class.php');
     
     $MyPage = new Page();
@@ -62,6 +60,8 @@
 
         $MyPage_->setNbDeLigneParPage($leNbDeLigneParPage);
         $MyPage_->setCountLine($theTable_);
+        $_SESSION['nbOfProduct'] = $MyPage_->getCountLine();
+
         $totalLigne = $MyPage_->getCountLine();
         
         if ($totalLigne < $leNbDeLigneParPage){

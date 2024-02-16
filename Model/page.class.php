@@ -10,8 +10,6 @@
 
         public function __construct()
         {
-            //$_SESSION['timeZone']="Europe/Paris";
-            //date_default_timezone_set($_SESSION['timeZone']);
         }
         
         // __Nombre de ligne__________________________________________

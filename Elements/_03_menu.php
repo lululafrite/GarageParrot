@@ -2,7 +2,7 @@
 
     <div class="text-center my-auto">
         <a href="index.php?page=home">
-            <img class="img-fluid px-2" src="img/Logo_Garage_Parrot_250x70_Dark.png" alt="logo du garage parrot">
+            <img class="img-fluid px-2" src="img/logo/Logo_Garage_Parrot_250x70_Dark.png" alt="logo du garage parrot">
         </a>
     </div>
 
@@ -45,7 +45,7 @@
                                 </li>
                                 <li>
                                     <form action="index.php?page=user_edit" method="post">
-                                        <button class="dropdown-item" id="nav_new_user_" name="nav_new_user_" type="submit">
+                                        <button class="dropdown-item" id="nav_new_user" name="nav_new_user" type="submit">
                                             <img class="p-2 h-75" src="img/icon/person-plus.svg" alt="icone du bouton s'identifier">
                                             Nouveau
                                         </button>

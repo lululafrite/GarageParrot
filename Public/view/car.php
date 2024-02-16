@@ -88,13 +88,10 @@
 
 <?php include('../Elements/_05_select_page.php');?>
 
-<script src="../JS/car.js"></script>
-
 <script>
-    
-function focusOnInput(){
-    document.getElementById('contact_description').value = "Bonjour, je souhaite prendre rendez-vous pour une présentation détaillé et un essai du véhicule xxxxxxxx ";
-    document.getElementById('contact_name').focus();
-    document.getElementById('bottom').scrollIntoView({ behavior: 'smooth' });
-}
+    function focusOnInput(){
+        document.getElementById('contact_description').value = "Bonjour, je souhaite prendre rendez-vous pour une présentation détaillé et un essai du véhicule xxxxxxxx ";
+        document.getElementById('contact_name').focus();
+        document.getElementById('bottom').scrollIntoView({ behavior: 'smooth' });
+    }
 </script>

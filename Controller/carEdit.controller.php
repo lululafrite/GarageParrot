@@ -25,6 +25,9 @@
     $changeImage = false;
 
     include('../Model/car.class.php');
+    
+    $_SESSION['theTable'] = 'car';
+    
     $MyCar = new Car();
     
     $Cars = array();
@@ -158,11 +161,11 @@
                 "price" => '',
                 "sold" => '',
                 "description" => '',
-                "image1" => '',
-                "image2" => '',
-                "image3" => '',
-                "image4" => '',
-                "image5" => ''
+                "image1" => '_.webp',
+                "image2" => '_.webp',
+                "image3" => '_.webp',
+                "image4" => '_.webp',
+                "image5" => '_.webp'
             );
             $Cars[0] = $car;
 

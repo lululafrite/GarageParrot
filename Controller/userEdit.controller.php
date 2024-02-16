@@ -4,16 +4,12 @@
 // traitement droits utilisateur : renvoi vers la page erro_page.php si l'utilisateur et un Guest
 //***********************************************************************************************
 
-    if ($_SESSION['userConnected'] === "Guest" || $_SESSION['userConnected'] === "User"){
-
+    if ($_SESSION['userConnected'] != "Administrator") {
         if($_SESSION['local']===true){
-
             echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
-        
-        }else{
-
+        }
+        else{
             echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
-
         }
         exit();
     }
@@ -23,6 +19,8 @@
 //***********************************************************************************************
 
     include_once('../Model/user.class.php');
+    
+    $_SESSION['theTable'] = 'user';
 
     $MyUser = new User();
     
@@ -31,20 +29,6 @@
         "id_user" => ''
     );
     $Users[0] = $user;
-    
-
-/*
-    //initialisez messages input Formulaire edition user
-    $MessageId = "<span>Votre numéro d'identifiant. Ce numèro est incrémenté automatiquement par la robot.</span>";
-    $MessageName = "<span>Saisissez votre Nom d'une longueur de 50 caractères maximum.</span>";
-    $MessageSurname = "<span>Saisissez votre Prénom d'une longueur de 50 caractères maximum.</span>";
-    $MessagePseudo = "<span>Saisissez votre pseudonyme d'une longueur de 20 caractères maximum.</span>";
-    $MessageEmail = "<span>Saisissez votre adresse de courriel d'une longueur maximum de 255 caractères.</span>";
-    $MessagePhone = "<span>Saisissez votre N° de téléphone.</span>";
-    $MessageType = "<span>Selectionnez le type d'utilisateur dans la liste de choix.</span>";
-    $MessagePassword = "<span>Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants /*-.!?@</span>";
-    $MessageConfirm = "<span>Confirmez le mot de passe.</span>";
-*/
 
 //***********************************************************************************************
 // traitement du CRUD

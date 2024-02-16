@@ -157,8 +157,6 @@ use function PHPSTORM_META\type;
 										  `comment`.`rating` = '" . $this->rating . "' AND
 										  `comment`.`comment` = '" . $this->comment . "'
 								  ");
-				//$id_comment = $sql->fetch();
-				//$ValeurId = $id_comment[0];
 
 				if(!$sql->fetch()){
 					$bdd->exec("INSERT INTO `comment`(`date_`,`pseudo`,`rating`,`comment`)

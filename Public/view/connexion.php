@@ -15,12 +15,12 @@
 
                     <div class="form-group mb-3">
                         <label class="text-light w-100" for="email">email</label>
-                        <input class="text-light" type="email" id="email" name="email" placeholder="Saisissez votre email">
+                        <input class="" type="email" id="email" name="email" placeholder="Saisissez votre email">
                     </div>
 
                     <div class="form-group mb-3">
                         <label class="text-light w-100" for="password">mot de passe</label>
-                        <input class="text-light" type="password" id="password" name="password" placeholder="Saisissez votre mot de passe">
+                        <input class="" type="password" id="password" name="password" placeholder="Saisissez votre mot de passe">
                     </div>
 
                     <div class="form-group my-5">

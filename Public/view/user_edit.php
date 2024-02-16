@@ -9,6 +9,17 @@
         <table class="w-100">
 
             <tr class="m-0 p-0">
+                <td class="m-0 p-0 pb-5">
+                </td>
+                <td class="m-0 p-0 pb-5">
+                    <button type="submit" class="btn btn-lg btn-warning fs-4" id="bt_userEdit_cancel" name="bt_userEdit_cancel" onclick="retour();">Retour</button>
+                    <button type="submit" class="btn btn-lg btn-success fs-4" id="bt_userEdit_save" name="bt_userEdit_save">Enregistrer</button>
+                    <button type="submit" class="btn btn-lg btn-info fs-4" id="bt_userEdit_new" name="bt_userEdit_new">Nouveau</button>
+                    <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt_userEdit_delete" name="bt_userEdit_delete">Supprimer</button>
+                </td>
+            </tr>
+
+            <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
                     <label class="form-label m-0 p-0 pe-3" for="txt_userEdit_id">ID</label>
                 </td>
@@ -238,9 +249,9 @@
             </tr>
 
             <tr class="m-0 p-0">
-                <td class="m-0 p-0">
+                <td class="m-0 p-0 pt-5">
                 </td>
-                <td class="m-0 p-0">
+                <td class="m-0 p-0 pt-5">
                     <button type="submit" class="btn btn-lg btn-warning fs-4" id="bt_userEdit_cancel" name="bt_userEdit_cancel" onclick="retour();">Retour</button>
                     <button type="submit" class="btn btn-lg btn-success fs-4" id="bt_userEdit_save" name="bt_userEdit_save">Enregistrer</button>
                     <button type="submit" class="btn btn-lg btn-info fs-4" id="bt_userEdit_new" name="bt_userEdit_new">Nouveau</button>

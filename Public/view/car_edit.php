@@ -7,6 +7,17 @@
     <form action="" method="post" id="formCarEdit" enctype="multipart/form-data">
 
         <table class="w-100">
+            
+            <tr class="m-0 p-0">
+                <td class="m-0 p-0 mb-5">
+                </td>
+                <td class="m-0 p-0 mb-5">
+                    <button type="submit" class="btn btn-lg btn-warning fs-4 px-2 mb-2" id="bt_carEdit_cancel" name="bt_carEdit_cancel" onclick="retour()" style="width: 100px;">Retour</button>
+                    <button type="submit" class="btn btn-lg btn-success fs-4 px-2 mb-2" id="bt_carEdit_save" name="bt_carEdit_save" style="width: 100px;">Enregistrer</button>
+                    <button type="submit" class="btn btn-lg btn-info fs-4 px-2 mb-2" id="bt_carEdit_new" name="bt_carEdit_new" style="width: 100px;">Nouveau</button>
+                    <button type="submit" class="btn btn-lg btn-danger fs-4 px-2 mb-2" id="bt_carEdit_delete" name="bt_carEdit_delete" onclick="confirmDelete()" style="width: 100px;">Supprimer</button>
+                </td>
+            </tr>
 
             <tr class="m-0 p-0">
                 <td class="text-end m-0 p-0">
@@ -427,9 +438,9 @@
             </tr>
 
             <tr class="m-0 p-0">
-                <td class="m-0 p-0">
+                <td class="m-0 p-0 pt-5">
                 </td>
-                <td class="m-0 p-0">
+                <td class="m-0 p-0 pt-5">
                     <button type="submit" class="btn btn-lg btn-warning fs-4 px-2 mb-2" id="bt_carEdit_cancel" name="bt_carEdit_cancel" onclick="retour()" style="width: 100px;">Retour</button>
                     <button type="submit" class="btn btn-lg btn-success fs-4 px-2 mb-2" id="bt_carEdit_save" name="bt_carEdit_save" style="width: 100px;">Enregistrer</button>
                     <button type="submit" class="btn btn-lg btn-info fs-4 px-2 mb-2" id="bt_carEdit_new" name="bt_carEdit_new" style="width: 100px;">Nouveau</button>
@@ -454,11 +465,11 @@ function retour() {
     setInputValue('txt_carEdit_price', '0');
     setInputValue('list_carEdit_sold', 'Oui');
     setInputValue('list_carEdit_option', 'option');
-    setInputValue('txt_carEdit_image1', '_.png');
-    setInputValue('txt_carEdit_image2', '_.png');
-    setInputValue('txt_carEdit_image3', '_.png');
-    setInputValue('txt_carEdit_image4', '_.png');
-    setInputValue('txt_carEdit_image5', '_.png');
+    setInputValue('txt_carEdit_image1', '_.webp');
+    setInputValue('txt_carEdit_image2', '_.webp');
+    setInputValue('txt_carEdit_image3', '_.webp');
+    setInputValue('txt_carEdit_image4', '_.webp');
+    setInputValue('txt_carEdit_image5', '_.webp');
 
     return;
 }
@@ -487,46 +498,50 @@ function validateInput(input , datalist, myLabel, myMessage){
     var myInput = document.getElementById(input);
     var errorMessage = document.getElementById(myLabel);
     var isError = false;
-    
-    if(datalist!=''){
-        
-        var myDatalist = document.getElementById(datalist);
+    //if(input != 'txt_carEdit_image1' || input != 'txt_carEdit_image2' || input != 'txt_carEdit_image3' || input != 'txt_carEdit_image4' || input != 'txt_carEdit_image5'){
 
-        var isValid = Array.from(myDatalist.options).some(function(option) {
-            return option.value === myInput.value;
-        });
-
-        if(!isValid){isError = true;}
-
-    }else if(myInput.value.trim() === ''){
-        
-        isError = true;
-
-    }else{
-
-        if(input === 'txt_carEdit_year'){
-
-            var isValidNumber = /^\d{4}$/.test(myInput.value);
-            if(!isValidNumber){isError = true;}
-
-        }else if(input === 'txt_carEdit_price' || input === 'txt_carEdit_mileage'){
-
-            var isValidNumber = /^\d+$/.test(myInput.value);
-            if(!isValidNumber){isError = true;}
-
-        }else if(input === 'txt_carEdit_image1' ||
-                 input === 'txt_carEdit_image2' ||
-                 input === 'txt_carEdit_image3' ||
-                 input === 'txt_carEdit_image4' ||
-                 input === 'txt_carEdit_image5'){
+        if(datalist!=''){
             
-            var isValidExtension = /\.(png|jpg|webp)$/i.test(myInput.value);
-            var isValidCharacters = /^[a-zA-Z0-9_\-\.]+$/.test(myInput.value);
+            var myDatalist = document.getElementById(datalist);
 
-            if (!isValidExtension || !isValidCharacters){
-                isError = true;
+            var isValid = Array.from(myDatalist.options).some(function(option) {
+                return option.value === myInput.value;
+            });
+
+            if(!isValid){isError = true;}
+
+        }else if(myInput.value.trim() === ''){
+            
+            isError = true;
+
+        }else{
+
+            if(input === 'txt_carEdit_year'){
+
+                var isValidNumber = /^\d{4}$/.test(myInput.value);
+                if(!isValidNumber){isError = true;}
+
+            }else if(input === 'txt_carEdit_price' || input === 'txt_carEdit_mileage'){
+
+                var isValidNumber = /^\d+$/.test(myInput.value);
+                if(!isValidNumber){isError = true;}
+
+            }else if(input === 'txt_carEdit_image1' ||
+                    input === 'txt_carEdit_image2' ||
+                    input === 'txt_carEdit_image3' ||
+                    input === 'txt_carEdit_image4' ||
+                    input === 'txt_carEdit_image5'){
+                
+                var isValidExtension = /\.(png|jpg|webp)$/i.test(myInput.value);
+                var isValidCharacters = /^[a-zA-Z0-9_\-\.]+$/.test(myInput.value);
+
+                if (!isValidExtension || !isValidCharacters){
+                    isError = true;
+                }
             }
-        }
+    //    }
+    //}else{
+    //    isError = false;
     }
 
     if(isError){
@@ -557,72 +572,76 @@ function validateInput(input , datalist, myLabel, myMessage){
 
 document.getElementById('formCarEdit').addEventListener('submit', function (event) {
 
-    var MessageBrand = "Selectionner une marque dans la liste de choix.";
-    var MessageModel = "Selectionner un modèle dans la liste de choix.";
-    var MessageMotorization = "Selectionner une motorization dans la liste de choix.";
-    var MessageYear = "Saisissez l'année (à 4 chiffres) de 1er mise en circulation.";
-    var MessageMileage = "Saisissez le kilomètrage (uniquement des chiffres).";
-    var MessagePrice = "Saisissez le prix (uniquement des chiffres).";
-    var MessageSold = "Selectionnez Oui ou Non dans la liste de choix pour indiquer la disponibilité";
-    var MessageImage1 = "Saisissez le nom de l'image (sans caractères spéciaux sauf - et _) aux formats png, jpg et webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image1 au ratio de 350px sur 180px.";
-    var MessageImage = "Saisissez le nom de l'image (sans caractères spéciaux sauf - et _) aux formats png, jpg et webp. Sinon, téléchargez une image depuis votre disque local.";
-    
-    var isError = false;
-    
-    if (!validateInput('list_carEdit_brand', 'datalist_carEdit_brand', 'labelMessageBrand', MessageBrand)){
-        isError = true;
-    }
-    
-    if (!validateInput('list_carEdit_model', 'datalist_carEdit_model', 'labelMessageModel', MessageModel)){
-        isError = true;
-    }
+    //if(input != 'txt_carEdit_image1' || input != 'txt_carEdit_image2' || input != 'txt_carEdit_image3' || input != 'txt_carEdit_image4' || input != 'txt_carEdit_image5'){
 
-    if (!validateInput('list_carEdit_motorization', 'datalist_carEdit_motorization', 'labelMessageMotorization', MessageMotorization)) {
-        isError = true;
-    }
+        var MessageBrand = "Selectionner une marque dans la liste de choix.";
+        var MessageModel = "Selectionner un modèle dans la liste de choix.";
+        var MessageMotorization = "Selectionner une motorization dans la liste de choix.";
+        var MessageYear = "Saisissez l'année (à 4 chiffres) de 1er mise en circulation.";
+        var MessageMileage = "Saisissez le kilomètrage (uniquement des chiffres).";
+        var MessagePrice = "Saisissez le prix (uniquement des chiffres).";
+        var MessageSold = "Selectionnez Oui ou Non dans la liste de choix pour indiquer la disponibilité";
+        var MessageImage1 = "Saisissez le nom de l'image (sans caractères spéciaux sauf - et _) aux formats png, jpg et webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image1 au ratio de 350px sur 180px.";
+        var MessageImage = "Saisissez le nom de l'image (sans caractères spéciaux sauf - et _) aux formats png, jpg et webp. Sinon, téléchargez une image depuis votre disque local.";
+        
+        var isError = false;
+        
+        if (!validateInput('list_carEdit_brand', 'datalist_carEdit_brand', 'labelMessageBrand', MessageBrand)){
+            isError = true;
+        }
+        
+        if (!validateInput('list_carEdit_model', 'datalist_carEdit_model', 'labelMessageModel', MessageModel)){
+            isError = true;
+        }
 
-    if (!validateInput('txt_carEdit_year', '', 'labelMessageYear', MessageYear)) {
-        isError = true;
-    }
+        if (!validateInput('list_carEdit_motorization', 'datalist_carEdit_motorization', 'labelMessageMotorization', MessageMotorization)) {
+            isError = true;
+        }
 
-    if (!validateInput('txt_carEdit_mileage', '', 'labelMessageMileage', MessageMileage)) {
-        isError = true;
-    }
+        if (!validateInput('txt_carEdit_year', '', 'labelMessageYear', MessageYear)) {
+            isError = true;
+        }
 
-    if (!validateInput('txt_carEdit_price', '', 'labelMessagePrice', MessagePrice)) {
-        isError = true;
-    }
+        if (!validateInput('txt_carEdit_mileage', '', 'labelMessageMileage', MessageMileage)) {
+            isError = true;
+        }
 
-    if (!validateInput('list_carEdit_sold', 'datalist_carEdit_sold', 'labelMessageSold', MessageSold)) {
-        isError = true;
-    }
+        if (!validateInput('txt_carEdit_price', '', 'labelMessagePrice', MessagePrice)) {
+            isError = true;
+        }
 
-    if (!validateInput('txt_carEdit_image1', '', 'labelMessageImage1', MessageImage1)) {
-        isError = true;
-    }
+        if (!validateInput('list_carEdit_sold', 'datalist_carEdit_sold', 'labelMessageSold', MessageSold)) {
+            isError = true;
+        }
 
-    if (!validateInput('txt_carEdit_image2', '', 'labelMessageImage2', MessageImage)) {
-        isError = true;
-    }
+        if (!validateInput('txt_carEdit_image1', '', 'labelMessageImage1', MessageImage1)) {
+            isError = true;
+        }
 
-    if (!validateInput('txt_carEdit_image3', '', 'labelMessageImage3', MessageImage)) {
-        isError = true;
-    }
+        if (!validateInput('txt_carEdit_image2', '', 'labelMessageImage2', MessageImage)) {
+            isError = true;
+        }
 
-    if (!validateInput('txt_carEdit_image4', '', 'labelMessageImage4', MessageImage)) {
-        isError = true;
-    }
+        if (!validateInput('txt_carEdit_image3', '', 'labelMessageImage3', MessageImage)) {
+            isError = true;
+        }
 
-    if (!validateInput('txt_carEdit_image5', '', 'labelMessageImage5', MessageImage)) {
-        isError = true;
-    }
-    
-    var messageAlerte = 'Vous avez un ou plusieurs champs dont la valeur n\'est pas conforme. Veuillez vérifier et corriger le ou les champs concernés';
-    
-    if (isError === true){
-        event.preventDefault();
-        alert (messageAlerte)
-        isError = false;
-    }
+        if (!validateInput('txt_carEdit_image4', '', 'labelMessageImage4', MessageImage)) {
+            isError = true;
+        }
+
+        if (!validateInput('txt_carEdit_image5', '', 'labelMessageImage5', MessageImage)) {
+            isError = true;
+        }
+        
+        var messageAlerte = 'Vous avez un ou plusieurs champs dont la valeur n\'est pas conforme. Veuillez vérifier et corriger le ou les champs concernés';
+        
+        if (isError === true){
+            event.preventDefault();
+            alert (messageAlerte)
+            isError = false;
+        }
+    //}
 });
+
 </script>

@@ -1,8 +1,14 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 'On');
+    // décommenter les 2 lignes ci-dessous pour débogage inline et offline 
+    //error_reporting(E_ALL);
+    //ini_set('display_errors', 'On');
+
+    // décommenter la lignes ci-dessous pour débogage offline avec VS Code (installer l'extention xdebug et parametrer php.ini)
+    //xdebug_break();
     
-    xdebug_break();
+    // La variable $_SESSION['local'] mettre à false si online et à true si serveur local
+    // Cette variable agit sur le controleur 'ConfigConnGP.php' pour les paramètres de connexion
+    $_SESSION['local']=false;
 
     session_start();
 
@@ -18,6 +24,7 @@
         $_SESSION['firstLine'] = 0;
         $_SESSION['ligneParPage'] = 3;
         $_SESSION['nbOfPage'] = 1;
+        $_SESSION['nbOfProduct'] = 1;
         $_SESSION['NextOrPrevious'] = false;
 
         $_SESSION['theTable'] = 'car';
@@ -59,9 +66,6 @@
         $_SESSION['timeZone']="Europe/Paris";
     }
 
-    // La variable $_SESSION['local'] doit être changée manuellement : mettre à true si travail en local, sinon mettre à false.
-    $_SESSION['local']=true;
-
     //$page = $_GET['page']?? 'home';
     //La syntaxe ci-dessus est équivalente celle ci-dessous
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
@@ -87,8 +91,6 @@
         pageTitle = "Garage V.PARROT - Nos occasions";
     } else if (window.location.href.includes("car_edit")) {
         pageTitle = "Garage V.PARROT - Editer occasion";
-    } else if (window.location.href.includes("image")) {
-        pageTitle = "Garage V.PARROT - Charger image";
     } else if (window.location.href.includes("contact_us")) {
         pageTitle = "Garage V.PARROT - Nous contacter";
     } else if (window.location.href.includes("connexion")) {
@@ -118,10 +120,6 @@
             require_once 'view/car.php';
         }elseif ($page === 'car_edit'){
             include_once 'view/car_edit.php';
-        }elseif ($page === 'image'){
-            include_once 'view/image.php';
-        }elseif ($page === 'upload'){
-            include_once 'view/upload.php';
         }elseif ($page === 'contact_us'){
             include_once 'view/contact_us.php';
         }elseif ($page === 'connexion'){
@@ -146,18 +144,6 @@
 ?>
 
 <!-- -------- FILE ASSET JAVASCRIPT FOR BOOTSTRAP (STANDARD AND POPPER) --------- -->
-<!-- <script src="assets/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
-
-<!-- ----------- CND JAVASCRIPT FOR BOOTSTRAP (STANDARD AND POPPER) ------------- -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
-
-<!-- ----------------- CND JAVASCRIPT FOR BOOTSTRAP (POPPER) -------------------- -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->
-
-<!-- ----------------- CND JAVASCRIPT FOR BOOTSTRAP (STANDARD) ------------------ -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
-
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
