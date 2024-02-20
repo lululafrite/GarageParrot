@@ -1,11 +1,9 @@
 # Site web pour le GARAGE V.PARROT
 
-Tous les documents sont disponibles dans Dossier_Technique/
-
 ******** MANUEL D'INSTALLATION ONLINE ET LOCAL ********
 
-Le manuel ci-dessous d'écrit uniquement les étapes principales à respecter pour travailler en local ou en online
-Pour l'utilisation du site, référez-vous au manuel d'utilisation : manuel_utilisation_Garage_PARROT.pdf
+Le manuel ci-dessous d'écrit uniquement les étapas pricipales à respecter pour travailler en local ou en online
+Pour l'utilisation du site, référez-vous au manuel d'utilisation dans le dossier tuto/manuel_utilisation_Garage_PARROT.pdf
 
 POUR TRAVAILLER EN LOCAL
 1) Installez WAMPSERVER avec php 8.2 et mariadb 10.11.5
@@ -33,8 +31,8 @@ POUR TRAVAILLER EN LOCAL
     - Décommentez xdebug_break();
     - Passez la variable $_SESSION['local'] à true. Exemple : $_SESSION['local']=true; Cette variable agit sur le controleur 'ConfigConnGP.php' pour les paramètres de connexion (true pour local et false pour online).
 
-PS : il y a 3 types de profil : Le visiteur (Guest), l'employé (User) et l'administrateur (Administrator). L'utilisateur et l'administrateur doivent se connecter avec un identifiant et un mot de passe. L'utilisateur posséde des privilèges de création et de suppression que le visiteur ne posséde pas et l'administrateur a les mêmes privilèges que l'utilisateur avec en plus, la possibilité de créer des nouveaux profils pouvant-être : employé ou administrateur.
-Il existe un employé (User) par défaut dans la BD | ID : user@gmail.com | PW : User123/
+PS : il y a 3 types de profil : Le visiteur (Guest), l'utilisateur (User) et l'administrateur (Administrator). L'utilisateur et l'administrateur doivent se connecter avec un identifiant et un mot de passe. L'utilisateur posséde des privilèges de création et de suppression que le visiteur ne posséde pas et l'administrateur à les mêmes privilèhes que l'utilisateur avec en plus, la possibilité de créer des nouveaux profils pouvant-être : utilisateur ou administrateur.
+Il existe un utilisateur (User) par défaut dans la BD | ID : user@gmail.com | PW : User123/
 Il existe un administrateur (Administrator) par défaut dans la BD | ID : admin@gmail.com | PW : Admin123/
 
 
