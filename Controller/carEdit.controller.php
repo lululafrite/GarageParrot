@@ -27,7 +27,6 @@
     include('../Model/car.class.php');
     
     $_SESSION['theTable'] = 'car';
-    
     $MyCar = new Car();
     
     $Cars = array();
@@ -88,7 +87,7 @@
         }else{
 
             echo "<script>alert('Aucune image n'a été sélectionnée ou une erreur s'est produite.');</script>";
-            return;
+            
         }
 
         if(move_uploaded_file($sourceFile, $destinationFile)){
@@ -177,10 +176,31 @@
         // requete qui supprime le véhicule
         $MyCar->deleteCar($_POST["txt_carEdit_id"]);
 
+        if($_SESSION['local']===true){
+
+            echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
+        
+        }else{
+
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=car";</script>';
+
+        }
+        exit();
+
     }else if(isset($_POST['bt_carEdit_cancel'])){
         
         $_SESSION['newCar'] = false;
-        echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
+
+        if($_SESSION['local']===true){
+
+            echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
+        
+        }else{
+
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=car";</script>';
+
+        }
+        exit();
 
     }
 

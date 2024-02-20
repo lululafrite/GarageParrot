@@ -1,18 +1,18 @@
 <?php
     // décommenter les 2 lignes ci-dessous pour débogage inline et offline 
-    //error_reporting(E_ALL);
-    //ini_set('display_errors', 'On');
+    error_reporting(E_ALL);
+    ini_set('display_errors', 'On');
 
     // décommenter la lignes ci-dessous pour débogage offline avec VS Code (installer l'extention xdebug et parametrer php.ini)
-    //xdebug_break();
-    
-    // La variable $_SESSION['local'] mettre à false si online et à true si serveur local
-    // Cette variable agit sur le controleur 'ConfigConnGP.php' pour les paramètres de connexion
-    $_SESSION['local']=false;
+    xdebug_break();
 
     session_start();
 
     include_once '../vendor/autoload.php';
+    
+    // La variable $_SESSION['local'] mettre à false si online et à true si serveur local
+    // Cette variable agit sur le controleur 'ConfigConnGP.php' pour les paramètres de connexion
+    $_SESSION['local']=true;
     
     if (!isset($_SESSION['userConnected'])) {
         
@@ -62,7 +62,7 @@
 
         $_SESSION['whereClause'] = 1;
 
-        $_SESSION['local']=true;
+        //$_SESSION['local']=true;
         $_SESSION['timeZone']="Europe/Paris";
     }
 
@@ -120,8 +120,6 @@
             require_once 'view/car.php';
         }elseif ($page === 'car_edit'){
             include_once 'view/car_edit.php';
-        }elseif ($page === 'contact_us'){
-            include_once 'view/contact_us.php';
         }elseif ($page === 'connexion'){
             include_once 'view/connexion.php';
         }elseif ($page === 'disconnect'){
@@ -132,6 +130,10 @@
             include_once 'view/error_unknown_page.php';
         }elseif($page === '404'){
             include_once 'view/error_unknown_page.php';
+        }elseif ($page === 'kanban'){
+            include_once 'view/kanban.php';
+        }elseif ($page === 'mokup'){
+            include_once 'view/mokup.php';
         }else {
             include_once 'view/error_unknown_page.php';
         }

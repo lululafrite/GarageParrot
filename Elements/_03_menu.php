@@ -34,13 +34,13 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img class="p-2 h-75" src="img/icon/people.svg" alt="icone du bouton s'identifier">    
-                                Contacts
+                                Profils
                             </a>
                             <ul class="dropdown-menu">
                                 <li>    
                                     <a class="dropdown-item" href="index.php?page=user">
                                         <img class="p-2 h-75" src="img/icon/search.svg" alt="icone du bouton s'identifier">
-                                        Contacts
+                                        Profils
                                     </a>
                                 </li>
                                 <li>

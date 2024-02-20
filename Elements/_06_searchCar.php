@@ -113,7 +113,7 @@
 
         </div>
         
-        <div class="container d-flex flex-column w-25">
+        <div class="container d-flex flex-column  w-50 w-sm-25">
             <label for="btn-SearchCar" class="form-label text-light text-dark">Rechercher</label>
             <button class="btn btn-lg btn-primary px-3 py-2" type="submit" id="btn-SearchCar" name="btn-SearchCar">Rechercher</button>
         </div>

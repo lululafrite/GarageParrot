@@ -10,6 +10,7 @@
                     if(isset($_POST['Text_User_Nom'])){
                         $_SESSION['criteriaName'] = $_POST['Text_User_Nom'];
                     }
+                    echo $_SESSION['criteriaName'];
                 ?>"
             >
         </div>
@@ -23,6 +24,7 @@
                     if(isset($_POST['Text_User_Pseudo'])){
                         $_SESSION['criteriaPseudo'] = $_POST['Text_User_Pseudo'];
                     }
+                    echo $_SESSION['criteriaPseudo'];
                 ?>"
             >
 

@@ -4,11 +4,16 @@
 //---------------------------------------------------------------
 //---Checking access permissions---
     if ($_SESSION['userConnected'] != "Administrator") {
+        
         if($_SESSION['local']===true){
+            
             echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
+        
         }
         else{
+            
             echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
+        
         }
         exit();
     }
@@ -45,8 +50,8 @@
     if(isset($_POST['Text_User_Nom']) && $_POST['Text_User_Nom'] != ''){
         $_SESSION['criteriaName'] = $_POST['Text_User_Nom'];
         $name_umpty = false;
-    }else if(!empty($_SESSION['criteriaName']) && $_SESSION['criteriaName'] === ''){
-        $name_umpty = true;
+    }else if(empty($_SESSION['criteriaName']) && $_SESSION['criteriaName'] === ''){
+        //$name_umpty = true;
     }else{
         $name_umpty = false;
     }
@@ -54,8 +59,8 @@
     if(isset($_POST['Text_User_Pseudo']) && $_POST['Text_User_Pseudo'] != ''){
         $_SESSION['criteriaPseudo'] = $_POST['Text_User_Pseudo'];
         $pseudo_umpty = false;
-    }else if(!empty($_SESSION['criteriaPseudo']) && $_SESSION['criteriaPseudo'] === ''){
-        $pseudo_umpty = true;
+    }else if(empty($_SESSION['criteriaPseudo']) && $_SESSION['criteriaPseudo'] === ''){
+        //$pseudo_umpty = true;
     }else{
         $pseudo_umpty = false;
     }
@@ -64,7 +69,7 @@
         $_SESSION['criteriaType'] = $_POST['Select_User_Type'];
         $userType_umpty = false;
     }else if(!empty($_SESSION['criteriaType']) && $_SESSION['criteriaType'] === 'Selectionnez un type'){
-        $userType_umpty = true;
+        //$userType_umpty = true;
     }else{
         $userType_umpty = false;
     }
@@ -86,7 +91,7 @@
 
     }else if($name_umpty === true && $pseudo_umpty === false && $userType_umpty === false){
 
-        $whereClause = "`user`.`pseudo` LIKE '%" . $_SESSION['criteriaName'] . "%' AND
+        $whereClause = "`user`.`pseudo` LIKE '%" . $_SESSION['criteriaPseudo'] . "%' AND
                         `user`.`id_type` = (SELECT `user_type`.`id_type` FROM `user_type` WHERE `user_type`.`type`='" . $_SESSION['criteriaType'] . "')";
         
     }else if($name_umpty === true && $pseudo_umpty === true && $userType_umpty === false){
@@ -95,7 +100,7 @@
         
     }else if($name_umpty === true && $pseudo_umpty === false && $userType_umpty === true){
 
-        $whereClause = "`user`.`pseudo` LIKE '%" . $_SESSION['criteriaName'] . "%'";
+        $whereClause = "`user`.`pseudo` LIKE '%" . $_SESSION['criteriaPseudo'] . "%'";
 
     }else if($name_umpty === false && $pseudo_umpty === true && $userType_umpty === false){
 
@@ -109,7 +114,7 @@
     }else if($name_umpty === false && $pseudo_umpty === false && $userType_umpty === true){
 
         $whereClause = "`user`.`name` LIKE '%" . $_SESSION['criteriaName'] . "%' AND
-                        `user`.`pseudo` LIKE '%" . $_SESSION['criteriaName'] . "%'";
+                        `user`.`pseudo` LIKE '%" . $_SESSION['criteriaPseudo'] . "%'";
 
     }
     

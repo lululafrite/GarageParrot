@@ -405,8 +405,6 @@ use function PHPSTORM_META\type;
 			{
 			    $bdd->exec('DELETE FROM car WHERE id_car=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
-				echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
-				echo '<script>window.location.href = "http://www.follaco.fr/index.php?page=car";</script>';
 			}
 			catch (Exception $e)
 			{

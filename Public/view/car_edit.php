@@ -7,15 +7,19 @@
     <form action="" method="post" id="formCarEdit" enctype="multipart/form-data">
 
         <table class="w-100">
-            
+
             <tr class="m-0 p-0">
-                <td class="m-0 p-0 mb-5">
+                <td class="m-0 p-0 pb-5">
                 </td>
-                <td class="m-0 p-0 mb-5">
-                    <button type="submit" class="btn btn-lg btn-warning fs-4 px-2 mb-2" id="bt_carEdit_cancel" name="bt_carEdit_cancel" onclick="retour()" style="width: 100px;">Retour</button>
-                    <button type="submit" class="btn btn-lg btn-success fs-4 px-2 mb-2" id="bt_carEdit_save" name="bt_carEdit_save" style="width: 100px;">Enregistrer</button>
-                    <button type="submit" class="btn btn-lg btn-info fs-4 px-2 mb-2" id="bt_carEdit_new" name="bt_carEdit_new" style="width: 100px;">Nouveau</button>
-                    <button type="submit" class="btn btn-lg btn-danger fs-4 px-2 mb-2" id="bt_carEdit_delete" name="bt_carEdit_delete" onclick="confirmDelete()" style="width: 100px;">Supprimer</button>
+                <td class="d-flex flex-column flex-sm-row m-0 p-0 pb-5">
+                    <div class="pe-2 pb-2 pb-sm-0">
+                        <button type="submit" class="btn btn-lg btn-warning fs-4 px-2 mb-2" id="bt_carEdit_cancel" name="bt_carEdit_cancel" onclick="retour()" style="width: 100px;">Retour</button>
+                        <button type="submit" class="btn btn-lg btn-success fs-4 px-2 mb-2" id="bt_carEdit_save" name="bt_carEdit_save" style="width: 100px;">Enregistrer</button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-lg btn-info fs-4 px-2 mb-2" id="bt_carEdit_new" name="bt_carEdit_new" style="width: 100px;">Nouveau</button>
+                        <button type="submit" class="btn btn-lg btn-danger fs-4 px-2 mb-2" id="bt_carEdit_delete" name="bt_carEdit_delete" onclick="confirmDelete()" style="width: 100px;">Supprimer</button>
+                    </div>
                 </td>
             </tr>
 
@@ -256,29 +260,33 @@
             </tr>
             
             <tr class="m-0 p-0">
-                <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image1">Image1<span style="color:red;">*</span></label>
-                </td>
-                <td class="m-0 p-0">
-                    <div class="d-flex flex-column flex-xl-row">
-                        <div class="d-flex align-items-center w-100 w-lg-50">
-                            <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_carEdit_image1" name="txt_carEdit_image1" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image1','','labelMessageImage1','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image1 au ratio de 350px sur 180px.')"
-                                value=
-                                "<?php
-                                    echo $Cars[0]['image1'];
-                                ?>"
-                            >
-                        </div>
-                        <div class="d-flex flex-column flex-md-row justify-content-start align-items-center m-0 mt-1 ms-xl-2 p-0 w-100">
-                            <div class="d-flex align-items-center m-0 p-0 w-75">
-                                <input class="fs-4" type="file" name="fileInput1" id="fileInput1" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                <div class="container">  
+                    <div class="row">
+                        <td class="col-1 text-end">
+                            <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image1">Image1<span style="color:red;">*</span></label>
+                        </td>
+                        <td class="col-11"> 
+                            <div class="container m-0 p-0">  
+                                <div class="row">
+                                    <div class="col-12 col-lg-3 pb-3 pb-lg-0">
+                                        <input class="form-control-lg m-0 p-0 border border-black" id="txt_carEdit_image1" name="txt_carEdit_image1" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image1','','labelMessageImage1','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image1 au ratio de 350px sur 180px.')"
+                                            value=
+                                            "<?php
+                                                echo $Cars[0]['image1'];
+                                            ?>"
+                                        >
+                                    </div>
+                                    <div class="col-12 col-lg-5 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="fs-4" type="file" name="fileInput1" id="fileInput1" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                                    </div>
+                                    <div class="col-12 col-lg-4 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image1" id="btn_image1" value="Télécharger">
+                                    </div>
+                                </div>  
                             </div>
-                            <div class="d-flex align-items-center m-0 mt-sm-1 p-0 w-25">
-                                <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image1" id="btn_image1" value="Télécharger">
-                            </div>
-                        </div>
+                        </td>
                     </div>
-                </td>
+                </div>
             </tr>
 
             <tr>
@@ -292,30 +300,33 @@
             </tr>
             
             <tr class="m-0 p-0">
-                <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image2">Image2<span style="color:red;">*</span></label>
-                </td>
-                <td class="m-0 p-0">
-                    <div class="d-flex flex-column flex-xl-row">
-                        <div class="d-flex align-items-center w-100 w-lg-50">
-                            <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_carEdit_image2" name="txt_carEdit_image2" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image2','','labelMessageImage2','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local.')"
-                                value=
-                                "<?php
-                                    echo $Cars[0]['image2'];
-                                ?>"
-                            >
-                        </div>
-                        <div class="d-flex flex-column flex-md-row justify-content-start align-items-center m-0 mt-1 ms-xl-2 p-0 w-100">
-                            <div class="d-flex align-items-center m-0 p-0 w-75">
-                                <input class="fs-4" type="file" name="fileInput2" id="fileInput2" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                <div class="container">  
+                    <div class="row">
+                        <td class="col-1 text-end">
+                            <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image2">Image2<span style="color:red;">*</span></label>
+                        </td>
+                        <td class="col-11"> 
+                            <div class="container m-0 p-0">  
+                                <div class="row">
+                                    <div class="col-12 col-lg-3 pb-3 pb-lg-0">
+                                        <input class="form-control-lg m-0 p-0 border border-black" id="txt_carEdit_image2" name="txt_carEdit_image2" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image2','','labelMessageimage2','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image2 au ratio de 350px sur 180px.')"
+                                            value=
+                                            "<?php
+                                                echo $Cars[0]['image2'];
+                                            ?>"
+                                        >
+                                    </div>
+                                    <div class="col-12 col-lg-5 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="fs-4" type="file" name="fileInput2" id="fileInput2" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                                    </div>
+                                    <div class="col-12 col-lg-4 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image2" id="btn_image2" value="Télécharger">
+                                    </div>
+                                </div>  
                             </div>
-                            <div class="d-flex align-items-center m-0 mt-sm-1 p-0 w-25">
-                                <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image2" id="btn_image2" value="Télécharger">
-                            </div>
-                        </div>
+                        </td>
                     </div>
-                </td>
-                </td>
+                </div>
             </tr>
 
             <tr>
@@ -329,29 +340,33 @@
             </tr>
             
             <tr class="m-0 p-0">
-                <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image3">Image3<span style="color:red;">*</span></label>
-                </td>
-                <td class="m-0 p-0">
-                    <div class="d-flex flex-column flex-xl-row">
-                        <div class="d-flex align-items-center w-100 w-lg-50">
-                            <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_carEdit_image3" name="txt_carEdit_image3" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image3','','labelMessageImage3','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local.')"
-                                value=
-                                "<?php
-                                    echo $Cars[0]['image3'];
-                                ?>"
-                            >
-                        </div>
-                        <div class="d-flex flex-column flex-md-row justify-content-start align-items-center m-0 mt-1 ms-xl-2 p-0 w-100">
-                            <div class="d-flex align-items-center m-0 p-0 w-75">
-                                <input class="fs-4" type="file" name="fileInput3" id="fileInput3" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                <div class="container">  
+                    <div class="row">
+                        <td class="col-1 text-end">
+                            <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image3">Image3<span style="color:red;">*</span></label>
+                        </td>
+                        <td class="col-11"> 
+                            <div class="container m-0 p-0">  
+                                <div class="row">
+                                    <div class="col-12 col-lg-3 pb-3 pb-lg-0">
+                                        <input class="form-control-lg m-0 p-0 border border-black" id="txt_carEdit_image3" name="txt_carEdit_image3" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image3','','labelMessageimage3','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image3 au ratio de 350px sur 180px.')"
+                                            value=
+                                            "<?php
+                                                echo $Cars[0]['image3'];
+                                            ?>"
+                                        >
+                                    </div>
+                                    <div class="col-12 col-lg-5 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="fs-4" type="file" name="fileInput3" id="fileInput3" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                                    </div>
+                                    <div class="col-12 col-lg-4 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image3" id="btn_image3" value="Télécharger">
+                                    </div>
+                                </div>  
                             </div>
-                            <div class="d-flex align-items-center m-0 mt-sm-1 p-0 w-25">
-                                <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image3" id="btn_image3" value="Télécharger">
-                            </div>
-                        </div>
+                        </td>
                     </div>
-                </td>
+                </div>
             </tr>
 
             <tr>
@@ -363,32 +378,35 @@
                     </label>
                 </td>
             </tr>
-
             
             <tr class="m-0 p-0">
-                <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image4">Image4<span style="color:red;">*</span></label>
-                </td>
-                <td class="m-0 p-0">
-                    <div class="d-flex flex-column flex-xl-row">
-                        <div class="d-flex align-items-center w-100 w-lg-50">
-                            <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_carEdit_image4" name="txt_carEdit_image4" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image4','','labelMessageImage4','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local.')"
-                                value=
-                                "<?php
-                                    echo $Cars[0]['image4'];
-                                ?>"
-                            >
-                        </div>
-                        <div class="d-flex flex-column flex-md-row justify-content-start align-items-center m-0 mt-1 ms-xl-2 p-0 w-100">
-                            <div class="d-flex align-items-center m-0 p-0 w-75">
-                                <input class="fs-4" type="file" name="fileInput4" id="fileInput4" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                <div class="container">  
+                    <div class="row">
+                        <td class="col-1 text-end">
+                            <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image4">Image4<span style="color:red;">*</span></label>
+                        </td>
+                        <td class="col-11"> 
+                            <div class="container m-0 p-0">  
+                                <div class="row">
+                                    <div class="col-12 col-lg-3 pb-3 pb-lg-0">
+                                        <input class="form-control-lg m-0 p-0 border border-black" id="txt_carEdit_image4" name="txt_carEdit_image4" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image4','','labelMessageimage4','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image4 au ratio de 350px sur 180px.')"
+                                            value=
+                                            "<?php
+                                                echo $Cars[0]['image4'];
+                                            ?>"
+                                        >
+                                    </div>
+                                    <div class="col-12 col-lg-5 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="fs-4" type="file" name="fileInput4" id="fileInput4" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                                    </div>
+                                    <div class="col-12 col-lg-4 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image4" id="btn_image4" value="Télécharger">
+                                    </div>
+                                </div>  
                             </div>
-                            <div class="d-flex align-items-center m-0 mt-sm-1 p-0 w-25">
-                                <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image4" id="btn_image4" value="Télécharger">
-                            </div>
-                        </div>
+                        </td>
                     </div>
-                </td>
+                </div>
             </tr>
 
             <tr>
@@ -400,31 +418,35 @@
                     </label>
                 </td>
             </tr>
-
+            
             <tr class="m-0 p-0">
-                <td class="text-end m-0 p-0">
-                    <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image5">Image5<span style="color:red;">*</span></label>
-                </td>
-                <td class="m-0 p-0">
-                    <div class="d-flex flex-column flex-xl-row">
-                        <div class="d-flex align-items-center w-100 w-lg-50">
-                            <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_carEdit_image5" name="txt_carEdit_image5" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image5','','labelMessageImage5','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local.')"
-                                value=
-                                "<?php
-                                    echo $Cars[0]['image5'];
-                                ?>"
-                            >
-                        </div>
-                        <div class="d-flex flex-column flex-md-row justify-content-start align-items-center m-0 mt-1 ms-xl-2 p-0 w-100">
-                            <div class="d-flex align-items-center m-0 p-0 w-75">
-                                <input class="fs-4" type="file" name="fileInput5" id="fileInput5" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                <div class="container">  
+                    <div class="row">
+                        <td class="col-1 text-end">
+                            <label class="form-label m-0 p-0 pe-3" for="txt_carEdit_image5">Image5<span style="color:red;">*</span></label>
+                        </td>
+                        <td class="col-11"> 
+                            <div class="container m-0 p-0">  
+                                <div class="row">
+                                    <div class="col-12 col-lg-3 pb-3 pb-lg-0">
+                                        <input class="form-control-lg m-0 p-0 border border-black" id="txt_carEdit_image5" name="txt_carEdit_image5" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_carEdit_image5','','labelMessageimage5','Saisissez le nom de l\'image (sans caractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image5 au ratio de 350px sur 180px.')"
+                                            value=
+                                            "<?php
+                                                echo $Cars[0]['image5'];
+                                            ?>"
+                                        >
+                                    </div>
+                                    <div class="col-12 col-lg-5 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="fs-4" type="file" name="fileInput5" id="fileInput5" accept="image/jpeg, image/png, image/webp" directory="./img/vehicle/">
+                                    </div>
+                                    <div class="col-12 col-lg-4 d-flex align-items-center pb-3 pb-lg-0">
+                                        <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image5" id="btn_image5" value="Télécharger">
+                                    </div>
+                                </div>  
                             </div>
-                            <div class="d-flex align-items-center m-0 mt-sm-1 p-0 w-25">
-                                <input class="btn btn-lg btn-primary fs-4" type="submit" name="btn_image5" id="btn_image5" value="Télécharger">
-                            </div>
-                        </div>
+                        </td>
                     </div>
-                </td>
+                </div>
             </tr>
 
             <tr>
@@ -438,13 +460,17 @@
             </tr>
 
             <tr class="m-0 p-0">
-                <td class="m-0 p-0 pt-5">
+                <td class="m-0 p-0 pb-5">
                 </td>
-                <td class="m-0 p-0 pt-5">
-                    <button type="submit" class="btn btn-lg btn-warning fs-4 px-2 mb-2" id="bt_carEdit_cancel" name="bt_carEdit_cancel" onclick="retour()" style="width: 100px;">Retour</button>
-                    <button type="submit" class="btn btn-lg btn-success fs-4 px-2 mb-2" id="bt_carEdit_save" name="bt_carEdit_save" style="width: 100px;">Enregistrer</button>
-                    <button type="submit" class="btn btn-lg btn-info fs-4 px-2 mb-2" id="bt_carEdit_new" name="bt_carEdit_new" style="width: 100px;">Nouveau</button>
-                    <button type="submit" class="btn btn-lg btn-danger fs-4 px-2 mb-2" id="bt_carEdit_delete" name="bt_carEdit_delete" onclick="confirmDelete()" style="width: 100px;">Supprimer</button>
+                <td class="d-flex flex-column flex-sm-row m-0 p-0 pb-5">
+                    <div class="pe-2 pb-2 pb-sm-0">
+                        <button type="submit" class="btn btn-lg btn-warning fs-4 px-2 mb-2" id="bt_carEdit_cancel" name="bt_carEdit_cancel" onclick="retour()" style="width: 100px;">Retour</button>
+                        <button type="submit" class="btn btn-lg btn-success fs-4 px-2 mb-2" id="bt_carEdit_save" name="bt_carEdit_save" style="width: 100px;">Enregistrer</button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-lg btn-info fs-4 px-2 mb-2" id="bt_carEdit_new" name="bt_carEdit_new" style="width: 100px;">Nouveau</button>
+                        <button type="submit" class="btn btn-lg btn-danger fs-4 px-2 mb-2" id="bt_carEdit_delete" name="bt_carEdit_delete" onclick="confirmDelete()" style="width: 100px;">Supprimer</button>
+                    </div>
                 </td>
             </tr>
 

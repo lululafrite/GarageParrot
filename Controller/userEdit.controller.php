@@ -4,12 +4,17 @@
 // traitement droits utilisateur : renvoi vers la page erro_page.php si l'utilisateur et un Guest
 //***********************************************************************************************
 
-    if ($_SESSION['userConnected'] != "Administrator") {
+    if ($_SESSION['userConnected'] != "Administrator"){
+
         if($_SESSION['local']===true){
+
             echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
+        
         }
         else{
+
             echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
+        
         }
         exit();
     }
@@ -95,7 +100,18 @@
     }else if(isset($_POST['bt_userEdit_cancel'])){
         
         $_SESSION['newUserr'] = false;
-        echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
+        
+        if($_SESSION['local']===true){
+
+            echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
+        
+        }
+        else{
+            
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user";</script>';
+        
+        }
+        exit();
 
     }
 
