@@ -103,3 +103,13 @@
 <div class="container pt-3">
 	<?php include("../Elements/_09_comment.php");?>
 </div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		afficherAlerte();
+	});
+
+	function afficherAlerte() {
+		alert("ATTENTION! Je ne vous ai pas transmis le bon fichier *.sql. Utilisez celui qui est disponible dans le dossier 'Dossier_Technique' dans Github. Désolé pour le désagrément.");
+	}
+</script>

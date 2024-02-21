@@ -10,8 +10,8 @@
     <title id="pageTitle" class="head__title">Garage V.PARROT</title>
 
 	<!-- --------------------------- META DATA FOR REFFERENCEMENT ----------------------------- -->
-	<meta name="description" content="Decouvrez sur ce site, les competences de ludovic follaco en tant que conseil et developpeur de solution de productivité pour l'industrie">
-	<meta name="keywords" content="industrie, système, qualité, application, interaction, gestion, productivité">
+	<meta name="description" content="Decouvrez sur ce site, les competences de Vincent PARROT et de son équipe. Des techiniciens spécialisés en réparation de véhicule automobile.">
+	<meta name="keywords" content="Réparation, entretien, mécanique, carrosserie, électricité, électronique, automobile, voiture, qualité, service, occasion, véhicule d'occasion, vente, achat, vente occasion, achat occasion">
 
     <link rel="icon" href="img/icon/garage_75x75.png" type="image/png">
 
