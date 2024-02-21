@@ -149,24 +149,40 @@ use function PHPSTORM_META\type;
 			include('../Controller/ConfigConnGP.php');
 
 			try{
-				
-				$sql = $bdd->query("SELECT `comment`.`id_comment`
-									FROM  `comment`
-									WHERE `comment`.`date_` = '" . $this->date_ . "' AND
-										  `comment`.`pseudo` = '" . $this->pseudo . "' AND
-										  `comment`.`rating` = '" . $this->rating . "' AND
-										  `comment`.`comment` = '" . $this->comment . "'
-								  ");
 
-				if(!$sql->fetch()){
-					$bdd->exec("INSERT INTO `comment`(`date_`,`pseudo`,`rating`,`comment`)
-								VALUES(
-										'" . $this->date_ . "',
-										'" . $this->pseudo . "',
-										'" . $this->rating . "',
-										'" . $this->comment . "'
-									)
-								");
+				// Requête préparée
+				$query = $bdd->prepare("SELECT `comment`.`id_comment`
+										FROM  `comment`
+										WHERE `comment`.`date_` = :date_
+										AND `comment`.`pseudo` = :pseudo
+										AND `comment`.`rating` = :rating
+										AND `comment`.`comment` = :comment");
+
+				// Liaison des valeurs
+				$query->bindParam(':date_', $this->date_);
+				$query->bindParam(':pseudo', $this->pseudo);
+				$query->bindParam(':rating', $this->rating);
+				$query->bindParam(':comment', $this->comment);
+
+				// Exécution de la requête
+				$query->execute();
+
+				// Récupération du résultat
+				$result = $query->fetch(PDO::FETCH_ASSOC);
+
+				if (!$result) {
+
+
+					$query = $bdd->prepare("INSERT INTO `comment` (`date_`, `pseudo`, `rating`, `comment`) VALUES (:date_, :pseudo, :rating, :comment)");
+
+					// Liaison des valeurs
+					$query->bindParam(':date_', $this->date_);
+					$query->bindParam(':pseudo', $this->pseudo);
+					$query->bindParam(':rating', $this->rating);
+					$query->bindParam(':comment', $this->comment);
+
+					// Exécution de la requête
+					$query->execute();
 					
 					$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$sql = $bdd->query("SELECT MAX(`id_comment`) AS idMax FROM `comment`");
@@ -192,14 +208,23 @@ use function PHPSTORM_META\type;
 			include('../Controller/ConfigConnGP.php');
 			try
 			{
-				$bdd->exec("UPDATE `comment`
-							SET `date_` =  '" . $this->date_ . "',
-								`pseudo` =  '" . $this->pseudo . "',
-								`rating` =  '" . $this->rating . "',
-								`comment` =  '" . $this->comment . "'
+				// Requête préparée
+				$query = $bdd->prepare("UPDATE `comment`
+				SET `date_` = :date_,
+					`pseudo` = :pseudo,
+					`rating` = :rating,
+					`comment` = :comment
+				WHERE `id_comment` = :idComment");
 
-								WHERE `id_commnt` = '" . $idComment . "'
-							");
+				// Liaison des valeurs
+				$query->bindParam(':date_', $this->date_);
+				$query->bindParam(':pseudo', $this->pseudo);
+				$query->bindParam(':rating', $this->rating);
+				$query->bindParam(':comment', $this->comment);
+				$query->bindParam(':idComment', $idComment);
+
+				// Exécution de la requête
+				$query->execute();
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
@@ -212,31 +237,47 @@ use function PHPSTORM_META\type;
 		}
 
 		//-----------------------------------------------------------------------
-
+		
 		public function deleteComment($id)
 		{
 			include('../Controller/ConfigConnGP.php');
 
-			try
-			{
-				$sql = $bdd->query("SELECT `comment`.`id_comment`
-									FROM  `comment`
-									WHERE `comment`.`id_comment` = '" . $id . "'
-								  ");
-				$id_comment = $sql->fetch();
-				//$ValeurId = $id_comment[0];
+			try {
+				// Requête préparée pour la sélection
+				$query = $bdd->prepare("SELECT `comment`.`id_comment`
+										FROM  `comment`
+										WHERE `comment`.`id_comment` = :id");
 
-				if($id_comment){
-					$bdd->exec('DELETE FROM comment WHERE id_comment=' . $id);
+				// Liaison de la valeur
+				$query->bindParam(':id', $id);
+
+				// Exécution de la requête
+				$query->execute();
+
+				// Récupération du résultat
+				$id_comment = $query->fetch(PDO::FETCH_COLUMN);
+
+				// Vérification si l'ID existe
+				if ($id_comment !== false) {
+					// Requête préparée pour la suppression
+					$deleteQuery = $bdd->prepare('DELETE FROM comment WHERE id_comment = :id_comment');
+
+					// Liaison de la valeur
+					$deleteQuery->bindParam(':id_comment', $id_comment);
+
+					// Exécution de la requête de suppression
+					$deleteQuery->execute();
+
 					echo '<script>alert("Cet enregistrement est supprimé!");</script>';
+				} else {
+					// L'ID n'existe pas, gestion de l'erreur si nécessaire
+					echo '<script>alert("L\'enregistrement avec cet ID n\'existe pas!");</script>';
 				}
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+			} catch (Exception $e) {
+				echo "Erreur de la requête : " . $e->getMessage();
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
 
         //__Ajouter user?___________________________________________
