@@ -97,6 +97,30 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
+		private $article1_image1;
+		public function getArticle1_image1()
+		{
+			return $this->article1_image1;
+		}
+		public function setArticle1_image1($new)
+		{
+			$this->article1_image1 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $article1_titre2;
+		public function getArticle1_titre2()
+		{
+			return $this->article1_titre2;
+		}
+		public function setArticle1_titre2($new)
+		{
+			$this->article1_titre2 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
 		private $article1_chapter2;
 		public function getArticle1_chapter2()
 		{
@@ -107,6 +131,17 @@ use function PHPSTORM_META\type;
 			$this->article1_chapter2 = $new;
 		}
 
+		//-----------------------------------------------------------------------
+
+		private $article1_image2;
+		public function getArticle1_image2()
+		{
+			return $this->article1_image2;
+		}
+		public function setArticle1_image2($new)
+		{
+			$this->article1_image2 = $new;
+		}
 
 		//-----------------------------------------------------------------------
 
@@ -134,6 +169,30 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
+		private $article2_image1;
+		public function getArticle2_image1()
+		{
+			return $this->article2_image1;
+		}
+		public function setArticle2_image1($new)
+		{
+			$this->article2_image1 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $article2_titre2;
+		public function getArticle2_titre2()
+		{
+			return $this->article2_titre2;
+		}
+		public function setArticle2_titre2($new)
+		{
+			$this->article2_titre2 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
 		private $article2_chapter2;
 		public function getArticle2_chapter2()
 		{
@@ -142,6 +201,18 @@ use function PHPSTORM_META\type;
 		public function setArticle2_chapter2($new)
 		{
 			$this->article2_chapter2 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $article2_image2;
+		public function getArticle2_image2()
+		{
+			return $this->article2_image2;
+		}
+		public function setArticle2_image2($new)
+		{
+			$this->article2_image2 = $new;
 		}
 
 		//-----------------------------------------------------------------------
@@ -162,10 +233,16 @@ use function PHPSTORM_META\type;
 										`home`.`titre2`,
 										`home`.`article1_titre`,
 										`home`.`article1_chapter1`,
+										`home`.`article1_image1`,
+										`home`.`article1_titre2`,
 										`home`.`article1_chapter2`,
+										`home`.`article1_image2`,
 										`home`.`article2_titre`,
 										`home`.`article2_chapter1`,
-										`home`.`article2_chapter2`
+										`home`.`article2_image1`,
+										`home`.`article2_titre2`,
+										`home`.`article2_chapter2`,
+										`home`.`article2_image2`
 
 									FROM `home`
 									
@@ -201,10 +278,16 @@ use function PHPSTORM_META\type;
 										`home`.`titre2`,
 										`home`.`article1_titre`,
 										`home`.`article1_chapter1`,
+										`home`.`article1_image1`,
+										`home`.`article1_titre2`,
 										`home`.`article1_chapter2`,
+										`home`.`article1_image2`,
 										`home`.`article2_titre`,
 										`home`.`article2_chapter1`,
-										`home`.`article2_chapter2`
+										`home`.`article2_image1`,
+										`home`.`article2_titre2`,
+										`home`.`article2_chapter2`,
+										`home`.`article2_image2`
 
 									FROM `home`
 
@@ -237,9 +320,11 @@ use function PHPSTORM_META\type;
 					`titre2` = ?,
 					`article1_titre` = ?,
 					`article1_chapter1` = ?,
+					`article1_titre2` = ?,
 					`article1_chapter2` = ?,
 					`article2_titre` = ?,
 					`article2_chapter1` = ?,
+					`article2_titre2` = ?,
 					`article2_chapter2` = ?
 				WHERE `id_home` = ?");
 
@@ -249,9 +334,11 @@ use function PHPSTORM_META\type;
 						$this->titre2,
 						$this->article1_titre,
 						$this->article1_chapter1,
+						$this->article1_titre2,
 						$this->article1_chapter2,
 						$this->article2_titre,
 						$this->article2_chapter1,
+						$this->article2_titre2,
 						$this->article2_chapter2,
 						$idHome]);
 							

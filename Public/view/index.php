@@ -39,31 +39,52 @@
 	</div>
 	<div class="container pb-3">
 		<div class="row">
-			<div class="col-12 col-lg-5 mx-auto ms-lg-0">
-				<h3 class="bg-dark bg-opacity-75 rounded p-0 py-3 m-0"><input class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'text-light bg-transparent';} ?>" type="text" id="txt_article1_titre" name="txt_article1_titre" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?> value="<?php echo $Home[0]['article1_titre']; ?>"></h3>
-				<p>
-					<textarea class="text-left <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article1_chapter1" id="txt_article1_chapter1" rows="2" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
+			<div class="d-flex justify-content-center p-5 m-0">
+				<div class="col-8 bg-light m-0 pe-5">
+					<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>"><input class="text-center" id="txt_article1_titre" name="txt_article1_titre" type="text" value="<?php echo $Home[0]['article1_titre']; ?>" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>></h2>
+					<textarea class="text-left m-0 pe-5 <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article1_chapter1" id="txt_article1_chapter1" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
 <?php echo $Home[0]['article1_chapter1']; ?></textarea>
-				</p>
-				<hr>
-				<p>
-					<textarea class="text-left <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article1_chapter2" id="txt_article1_chapter2" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
-<?php echo $Home[0]['article1_chapter2']; ?></textarea>
-				</p>
-				<hr>
+				</div>
+				<img class="m-0 ps-5" src="../img/photo/<?php echo $Home[0]['article1_image1']; ?>" alt="photo mécanique">
 			</div>
-			<div class="col-12 col-lg-5 mx-auto me-lg-0">
-				<h3 class="bg-dark bg-opacity-75 rounded py-3"><input class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'text-light bg-transparent';} ?>" type="text" id="txt_article2_titre" name="txt_article2_titre" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?> value="<?php echo $Home[0]['article2_titre']; ?>"></h3>
-				<p>
-					<textarea class="text-left <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article2_chapter1" id="txt_article2_chapter1" rows="2" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
+			<hr>
+		</div>
+	</div>
+	<div class="container pb-3">
+		<div class="row">
+			<div class="d-flex justify-content-center p-5 m-0">
+				<img class="m-0 pe-5" src="../img/photo/<?php echo $Home[0]['article1_image2']; ?>" alt="photo mécanique">
+				<div class="col-8 bg-light m-0 ps-5">
+				<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>"><input class="text-center" id="txt_article1_titre2" name="txt_article1_titre2" type="text" value="<?php echo $Home[0]['article1_titre2']; ?>" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>></h2>
+					<textarea class="text-left m-0 ps-5 <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article1_chapter2" id="txt_article1_chapter2" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
+<?php echo $Home[0]['article1_chapter2']; ?></textarea>
+				</div>
+			</div>
+			<hr>
+		</div>
+	</div>
+	<div class="container pb-3">
+		<div class="row">
+			<div class="d-flex justify-content-center p-5 m-0">
+				<div class="col-8 bg-light m-0 pe-5">
+				<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>"><input class="text-center" id="txt_article2_titre" name="txt_article2_titre" type="text" value="<?php echo $Home[0]['article2_titre']; ?>" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>></h2>
+					<textarea class="text-left m-0 pe-5 <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article2_chapter1" id="txt_article2_chapter1" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
 <?php echo $Home[0]['article2_chapter1']; ?></textarea>
-				</p>
-				<hr>
-				<p>
-					<textarea class="text-left <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article2_chapter2" id="txt_article2_chapter2" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
+				</div>
+				<img class="m-0 ps-5" src="../img/photo/<?php echo $Home[0]['article2_image1']; ?>" alt="photo mécanique">
+			</div>
+			<hr>
+		</div>
+	</div>
+	<div class="container pb-3">
+		<div class="row">
+			<div class="d-flex justify-content-center p-5 m-0">
+				<img class="m-0 pe-5" src="../img/photo/<?php echo $Home[0]['article2_image2']; ?>" alt="photo mécanique">
+				<div class="col-8 bg-light m-0 ps-5">
+				<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>"><input class="text-center" id="txt_article2_titre2" name="txt_article2_titre2" type="text" value="<?php echo $Home[0]['article2_titre2']; ?>" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>></h2>
+					<textarea class="text-left m-0 ps-5 <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article2_chapter2" id="txt_article2_chapter2" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
 <?php echo $Home[0]['article2_chapter2']; ?></textarea>
-				</p>
-				<hr>
+				</div>
 			</div>
 		</div>
 	</div>
