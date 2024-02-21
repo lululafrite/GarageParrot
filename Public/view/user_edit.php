@@ -13,12 +13,12 @@
                 </td>
                 <td class="d-flex flex-column flex-sm-row m-0 p-0 pb-5">
                     <div class="pe-2 pb-2 pb-sm-0">
-                        <button type="submit" class="btn btn-lg btn-warning fs-4" id="bt_userEdit_cancel" name="bt_userEdit_cancel" onclick="retour();">Retour</button>
-                        <button type="submit" class="btn btn-lg btn-success fs-4" id="bt_userEdit_save" name="bt_userEdit_save">Enregistrer</button>
+                        <button type="submit" class="btn btn-lg btn-warning fs-4" id="bt_userEdit_cancel" name="bt_userEdit_cancel" style="width: 100px;" onclick="retour();">Retour</button>
+                        <button type="submit" class="btn btn-lg btn-success fs-4" id="bt_userEdit_save" name="bt_userEdit_save" style="width: 100px;">Enregistrer</button>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-lg btn-info fs-4" id="bt_userEdit_new" name="bt_userEdit_new">Nouveau</button>
-                        <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt_userEdit_delete" name="bt_userEdit_delete">Supprimer</button>
+                        <button type="submit" class="btn btn-lg btn-info fs-4" id="bt_userEdit_new" name="bt_userEdit_new" style="width: 100px;">Nouveau</button>
+                        <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt_userEdit_delete" name="bt_userEdit_delete" style="width: 100px;">Supprimer</button>
                     </div>
                 </td>
             </tr>
@@ -257,12 +257,12 @@
                 </td>
                 <td class="d-flex flex-column flex-sm-row m-0 p-0 pb-5">
                     <div class="pe-2 pb-2 pb-sm-0">
-                        <button type="submit" class="btn btn-lg btn-warning fs-4" id="bt_userEdit_cancel" name="bt_userEdit_cancel" onclick="retour();">Retour</button>
-                        <button type="submit" class="btn btn-lg btn-success fs-4" id="bt_userEdit_save" name="bt_userEdit_save">Enregistrer</button>
+                        <button type="submit" class="btn btn-lg btn-warning fs-4" id="bt_userEdit_cancel" name="bt_userEdit_cancel" style="width: 100px;" onclick="retour();">Retour</button>
+                        <button type="submit" class="btn btn-lg btn-success fs-4" id="bt_userEdit_save" name="bt_userEdit_save" style="width: 100px;">Enregistrer</button>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-lg btn-info fs-4" id="bt_userEdit_new" name="bt_userEdit_new">Nouveau</button>
-                        <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt_userEdit_delete" name="bt_userEdit_delete">Supprimer</button>
+                        <button type="submit" class="btn btn-lg btn-info fs-4" id="bt_userEdit_new" name="bt_userEdit_new" style="width: 100px;">Nouveau</button>
+                        <button type="submit" class="btn btn-lg btn-danger fs-4" id="bt_userEdit_delete" name="bt_userEdit_delete" style="width: 100px;">Supprimer</button>
                     </div>
                 </td>
             </tr>

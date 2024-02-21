@@ -47,7 +47,7 @@
             </table>
         </div>
         <div class="d-flex justify-content-center my-2">
-            <button type="submit" class='btn btn-primary fs-3 mt-3' name='bt_user_edit'>edit</button>
+            <button type="submit" class='btn btn-primary fs-3 mt-3' name='bt_user_edit'>Editer</button>
         </div>
     </form>
 </article>
