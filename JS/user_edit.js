@@ -3,9 +3,9 @@
         setInputValue('txt_userEdit_name', '_');
         setInputValue('txt_userEdit_surname', '_');
         setInputValue('txt_userEdit_pseudo', '_');
-        setInputValue('txt_userEdit_email', 'guest@gmail.com');
+        setInputValue('txt_userEdit_email', 'user@gmail.com');
         setInputValue('txt_userEdit_phone', '00 00 00 00 00');
-        setInputValue('list_userEdit_type', 'Guest');
+        setInputValue('list_userEdit_type', 'User');
         setInputValue('txt_userEdit_password', 'Abc123/*-');
         setInputValue('txt_userEdit_confirm', 'Abc123/*-');
 
