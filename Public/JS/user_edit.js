@@ -1,4 +1,5 @@
-    //Permet de remplir les input avec une valeur quelquonque. Utile si l'on a cliqué sur le bouton nouveau et que l'on veut annuler. 
+//Permet de remplir les input avec une valeur quelquonque. Utile si l'on a cliqué sur le bouton nouveau et que l'on veut annuler. 
+
     function retour() {        
         setInputValue('txt_userEdit_name', '_');
         setInputValue('txt_userEdit_surname', '_');
@@ -45,6 +46,39 @@
             
             isError = true;
 
+        }else if(input === 'txt_userEdit_password'){
+
+            var passwordInput = document.getElementById(input).value;
+
+            // Vérifier que la longueur est de 8 caractères
+            if (passwordInput.length < 8) {
+                //alert("Le mot de passe doit contenir au moins 8 caractères dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi les suivants (_-/*-@!)");
+                isError=true;
+            }else{
+                isError=false;
+            }
+
+            //Vérifier au moins une majuscule, une minuscule, un chiffre, et un caractère spécial
+            var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[_\-/*-@!])[\w\-/*-@!]{8,255}$/;
+            
+            if (!regex.test(passwordInput)) {
+                //alert("Le mot de passe doit contenir au moins 8 caractères dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi les suivants (_-/*-@!)");
+                isError=true;
+            }
+            
+        }else if(input === 'txt_userEdit_confirm'){
+
+            var password = document.getElementById('txt_userEdit_password').value;
+            var passwordConfirm = document.getElementById(input).value;
+
+            if(passwordConfirm === password){
+                isError=false;
+                console.log(isError);
+            }
+            else{
+                isError=true;
+                console.log(isError);
+            }
         }
 
         if(isError){

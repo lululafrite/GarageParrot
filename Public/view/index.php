@@ -53,7 +53,7 @@
 	<div class="container pb-0 pb-lg-3">
 		<div class="row">
 			<div class="d-flex flex-column flex-lg-row justify-content-center p-0 p-lg-5 m-0">
-				<img class="m-0 ps-0 pb-3 pb-lg-0 ps-lg-5" src="../img/photo/<?php echo $Home[0]['article1_image2']; ?>" alt="photo mécanique">
+				<img class="m-0 ps-0 pb-3 pb-lg-0" src="../img/photo/<?php echo $Home[0]['article1_image2']; ?>" alt="photo mécanique">
 				<div class="col-12 col-lg-8 d-flex flex-column justify-content-center bg-light m-0 ps-0 ps-lg-5">
 				<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>"><input class="text-center fw-bold" id="txt_article1_titre2" name="txt_article1_titre2" type="text" value="<?php echo $Home[0]['article1_titre2']; ?>" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>></h2>
 					<textarea class="text-left m-0 pe-0 pb-3 pb-lg-0 pe-lg-5 <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article1_chapter2" id="txt_article1_chapter2" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
@@ -78,11 +78,11 @@
 	</div>
 	<div class="container pb-0 pb-lg-3">
 		<div class="row">
-			<div class="d-flex flex-column flex-lg-row justify-content-center p-0 p-lg-5 m-0">
-				<img class="m-0 ps-0 pb-3 pb-lg-0 ps-lg-5" src="../img/photo/<?php echo $Home[0]['article2_image2']; ?>" alt="photo mécanique">
-				<div class="col-12 col-lg-8 d-flex flex-column justify-content-center bg-light m-0 pe-0 pe-lg-5">
+			<div class="d-flex flex-column flex-lg-row justify-content-center p-0 p-lg-5 ps-lg-0 m-0">
+				<img class="m-0 ps-0 pb-3 pb-lg-0" src="../img/photo/<?php echo $Home[0]['article2_image2']; ?>" alt="photo mécanique">
+				<div class="col-12 col-lg-8 d-flex flex-column justify-content-center bg-light m-0 ps-0 ps-lg-5">
 				<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>"><input class="text-center fw-bold" id="txt_article2_titre2" name="txt_article2_titre2" type="text" value="<?php echo $Home[0]['article2_titre2']; ?>" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>></h2>
-					<textarea class="text-left m-0 pe-0 pe-lg-5 <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article2_chapter2" id="txt_article2_chapter2" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
+					<textarea class="text-left m-0 pe-0 pb-3 pb-lg-0 pe-lg-5 <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" name="txt_article2_chapter2" id="txt_article2_chapter2" rows="6" <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>>
 <?php echo $Home[0]['article2_chapter2']; ?></textarea>
 				</div>
 			</div>
