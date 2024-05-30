@@ -1,30 +1,12 @@
 <?php
 
 //***********************************************************************************************
-// traitement droits utilisateur : renvoi vers la page erro_page.php si l'utilisateur et un Guest
-//***********************************************************************************************
-
-    if ($_SESSION['userConnected'] === "Guest"){
-
-        if($_SESSION['local']===true){
-
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
-        
-        }else{
-
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
-
-        }
-        exit();
-    }
-
-//***********************************************************************************************
 // Daclaration de variables
 //***********************************************************************************************
 
     $changeImage = false;
 
-    include('../Model/car.class.php');
+    include('../model/car.class.php');
     
     $_SESSION['theTable'] = 'car';
     $MyCar = new Car();
@@ -271,19 +253,19 @@
     }
         
         //Traiment de la BD pour récupérer les données destinées à l'input liste brand
-        include_once('../Model/brand.class.php');
+        include_once('../model/brand.class.php');
         $Brands = new Brand();
         $MyBrand = $Brands->get(1,'name', 'ASC', 0, 50);
         unset($Brands);
 
         //Traiment de la BD pour récupérer les données destinées à l'input liste model
-        include_once('../Model/model.class.php');
+        include_once('../model/model.class.php');
         $Models = new Model();
         $MyModel = $Models->get(1,'name', 'ASC', 0, 50);
         unset($Models);
 
         //Traiment de la BD pour récupérer les données destinées à l'input liste motorization
-        include_once('../Model/motorization.class.php');
+        include_once('../model/motorization.class.php');
         $Motorizations = new Motorization();
         $MyMotorization = $Motorizations->get(1,'name', 'ASC', 0, 50);
         unset($Motorizations);

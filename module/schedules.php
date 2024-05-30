@@ -1,5 +1,5 @@
 <?php
-    include('../Controller/schedules.controller.php');
+    include('../controller/schedules.controller.php');
 ?>
 
 <table class="table table-dark table-bordered fs-4">

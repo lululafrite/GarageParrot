@@ -5,7 +5,7 @@
         <div class="container d-flex flex-column">
             
         <label for="select_car_brand" class="form-label text-light">Marque :</label>
-            <select class="form-select fw-bolder rounded-3" id="select_car_brand" name="select_car_brand">
+            <select class="form-select fw-bolder rounded-3" id="select_car_brand" name="select_car_brand" style="font-size: 1.6rem;">
             <?php
                 if(isset($_POST['select_car_brand'])){
                     $_SESSION['criteriaBrand'] = $_POST['select_car_brand'];
@@ -15,7 +15,7 @@
                 <option value='Selectionnez une marque'>Selectionnez une marque</option>
             <?php
 
-                include('../Model/brand.class.php');
+                include('../model/brand.class.php');
                 $Brands = new Brand();
                 $MyBrand = $Brands->get(1,'name', 'ASC', 0, 50);
                 unset($Brands);
@@ -29,7 +29,7 @@
         <div class="container d-flex flex-column">
 
         <label for="select_car_model" class="form-label text-light">Modèle :</label>
-            <select class="form-select fw-bolder rounded-3" id="select_car_model" name="select_car_model">
+            <select class="form-select fw-bolder rounded-3" id="select_car_model" name="select_car_model" style="font-size: 1.6rem;">
             <?php
                 if(isset($_POST['select_car_model'])){
                     $_SESSION['criteriaModel'] = $_POST['select_car_model'];
@@ -39,7 +39,7 @@
                 <option value='Selectionnez un modele'>Selectionnez un modele</option>";
             <?php
 
-                include('../Model/model.class.php');
+                include('../model/model.class.php');
                 $Models = new Model();
                 $MyModel = $Models->get(1,'name', 'ASC', 0, 50);
                 unset($Models);
@@ -53,7 +53,7 @@
         <div class="container d-flex flex-column">
 
         <label for="select_car_mileage" class="form-label text-light">Kms MAX :</label>
-            <select class="form-select fw-bolder rounded-3" id="select_car_mileage" name="select_car_mileage">
+            <select class="form-select fw-bolder rounded-3" id="select_car_mileage" name="select_car_mileage" style="font-size: 1.6rem;">
             <?php
                 if(isset($_POST['select_car_mileage'])){
                     $_SESSION['criteriaMileage'] = $_POST['select_car_mileage'];
@@ -82,7 +82,7 @@
         <div class="container d-flex flex-column">
 
             <label for="select_car_price" class="form-label text-light">Prix MAX :</label>
-            <select class="form-select fw-bolder rounded-3" id="select_car_price" name="select_car_price">
+            <select class="form-select fw-bolder rounded-3" id="select_car_price" name="select_car_price" style="font-size: 1.6rem;">
             <?php
                 if(isset($_POST['select_car_price'])){
                     $_SESSION['criteriaPrice'] = $_POST['select_car_price'];

@@ -14,7 +14,7 @@
         exit();
     }
     
-    include('../Model/connexion.class.php');
+    include('../model/connexion.class.php');
     $MyUserConnect = new userConnect();
 
     $MyUserConnect->SetUserConnect('Guest');

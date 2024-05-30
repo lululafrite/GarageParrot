@@ -4,11 +4,11 @@
             <div class="row">
                 <!-- <div class="col-12 col-lg-5 mx-auto ms-lg-0 text-center "> -->
                 <div class="col-12 col-lg-5 mx-auto ms-lg-0">
-                    <?php include ('../Elements/_04_schedules.php'); ?>
+                    <?php include ('../module/schedules.php'); ?>
                 </div>
                 <!-- <div class="col-12 col-lg-5 mx-auto me-lg-0 text-center "> -->
                 <div class="col-12 col-lg-5 mx-auto me-lg-0">
-                    <?php include ('../Elements/_08_contact.php'); ?>
+                    <?php include ('../module/contact.php'); ?>
                 </div>
             </div>
         </div>

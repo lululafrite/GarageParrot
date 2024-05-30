@@ -4,6 +4,8 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
+include_once('../controller/ConfigConnGP.php');
+
 	class Brand
 	{
 
@@ -40,15 +42,12 @@ use function PHPSTORM_META\type;
 		private $theBrand;
 		public function getBrand($îdBrand)
 		{
-			include('../Controller/ConfigConnGP.php');
-
-            //$_SESSION['timeZone']="Europe/Paris";
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`brand`.`id_brand`,
 										`brand`.`name`
 
@@ -66,7 +65,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -74,11 +73,12 @@ use function PHPSTORM_META\type;
 		private $brandList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`brand`.`id_brand`,
 										`brand`.`name`
 									FROM
@@ -96,20 +96,21 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function addBrand()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try{
-				$bdd->exec("INSERT INTO `brand`(`name`)
+				$conn->exec("INSERT INTO `brand`(`name`)
 							VALUES('" . $this->name . "')");
 
-				$sql = $bdd->query("SELECT MAX(`id_brand`) FROM `brand`");
+				$sql = $conn->query("SELECT MAX(`id_brand`) FROM `brand`");
 				$id_brand = $sql->fetch();
 				$this->id_brand = intval($id_brand['id_brand']);
 
@@ -121,17 +122,19 @@ use function PHPSTORM_META\type;
 
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function updateBrand($idBrand)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
+
 			try
 			{
-				$bdd->exec("UPDATE `brand` SET `name` = '" . $this->name . "'
+				$conn->exec("UPDATE `brand` SET `name` = '" . $this->name . "'
 							WHERE `id_brand` = " . intval($idBrand) . "
 							");
 				
@@ -142,18 +145,19 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function deleteBrand($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM brand WHERE id_brand=' . $id);
+			    $conn->exec('DELETE FROM brand WHERE id_brand=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
 			catch (Exception $e)
@@ -161,7 +165,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
         //__Ajouter user?___________________________________________

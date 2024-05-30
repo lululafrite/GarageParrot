@@ -1,4 +1,7 @@
 <?php
+
+include_once('../controller/ConfigConnGP.php');
+
 	class userConnect
     {
         public function __construct()
@@ -38,9 +41,10 @@
         private $dataConnect;
         public function queryConnect($email,$pw){
 
-            require('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
-            $resultat2 = $bdd->query("SELECT `pseudo`, `user_type`.`type` AS `type`
+            $resultat2 = $conn->query("SELECT `pseudo`, `user_type`.`type` AS `type`
                                         FROM `user`
                                         LEFT JOIN `user_type`
                                         ON `user`.`id_type` = `user_type`.`id_type`

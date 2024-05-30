@@ -33,19 +33,19 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="p-2 h-75" src="img/icon/people.svg" alt="icone du bouton s'identifier">    
+                                <img class="p-2 h-75" src="img/icon/people.svg" alt="icone du bouton s'identifier">    
                                 Profils
                             </a>
                             <ul class="dropdown-menu">
                                 <li>    
-                                    <a class="dropdown-item" href="index.php?page=user">
+                                    <a class="dropdown-item Nav_Span1" href="index.php?page=user">
                                         <img class="p-2 h-75" src="img/icon/search.svg" alt="icone du bouton s'identifier">
                                         Profils
                                     </a>
                                 </li>
                                 <li>
                                     <form action="index.php?page=user_edit" method="post">
-                                        <button class="dropdown-item" id="nav_new_user" name="nav_new_user" type="submit">
+                                        <button class="dropdown-item Nav_Span1" id="nav_new_user" name="nav_new_user" type="submit">
                                             <img class="p-2 h-75" src="img/icon/person-plus.svg" alt="icone du bouton s'identifier">
                                             Nouveau
                                         </button>
@@ -68,7 +68,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>    
-                                <a class="dropdown-item" href="index.php?page=car">
+                                <a class="dropdown-item Nav_Span1" href="index.php?page=car">
                                     <img class="p-2 h-75" src="img/icon/car-front.svg" alt="icone du bouton s'identifier">
                                     Nos occasions
                                 </a>
@@ -80,7 +80,7 @@
                     ?>
                             <form action="index.php?page=car_edit" method="post">
                                 <li>
-                                    <button class="dropdown-item" id="nav_new_car" name="nav_new_car" type="submit">
+                                    <button class="dropdown-item Nav_Span1" id="nav_new_car" name="nav_new_car" type="submit">
                                         <img class="p-2" src="img/icon/car-front-fill.svg" alt="icone du bouton s'identifier">
                                         Nouveau
                                     </button>
@@ -107,7 +107,7 @@
                     <li class="nav-item custom-border-md-bottom">
                         <a class="nav-link" aria-current="page" href="tel:0608818390">
                             <img class="p-2 h-75" src="img/icon/telephone.svg" alt="icone du bouton s'identifier">
-                            <span class="Nav_Span1">Contactez-nous<br><span class="Nav_Span2">06 08 81 83 90</span></span>
+                            <span class="Nav_Span1">Contact<br><span class="Nav_Span2">06.08.81.83.90</span></span>
                         </a>
                     </li>
 
@@ -118,13 +118,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="index.php?page=connexion">
+                                <a class="dropdown-item Nav_Span1" href="index.php?page=connexion">
                                     <img class="p-2" src="img/icon/login_25x25.png" alt="icone du bouton s'identifier">    
                                     S'identifier
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="index.php?page=disconnect">
+                                <a class="dropdown-item Nav_Span1" href="index.php?page=disconnect">
                                     <img class="p-2" src="img/icon/logout_25x25.png" alt="icone du bouton s'identifier">    
                                     Déconnexion
                                 </a>

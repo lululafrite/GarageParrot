@@ -44,7 +44,7 @@
                     <option value='Selectionnez un type'>Selectionnez un type</option>
 
                 <?php
-                    include('../Model/type.class.php');
+                    include('../model/type.class.php');
                     $Types = new Type();
                     $MyType = $Types->get(1,'type', 'ASC', 0, 50);
                     unset($Types);

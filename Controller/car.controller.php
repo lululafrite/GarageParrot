@@ -1,6 +1,7 @@
 <?php
 //---Load model car--------------------
-    include('../Model/car.class.php');
+    include_once('../model/car.class.php');
+    include_once('../common/utilies.php');
 //---Configure object Car--
     $MyCar = new Car();
     
@@ -16,6 +17,19 @@
         $_SESSION['firstLine'] = 0;
         $_SESSION['ligneParPage'] = 3;
         $_SESSION['nbOfPage'] = 1;
+
+        $_SESSION['criteriaBrand'] = isset($_POST['select_car_brand']) ? escapeInput($_POST['select_car_brand']) : '';
+        unset($_POST['select_car_brand']);
+        
+        $_SESSION['criteriaModel'] = isset($_POST['select_car_model']) ? escapeInput($_POST['select_car_model']) : '';
+        unset($_POST['select_car_model']);
+        
+        $_SESSION['criteriaMileage'] = isset($_POST['select_car_mileage']) ? escapeInput($_POST['select_car_mileage']) : '';
+        unset($_POST['select_car_mileage']);
+        
+        $_SESSION['criteriaPrice'] = isset($_POST['select_car_price']) ? escapeInput($_POST['select_car_price']) : '';
+        unset($_POST['select_car_price']);
+
     }else if(isset($_POST['nbOfPage'])){
         $_SESSION['laPage'] = 1;
         $_SESSION['firstLine']=0;
@@ -27,52 +41,34 @@
     $mileage_umpty = true;
     $price_umpty = true;
 
-    $whereClause = "";
+    $whereClause = 1;
 
-    if(isset($_POST['select_car_brand']) && !empty($_POST['select_car_brand']) && $_POST['select_car_brand'] != "Selectionnez une marque"){
-        $_SESSION['criteriaBrand'] = $_POST['select_car_brand'];
-        $brand_umpty = false;
-    }else if(!empty($_SESSION['criteriaBrand']) && $_SESSION['criteriaBrand'] === 'Selectionnez une marque'){
+    if(empty($_SESSION['criteriaBrand']) || $_SESSION['criteriaBrand'] === 'Selectionnez une marque'){
         $brand_umpty = true;
     }else{
         $brand_umpty = false;
     }
 
-    if(isset($_POST['select_car_model']) && !empty($_POST['select_car_model']) && $_POST['select_car_model'] != "Selectionnez un modele"){
-        $_SESSION['criteriaModel'] = $_POST['select_car_model'];
-        $model_umpty = false;
-    }else if(!empty($_SESSION['criteriaModel']) && $_SESSION['criteriaModel'] === 'Selectionnez un modele'){
-            //$_SESSION['criteriaModel'] = "";
+    if(empty($_SESSION['criteriaModel']) || $_SESSION['criteriaModel'] === 'Selectionnez un modele'){
+        $model_umpty = true;
     }else{
         $model_umpty = false;
-        //$_SESSION['criteriaModel'] = 'Selectionnez un modele';
     }
 
-    if(isset($_POST['select_car_mileage']) && !empty($_POST['select_car_mileage']) && $_POST['select_car_mileage'] != "Selectionnez un kilometrage maxi"){
-        $_SESSION['criteriaMileage'] = $_POST['select_car_mileage'];
-        $mileage_umpty = false;
-    }else if(!empty($_SESSION['criteriaMileage']) && $_SESSION['criteriaMileage'] === 'Selectionnez un kilometrage maxi'){
-        //$_SESSION['criteriaMileage'] = "";
+    if(empty($_SESSION['criteriaMileage']) || $_SESSION['criteriaMileage'] === 'Selectionnez un kilometrage maxi'){
+        $mileage_umpty = true;
     }else{
         $mileage_umpty = false;
-        //$_SESSION['criteriaMileage'] = 'Selectionnez un kilometrage maxi';
     }
 
-    if(isset($_POST['select_car_price']) && !empty($_POST['select_car_price']) && $_POST['select_car_price'] != "Selectionnez un prix maxi"){
-        $_SESSION['criteriaPrice'] = $_POST['select_car_price'];
-        $price_umpty = false;
-    }else if(!empty($_SESSION['criteriaPrice']) && $_SESSION['criteriaPrice'] === 'Selectionnez un prix maxi'){
-        //$_SESSION['criteriaPrice'] = "";
+    if(empty($_SESSION['criteriaPrice']) || $_SESSION['criteriaPrice'] === 'Selectionnez un prix maxi'){
+        $price_umpty = true;
     }else{
         $price_umpty = false;
-        //$_SESSION['criteriaPrice'] = 'Selectionnez un prix maxi';
-    }
-
-    if(isset($_POST['nbOfLine'])){
-
     }
 
     // Paramètrage de la clause WHERE pour executer la requete SELECT pour rechercher un ou plusieurs contacts
+
     if($brand_umpty === true && $model_umpty === true && $mileage_umpty === true && $price_umpty === true){
         
         $whereClause = 1;
@@ -80,9 +76,9 @@
     }else if($brand_umpty === false && $model_umpty === false && $mileage_umpty === false && $price_umpty === false){
 
         $whereClause = "`car`.`id_brand` = (SELECT `brand`.`id_brand` FROM `brand` WHERE `brand`.`name`='" . $_SESSION['criteriaBrand'] . "') AND
-                        `car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "') AND
-                        `car`.`mileage` < '" . $_SESSION['criteriaMileage'] . "' AND
-                        `car`.`price` < '" . $_SESSION['criteriaPrice'] . "'";
+                        `car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_SESSION['criteriaModel'] . "') AND
+                        `car`.`mileage` <= '" . $_SESSION['criteriaMileage'] . "' AND
+                        `car`.`price` <= '" . $_SESSION['criteriaPrice'] . "'";
 
     }else if($brand_umpty === false && $model_umpty === true && $mileage_umpty === true && $price_umpty === true){
 
@@ -91,72 +87,72 @@
     }else if($brand_umpty === false && $model_umpty === false && $mileage_umpty === true && $price_umpty === true){
 
         $whereClause = "`car`.`id_brand` = (SELECT `brand`.`id_brand` FROM `brand` WHERE `brand`.`name`='" . $_SESSION['criteriaBrand'] . "') AND
-                        `car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "')";
+                        `car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_SESSION['criteriaModel'] . "')";
 
     }else if($brand_umpty === false && $model_umpty === false && $mileage_umpty === false && $price_umpty === true){
 
         $whereClause = "`car`.`id_brand` = (SELECT `brand`.`id_brand` FROM `brand` WHERE `brand`.`name`='" . $_SESSION['criteriaBrand'] . "') AND
-                        `car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "') AND
-                        `car`.`mileage` < '" . $_SESSION['criteriaMileage'] . "' ";
+                        `car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_SESSION['criteriaModel'] . "') AND
+                        `car`.`mileage` <= '" . $_SESSION['criteriaMileage'] . "' ";
 
     }else if($brand_umpty === false && $model_umpty === true && $mileage_umpty === false && $price_umpty === false){
 
         $whereClause = "`car`.`id_brand` = (SELECT `brand`.`id_brand` FROM `brand` WHERE `brand`.`name`='" . $_SESSION['criteriaBrand'] . "') AND
-                        `car`.`mileage` < '" . $_SESSION['criteriaMileage'] . "' AND
-                        `car`.`price` < '" . $_SESSION['criteriaPrice'] . "'";
+                        `car`.`mileage` <= '" . $_SESSION['criteriaMileage'] . "' AND
+                        `car`.`price` <= '" . $_SESSION['criteriaPrice'] . "'";
 
     }else if($brand_umpty === false && $model_umpty === true && $mileage_umpty === true && $price_umpty === false){
 
         $whereClause = "`car`.`id_brand` = (SELECT `brand`.`id_brand` FROM `brand` WHERE `brand`.`name`='" . $_SESSION['criteriaBrand'] . "') AND
-                        `car`.`price` < '" . $_SESSION['criteriaPrice'] . "'";
+                        `car`.`price` <= '" . $_SESSION['criteriaPrice'] . "'";
 
     }else if($brand_umpty === false && $model_umpty === false && $mileage_umpty === true && $price_umpty === false){
 
         $whereClause = "`car`.`id_brand` = (SELECT `brand`.`id_brand` FROM `brand` WHERE `brand`.`name`='" . $_SESSION['criteriaBrand'] . "') AND
-                        `car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "') AND
-                        `car`.`price` < '" . $_SESSION['criteriaPrice'] . "'";
+                        `car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_SESSION['criteriaModel'] . "') AND
+                        `car`.`price` <= '" . $_SESSION['criteriaPrice'] . "'";
 
     }else if($brand_umpty === true && $model_umpty === false && $mileage_umpty === false && $price_umpty === false){
 
-        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "') AND
-                        `car`.`mileage` < '" . $_SESSION['criteriaMileage'] . "' AND
-                        `car`.`price` < '" . $_SESSION['criteriaPrice'] . "'";
+        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_SESSION['criteriaModel'] . "') AND
+                        `car`.`mileage` <= '" . $_SESSION['criteriaMileage'] . "' AND
+                        `car`.`price` <= '" . $_SESSION['criteriaPrice'] . "'";
 
     }else if($brand_umpty === true && $model_umpty === true && $mileage_umpty === false && $price_umpty === false){
 
-        $whereClause = "`car`.`mileage` < '" . $_SESSION['criteriaMileage'] . "' AND
-                        `car`.`price` < '" . $_SESSION['criteriaPrice'] . "'";
+        $whereClause = "`car`.`mileage` <= '" . $_SESSION['criteriaMileage'] . "' AND
+                        `car`.`price` <= '" . $_SESSION['criteriaPrice'] . "'";
 
     }else if($brand_umpty === true && $model_umpty === true && $mileage_umpty === true && $price_umpty === false){
 
-        $whereClause = "`car`.`price` < '" . $_SESSION['criteriaPrice'] . "'";
+        $whereClause = "`car`.`price` <= '" . $_SESSION['criteriaPrice'] . "'";
 
     }else if($brand_umpty === false && $model_umpty === true && $mileage_umpty === false && $price_umpty === true){
 
         $whereClause = "`car`.`id_brand` = (SELECT `brand`.`id_brand` FROM `brand` WHERE `brand`.`name`='" . $_SESSION['criteriaBrand'] . "') AND
-                        `car`.`mileage` < '" . $_SESSION['criteriaMileage'] . "'";
+                        `car`.`mileage` <= '" . $_SESSION['criteriaMileage'] . "'";
 
     }else if($brand_umpty === true && $model_umpty === false && $mileage_umpty === false && $price_umpty === true){
 
-        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "') AND
-                        `car`.`mileage` < '" . $_SESSION['criteriaMileage'] . "'";
+        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_SESSION['criteriaModel'] . "') AND
+                        `car`.`mileage` <= '" . $_SESSION['criteriaMileage'] . "'";
 
     }else if($brand_umpty === true && $model_umpty === false && $mileage_umpty === true && $price_umpty === false){
 
-        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "') AND
-                        `car`.`price` < '" . $_SESSION['criteriaPrice'] . "'";
+        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" .  $_SESSION['criteriaModel'] . "') AND
+                        `car`.`price` <= '" . $_SESSION['criteriaPrice'] . "'";
 
     }else if($brand_umpty === true && $model_umpty === false && $mileage_umpty === true && $price_umpty === false){
 
-        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "')";
+        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_SESSION['criteriaModel'] . "')";
 
     }else if($brand_umpty === true && $model_umpty === true && $mileage_umpty === false && $price_umpty === true){
 
-        $whereClause = "`car`.`mileage` < '" . $_SESSION['criteriaMileage'] . "' ";
+        $whereClause = "`car`.`mileage` <= '" . $_SESSION['criteriaMileage'] . "' ";
 
     }else if($brand_umpty === true && $model_umpty === false && $mileage_umpty === true && $price_umpty === true){
 
-        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_POST['select_car_model']. "')";
+        $whereClause = "`car`.`id_model` = (SELECT `model`.`id_model` FROM `model` WHERE `model`.`name`='" . $_SESSION['criteriaModel'] . "')";
 
     }
     
@@ -171,7 +167,7 @@
     // Executer la requete SELECT pour rechercher les contacts en fonction de la clause WHERE
     if($_SESSION['errorFormCar']===false && $MyCar->getNewCar() === false ){
         
-        require_once('../Controller/page.controller.php');
+        include_once('../controller/page.controller.php');
         $Cars = $MyCar->get($whereClause, 'price', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
         
     }

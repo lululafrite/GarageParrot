@@ -4,6 +4,8 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
+include_once('../controller/ConfigConnGP.php');
+
 	class Model
 	{
 
@@ -38,23 +40,20 @@ use function PHPSTORM_META\type;
 		//-----------------------------------------------------------------------
 
 		private $theModel;
-		public function getmodel($îdModel)
+		public function getmodel($idModel)
 		{
-			include('../Controller/ConfigConnGP.php');
-
-            //$_SESSION['timeZone']="Europe/Paris";
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`model`.`id_model`,
 										`model`.`name`
 
 									FROM `model`
 									
-									WHERE `model`.`id_model`=$îdmodel
+									WHERE `model`.`id_model`=$idModel
 								");
 
 				/*while ($this->theContact[] = $sql->fetch());*/
@@ -66,7 +65,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -74,11 +73,12 @@ use function PHPSTORM_META\type;
 		private $modelList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`model`.`id_model`,
 										`model`.`name`
 									FROM
@@ -96,20 +96,21 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function addModel()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try{
-				$bdd->exec("INSERT INTO `model`(`name`)
+				$conn->exec("INSERT INTO `model`(`name`)
 							VALUES('" . $this->name . "')");
 
-				$sql = $bdd->query("SELECT MAX(`id_model`) FROM `model`");
+				$sql = $conn->query("SELECT MAX(`id_model`) FROM `model`");
 				$id_model = $sql->fetch();
 				$this->id_model = intval($id_model['id_model']);
 
@@ -121,17 +122,19 @@ use function PHPSTORM_META\type;
 
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function updatemodel($idModel)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
+
 			try
 			{
-				$bdd->exec("UPDATE `model` SET `name` = '" . $this->name . "'
+				$conn->exec("UPDATE `model` SET `name` = '" . $this->name . "'
 							WHERE `id_model` = " . intval($idModel) . "
 							");
 				
@@ -142,18 +145,19 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function deleteModel($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM model WHERE id_model=' . $id);
+			    $conn->exec('DELETE FROM model WHERE id_model=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
 			catch (Exception $e)
@@ -161,7 +165,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
         //__Ajouter user?___________________________________________

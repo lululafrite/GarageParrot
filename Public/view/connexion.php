@@ -1,4 +1,4 @@
-<?php include('../Controller/connexion.controller.php'); ?>
+<?php include('../controller/connexion.controller.php'); ?>
 
 
 <div class="container">

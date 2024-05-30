@@ -4,6 +4,8 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
+include_once('../controller/ConfigConnGP.php');
+
 	class Comment
 	{
 
@@ -76,15 +78,12 @@ use function PHPSTORM_META\type;
 		private $theComment;
 		public function getComments($îdComment)
 		{
-			include('../Controller/ConfigConnGP.php');
-
-            //$_SESSION['timeZone']="Europe/Paris";
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`comment`.`id_comment`,
 										`comment`.`date_`,
 										`comment`.`pseudo`,
@@ -105,7 +104,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -113,11 +112,12 @@ use function PHPSTORM_META\type;
 		private $CommentList;
 		public function get($whereClause, $orderBy = 'date_', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 30)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`comment`.`id_comment`,
 										`comment`.`date_`,
 										`comment`.`pseudo`,
@@ -139,19 +139,20 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 		private $idComment;
 		public function addComment()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try{
 
 				// Requête préparée
-				$query = $bdd->prepare("SELECT `comment`.`id_comment`
+				$query = $conn->prepare("SELECT `comment`.`id_comment`
 										FROM  `comment`
 										WHERE `comment`.`date_` = :date_
 										AND `comment`.`pseudo` = :pseudo
@@ -173,7 +174,7 @@ use function PHPSTORM_META\type;
 				if (!$result) {
 
 
-					$query = $bdd->prepare("INSERT INTO `comment` (`date_`, `pseudo`, `rating`, `comment`) VALUES (:date_, :pseudo, :rating, :comment)");
+					$query = $conn->prepare("INSERT INTO `comment` (`date_`, `pseudo`, `rating`, `comment`) VALUES (:date_, :pseudo, :rating, :comment)");
 
 					// Liaison des valeurs
 					$query->bindParam(':date_', $this->date_);
@@ -184,8 +185,8 @@ use function PHPSTORM_META\type;
 					// Exécution de la requête
 					$query->execute();
 					
-					$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$sql = $bdd->query("SELECT MAX(`id_comment`) AS idMax FROM `comment`");
+					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					$sql = $conn->query("SELECT MAX(`id_comment`) AS idMax FROM `comment`");
 					$result = $sql->fetch(PDO::FETCH_ASSOC);
 					$this->id = $result['idMax'];
 
@@ -198,18 +199,20 @@ use function PHPSTORM_META\type;
 
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function updateComment($idComment)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
+
 			try
 			{
 				// Requête préparée
-				$query = $bdd->prepare("UPDATE `comment`
+				$query = $conn->prepare("UPDATE `comment`
 				SET `date_` = :date_,
 					`pseudo` = :pseudo,
 					`rating` = :rating,
@@ -233,18 +236,19 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 		
 		public function deleteComment($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try {
 				// Requête préparée pour la sélection
-				$query = $bdd->prepare("SELECT `comment`.`id_comment`
+				$query = $conn->prepare("SELECT `comment`.`id_comment`
 										FROM  `comment`
 										WHERE `comment`.`id_comment` = :id");
 
@@ -260,7 +264,7 @@ use function PHPSTORM_META\type;
 				// Vérification si l'ID existe
 				if ($id_comment !== false) {
 					// Requête préparée pour la suppression
-					$deleteQuery = $bdd->prepare('DELETE FROM comment WHERE id_comment = :id_comment');
+					$deleteQuery = $conn->prepare('DELETE FROM comment WHERE id_comment = :id_comment');
 
 					// Liaison de la valeur
 					$deleteQuery->bindParam(':id_comment', $id_comment);
@@ -277,7 +281,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requête : " . $e->getMessage();
 			}
 
-			$bdd = null;
+			$conn = null;
 		}
 
         //__Ajouter user?___________________________________________

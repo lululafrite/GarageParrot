@@ -1,5 +1,7 @@
 <?php
 
+include_once('../controller/ConfigConnGP.php');
+
 use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
@@ -218,14 +220,14 @@ use function PHPSTORM_META\type;
 		//-----------------------------------------------------------------------
 
 		private $theHome;
-		public function getHome($îdHome)
+		public function getHome($idHome)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->prepare("SELECT
 										`home`.`id_home`,
 										`home`.`titre1`,
 										`home`.`intro_chapter1`,
@@ -245,20 +247,23 @@ use function PHPSTORM_META\type;
 										`home`.`article2_image2`
 
 									FROM `home`
-									
-									WHERE `home`.`id_home`=$îdHome
+
+									WHERE `home`.`id_home`=:idHome
 								");
 
-				/*while ($this->theContact[] = $sql->fetch());*/
-				$this->theHome[] = $sql->fetch();
+				$sql->bindParam(':idHome', $idHome, PDO::PARAM_INT);
+				$sql->execute();
+
+				$this->theHome = $sql->fetch(PDO::FETCH_ASSOC);
 				return $this->theHome;
+
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -266,11 +271,12 @@ use function PHPSTORM_META\type;
 		private $homeList;
 		public function get($whereClause, $orderBy = 'id_home', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->prepare("SELECT
 										`home`.`id_home`,
 										`home`.`titre1`,
 										`home`.`intro_chapter1`,
@@ -293,98 +299,96 @@ use function PHPSTORM_META\type;
 
 									WHERE $whereClause
 									ORDER BY $orderBy $ascOrDesc
-									LIMIT $firstLine, $linePerPage
+									LIMIT :firstLine, :linePerPage
 								");
 
-				while ($this->homeList[] = $sql->fetch());
+				$sql->bindParam(':firstLine', $firstLine, PDO::PARAM_INT);
+				$sql->bindParam(':linePerPage', $linePerPage, PDO::PARAM_INT);
+				$sql->execute();
+
+				$this->homeList = $sql->fetchAll(PDO::FETCH_ASSOC);
 				return $this->homeList;
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
-			}
 
-			$bdd=null;
-		}
-
-		//-----------------------------------------------------------------------
-
-		public function updateHome($idHome)
-		{
-			include('../Controller/ConfigConnGP.php');
-			try{
-				$stmt = $bdd->prepare("UPDATE `home`
-				SET `titre1` = ?,
-					`intro_chapter1` = ?,
-					`intro_chapter2` = ?,
-					`titre2` = ?,
-					`article1_titre` = ?,
-					`article1_chapter1` = ?,
-					`article1_titre2` = ?,
-					`article1_chapter2` = ?,
-					`article2_titre` = ?,
-					`article2_chapter1` = ?,
-					`article2_titre2` = ?,
-					`article2_chapter2` = ?
-				WHERE `id_home` = ?");
-
-				$stmt->execute([$this->titre1,
-						$this->intro_chapter1,
-						$this->intro_chapter2,
-						$this->titre2,
-						$this->article1_titre,
-						$this->article1_chapter1,
-						$this->article1_titre2,
-						$this->article1_chapter2,
-						$this->article2_titre,
-						$this->article2_chapter1,
-						$this->article2_titre2,
-						$this->article2_chapter2,
-						$idHome]);
-							
-				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
 			catch (PDOException $e)
 			{
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
+		public function updateHome($idHome)
+		{
+			$conn = connectDB();
+			date_default_timezone_set($_SESSION['timeZone']);
+
+			try {
+				$sql = $conn->prepare("UPDATE `home`
+										SET `titre1` = :titre1,
+											`intro_chapter1` = :intro_chapter1,
+											`intro_chapter2` = :intro_chapter2,
+											`titre2` = :titre2,
+											`article1_titre` = :article1_titre,
+											`article1_chapter1` = :article1_chapter1,
+											`article1_titre2` = :article1_titre2,
+											`article1_chapter2` = :article1_chapter2,
+											`article2_titre` = :article2_titre,
+											`article2_chapter1` = :article2_chapter1,
+											`article2_titre2` = :article2_titre2,
+											`article2_chapter2` = :article2_chapter2
+										WHERE `id_home` = :id_home"
+									);
+
+				$sql->bindParam(':titre1', $this->titre1, PDO::PARAM_STR);
+				$sql->bindParam(':intro_chapter1', $this->intro_chapter1, PDO::PARAM_STR);
+				$sql->bindParam(':intro_chapter2', $this->intro_chapter2, PDO::PARAM_STR);
+				$sql->bindParam(':titre2', $this->titre2, PDO::PARAM_STR);
+				$sql->bindParam(':article1_titre', $this->article1_titre, PDO::PARAM_STR);
+				$sql->bindParam(':article1_chapter1', $this->article1_chapter1, PDO::PARAM_STR);
+				$sql->bindParam(':article1_titre2', $this->article1_titre2, PDO::PARAM_STR);
+				$sql->bindParam(':article1_chapter2', $this->article1_chapter2, PDO::PARAM_STR);
+				$sql->bindParam(':article2_titre', $this->article2_titre, PDO::PARAM_STR);
+				$sql->bindParam(':article2_chapter1', $this->article2_chapter1, PDO::PARAM_STR);
+				$sql->bindParam(':article2_titre2', $this->article2_titre2, PDO::PARAM_STR);
+				$sql->bindParam(':article2_chapter2', $this->article2_chapter2, PDO::PARAM_STR);
+				$sql->bindParam(':id_home', $idHome, PDO::PARAM_INT);
+
+				$sql->execute();
+								
+				echo '<script>alert("Les modifications sont enregistrées!");</script>';
+			} catch (PDOException $e) {
+				echo "Erreur de la requête : " . $e->getMessage();
+			}
+
+			$conn = null;
+		}
+		
+		//-----------------------------------------------------------------------
+
 		public function deleteHome($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM home WHERE id_home =' . $id);
+			    $sql = $conn->prepare('DELETE FROM home WHERE id_home = :id');
+				
+				$sql->bindParam(':id', $id, PDO::PARAM_INT);
+				$sql->execute();
+
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
-
-        //__Ajouter user?___________________________________________
-        
-        public function getAddHome()
-        {
-            if(is_null($_SESSION['addHome']))
-            {
-                $_SESSION['addHome']=false;
-            }
-            return $_SESSION['addHome'];
-        }
-        public function setAddHome($new)
-        {
-            $_SESSION['addHome']=$new;
-        }
 
 	}
 	

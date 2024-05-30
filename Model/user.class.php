@@ -4,6 +4,8 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
+include_once('../controller/ConfigConnGP.php');
+
 	class User
 	{
 
@@ -129,11 +131,12 @@ use function PHPSTORM_META\type;
 		private $listPseudo;
 		public function getPseudoUser()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $sql = $bdd->query("SELECT `pseudo` FROM `user` ORDER BY `pseudo` ASC");
+			    $sql = $conn->query("SELECT `pseudo` FROM `user` ORDER BY `pseudo` ASC");
 
 				while ($this->listPseudo[] = $sql->fetch());
 				return $this->listPseudo;
@@ -143,7 +146,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -151,15 +154,12 @@ use function PHPSTORM_META\type;
 		private $theUser;
 		public function getUser($îdUser)
 		{
-			include('../Controller/ConfigConnGP.php');
-
-            //$_SESSION['timeZone']="Europe/Paris";
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`user`.`id_user`,
 										`user`.`name`,
 										`user`.`surname`,
@@ -187,7 +187,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -195,11 +195,12 @@ use function PHPSTORM_META\type;
 		private $userList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`user`.`id_user`,
 										`user`.`name`,
 										`user`.`surname`,
@@ -224,17 +225,18 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function addUser()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try {
-					$bdd->exec("INSERT INTO `user`(`name`,`surname`,`pseudo`,`email`,`phone`,`password`,`id_type`)
+					$conn->exec("INSERT INTO `user`(`name`,`surname`,`pseudo`,`email`,`phone`,`password`,`id_type`)
 							VALUES('" . $this->name . "',
 									'" . $this->surname . "',
 									'" . $this->pseudo . "',
@@ -243,7 +245,7 @@ use function PHPSTORM_META\type;
 									'" . $this->password . "',
 									(SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "'))");
 
-				$sql = $bdd->query("SELECT `id_user` FROM `user` WHERE `email`='" . $this->email . "'");
+				$sql = $conn->query("SELECT `id_user` FROM `user` WHERE `email`='" . $this->email . "'");
 				$id_user = $sql->fetch();
 				$this->id_user = intval($id_user['id_user']);
 				return intval($id_user['id_user']);
@@ -254,17 +256,19 @@ use function PHPSTORM_META\type;
 
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function updateUser($idUser)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
+
 			try
 			{
-				$bdd->exec("UPDATE `user` SET
+				$conn->exec("UPDATE `user` SET
 								`name` = '" . $this->name . "',
 								`surname` = '" . $this->surname . "',
 								`pseudo` = '" . $this->pseudo . "',
@@ -284,18 +288,19 @@ use function PHPSTORM_META\type;
 
 			$this->setType('Administrator');
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function deleteUser($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM user WHERE id_user=' . $id);
+			    $conn->exec('DELETE FROM user WHERE id_user=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 				echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
 				echo '<script>window.location.href = "http://www.follaco.fr/index.php?page=user";</script>';
@@ -305,17 +310,18 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 		
 		private $userExist;
 		public function verifUser($email)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $sql = $bdd->query("SELECT COUNT(*) AS `number`
+			    $sql = $conn->query("SELECT COUNT(*) AS `number`
 									FROM
 										`user`
 									WHERE
@@ -330,7 +336,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
         //__Ajouter user?___________________________________________

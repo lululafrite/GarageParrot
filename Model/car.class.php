@@ -1,8 +1,6 @@
 <?php
 
-use Symfony\Component\Intl\Scripts;
-
-use function PHPSTORM_META\type;
+include_once('../controller/ConfigConnGP.php');
 
 	class Car
 	{
@@ -200,14 +198,12 @@ use function PHPSTORM_META\type;
 		private $theCar;
 		public function getCar($îdCar)
 		{
-			include('../Controller/ConfigConnGP.php');
-
-            //$_SESSION['timeZone']="Europe/Paris";
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`car`.`id_car`,
 										`brand`.`name` AS `brand`,
 										`model`.`name` AS `model`,
@@ -244,7 +240,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -252,11 +248,12 @@ use function PHPSTORM_META\type;
 		private $carList;
 		public function get($whereClause, $orderBy = 'price', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`car`.`id_car`,
 										`brand`.`name` AS `brand`,
 										`model`.`name` AS `model`,
@@ -294,17 +291,18 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function addCar()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try {
-					$stmt = $bdd->prepare("INSERT INTO `car` 
+					$stmt = $conn->prepare("INSERT INTO `car` 
 											(`id_brand`, `id_model`, `id_motorization`, `year`, `mileage`, `price`, `sold`, `description`, `image1`, `image2`, `image3`, `image4`, `image5`)
 											VALUES (
 													(SELECT `id_brand` FROM `brand` WHERE `name` = ?),
@@ -327,7 +325,7 @@ use function PHPSTORM_META\type;
 													$this->image4,
 													$this->image5]);
 
-				$sql = $bdd->query("SELECT MAX(`id_car`) FROM `car`");
+				$sql = $conn->query("SELECT MAX(`id_car`) FROM `car`");
 				$id_car_ = $sql->fetch();
 				$this->id_car = intval($id_car_[0]);
 				return intval($id_car_[0]);
@@ -338,20 +336,21 @@ use function PHPSTORM_META\type;
 
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function updateCar($idCar)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
 				$idCar = intval($idCar);
 				
-			    $stmt = $bdd->prepare("UPDATE `car`
+			    $stmt = $conn->prepare("UPDATE `car`
 										SET 
 												`id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name` = ?),
 												`id_model` = (SELECT `id_model` FROM `model` WHERE `name` = ?),
@@ -392,18 +391,19 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function deleteCar($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM car WHERE id_car=' . $id);
+			    $conn->exec('DELETE FROM car WHERE id_car=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
 			catch (Exception $e)
@@ -411,18 +411,19 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 		private $carExist;
 		public function verifCar($brand, $model, $motorization, $year, $mileage, $price)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $sql = $bdd->query("SELECT COUNT(*) AS `number`
+			    $sql = $conn->query("SELECT COUNT(*) AS `number`
 									FROM
 										`car`
 									WHERE
@@ -444,7 +445,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
         //__Ajouter car?___________________________________________

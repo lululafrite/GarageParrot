@@ -1,5 +1,5 @@
 <?php
-    include('../Controller/userEdit.controller.php');
+    include('../controller/userEdit.controller.php');
 ?>
 
 <section class="container">
@@ -273,4 +273,4 @@
 
 </section>
 
-<script src="../JS/user_edit.js"></script>
+<script src="../js/user_edit.js"></script>

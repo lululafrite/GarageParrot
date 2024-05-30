@@ -2,7 +2,7 @@
 
     if (isset($_POST['envoyer'])) {
         
-        include('../Model/connexion.class.php');
+        include('../model/connexion.class.php');
         $MyUserConnect = new userConnect();
 
         if ($_POST["email"] != null && $_POST["password"] != null ) {

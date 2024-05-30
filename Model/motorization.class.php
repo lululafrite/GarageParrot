@@ -4,6 +4,8 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
+include_once('../controller/ConfigConnGP.php');
+
 	class Motorization
 	{
 
@@ -38,23 +40,20 @@ use function PHPSTORM_META\type;
 		//-----------------------------------------------------------------------
 
 		private $theMotorization;
-		public function getmotorization($îdMotorization)
+		public function getmotorization($idMotorization)
 		{
-			include('../Controller/ConfigConnGP.php');
-
-            //$_SESSION['timeZone']="Europe/Paris";
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`motorization`.`id_motorization`,
 										`motorization`.`name`
 
 									FROM `motorization`
 									
-									WHERE `motorization`.`id_motorization`=$îdmotorization
+									WHERE `motorization`.`id_motorization`=$idMotorization
 								");
 
 				/*while ($this->theContact[] = $sql->fetch());*/
@@ -66,7 +65,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -74,11 +73,12 @@ use function PHPSTORM_META\type;
 		private $motorizationList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`motorization`.`id_motorization`,
 										`motorization`.`name`
 									FROM
@@ -96,20 +96,21 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function addMotorization()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try{
-				$bdd->exec("INSERT INTO `motorization`(`name`)
+				$conn->exec("INSERT INTO `motorization`(`name`)
 							VALUES('" . $this->name . "')");
 
-				$sql = $bdd->query("SELECT MAX(`id_motorization`) FROM `motorization`");
+				$sql = $conn->query("SELECT MAX(`id_motorization`) FROM `motorization`");
 				$id_motorization = $sql->fetch();
 				$this->id_motorization = intval($id_motorization['id_motorization']);
 
@@ -121,17 +122,19 @@ use function PHPSTORM_META\type;
 
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function updatemotorization($idMotorization)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
+
 			try
 			{
-				$bdd->exec("UPDATE `motorization` SET `name` = '" . $this->name . "'
+				$conn->exec("UPDATE `motorization` SET `name` = '" . $this->name . "'
 							WHERE `id_motorization` = " . intval($idMotorization) . "
 							");
 				
@@ -142,18 +145,19 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function deleteMotorization($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM motorization WHERE id_motorization=' . $id);
+			    $conn->exec('DELETE FROM motorization WHERE id_motorization=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
 			catch (Exception $e)
@@ -161,7 +165,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
         //__Ajouter user?___________________________________________

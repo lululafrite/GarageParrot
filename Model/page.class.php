@@ -1,5 +1,7 @@
 <?php
 
+include_once('../controller/ConfigConnGP.php');
+
 	class Page
     {
         //*******************************************************************
@@ -104,14 +106,15 @@
 		}
 		public function setCountLine($theTable)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
                 if(empty($_SESSION['whereClause'])){
-                    $this->countLine = $bdd->query('SELECT count(*) FROM ' . $theTable)->fetchColumn();
+                    $this->countLine = $conn->query('SELECT count(*) FROM ' . $theTable)->fetchColumn();
                 }else{
-                    $this->countLine = $bdd->query("SELECT count(*) FROM `" . $theTable . "` WHERE " . $_SESSION['whereClause'])->fetchColumn();
+                    $this->countLine = $conn->query("SELECT count(*) FROM `" . $theTable . "` WHERE " . $_SESSION['whereClause'])->fetchColumn();
                 }
 			}
 			catch (Exception $e)
@@ -119,7 +122,7 @@
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
     }
 

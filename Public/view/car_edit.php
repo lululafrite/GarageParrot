@@ -1,5 +1,5 @@
 <?php
-    include('../Controller/carEdit.controller.php');
+    include('../controller/carEdit.controller.php');
 ?>
 
 <section class="container">
@@ -480,4 +480,4 @@
 
 </section>
 
-<script src="../JS/car_edit.js"></script>
+<script src="../js/car_edit.js"></script>

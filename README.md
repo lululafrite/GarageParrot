@@ -26,8 +26,8 @@ POUR TRAVAILLER EN LOCAL
     - Concervez votre utilisateur 'root' sans mot de passe avec tous les privilèges
     - Créer le schéma nommé 'garage_parrot'
     - Importer le fichier garage_parrot.sql dans votre schéma
-6) Agir sur le fichier Public/index.php
-    Tout en haut du fichier Public/index.php :
+6) Agir sur le fichier public/index.php
+    Tout en haut du fichier public/index.php :
     - Décommentez error_reporting(E_ALL);
     - Décommentez ini_set('display_errors', 'On');
     - Décommentez xdebug_break();
@@ -39,8 +39,8 @@ Il existe un administrateur (Administrator) par défaut dans la BD | ID : admin@
 
 
 POUR TRAVAILLER ONLINE
-1) Agir sur le fichier Public/index.php
-    Tout en haut du fichier Public/index.php :
+1) Agir sur le fichier public/index.php
+    Tout en haut du fichier public/index.php :
     - Commentez //error_reporting(E_ALL);
     - Commentez //ini_set('display_errors', 'On');
     - Commentez //xdebug_break();

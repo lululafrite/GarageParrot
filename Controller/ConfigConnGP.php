@@ -1,5 +1,7 @@
 <?php
 
+function connectDB(){
+
 	if($_SESSION['local']===true){
 		$DB_HOST = 'localhost';
 		$DB_NAME = 'garage_parrot';
@@ -19,6 +21,7 @@
 	try
 	{
 		$bdd = new PDO("mysql:host=$DB_HOST; dbname=$DB_NAME;charset=utf8mb4;port=$BD_PORT", $DB_USER, $DB_PASS);
+		return $bdd;
 		//$bdd->exec("set names utf8");
 	}
 	catch (PDOException $e)
@@ -26,6 +29,7 @@
 		echo "Erreur de connexion à la base de données :" . $e->getMessage() . "<br/>";
 		die();
 	}
-		
+	
+}
 
 ?>

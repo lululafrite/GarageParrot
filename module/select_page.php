@@ -1,7 +1,7 @@
 <section class="d-flex flex-column flex-sm-row justify-content-center align-items-center p-3 mx-md-5 mx-2  bgDark border border-secondary border-3 rounded-4">
     <form class="d-flex align-items-center" id="form__nbOfLine" method="post" action=<?php $pageActive ?>>
         <label class="form-label text-light me-3" for="nbOfLine">Réf.<span style="color:#343a40">_</span>par<span style="color:#343a40">_</span>page<span style="color:#343a40">_</span>:</label>
-        <select class="form-select me-0 me-md-3" id="nbOfLine" name="nbOfLine" onchange="this.form.submit()">
+        <select class="form-select me-0 me-md-3" id="nbOfLine" name="nbOfLine" onchange="this.form.submit()" style="font-size: 1.6rem;">
             <option value="<?php
                 if(isset($_POST['nbOfLine']) && !isset($_POST['nbOfLine'])){
                     $value = $_POST['nbOfLine'];

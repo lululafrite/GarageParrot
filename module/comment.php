@@ -1,5 +1,5 @@
 <?php
-    include('../Controller/comment.controller.php');
+    include('../controller/comment.controller.php');
 ?>
 
 <div class="col-12 bg-dark d-flex justify-content-center text-light mx-auto mb-3 rounded-3">

@@ -4,6 +4,8 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
+include_once('../controller/ConfigConnGP.php');
+
 	class Type
 	{
 
@@ -40,13 +42,12 @@ use function PHPSTORM_META\type;
 		private $theType;
 		public function getType($îdType)
 		{
-			include('../Controller/ConfigConnGP.php');
-
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`user_type`.`id_type`,
 										`user_type`.`type`
 
@@ -63,7 +64,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -71,11 +72,12 @@ use function PHPSTORM_META\type;
 		private $userTypeList;
 		public function get($whereClause, $orderBy = 'type', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`user_type`.`id_type`,
 										`user_type`.`type`
 									FROM
@@ -93,20 +95,21 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function addUserType()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try{
-				$bdd->exec("INSERT INTO `user_type`(`type`)
+				$conn->exec("INSERT INTO `user_type`(`type`)
 							VALUES('" . $this->type . "')");
 
-				$sql = $bdd->query("SELECT MAX(`id_type`) FROM `user_type`");
+				$sql = $conn->query("SELECT MAX(`id_type`) FROM `user_type`");
 				$id_type = $sql->fetch();
 				$this->id_type = intval($id_type['id_type']);
 
@@ -118,17 +121,19 @@ use function PHPSTORM_META\type;
 
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function updateUserType($idType)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
+
 			try
 			{
-				$bdd->exec("UPDATE `user_type` SET `name` = '" . $this->type . "'
+				$conn->exec("UPDATE `user_type` SET `name` = '" . $this->type . "'
 							WHERE `id_type` = " . intval($idType) . "
 							");
 				
@@ -139,18 +144,19 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function deleteUserType($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM user_type WHERE id_type=' . $id);
+			    $conn->exec('DELETE FROM user_type WHERE id_type=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
 			catch (Exception $e)
@@ -158,7 +164,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
         //__Ajouter user?___________________________________________

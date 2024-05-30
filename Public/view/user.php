@@ -1,6 +1,6 @@
 <?php
-    include('../Controller/user.controller.php');
-    include('../Elements/_05_select_page.php');
+    include('../controller/user.controller.php');
+    include('../module/select_page.php');
 ?>
 
 <section class="m-5 d-flex flex-wrap justify-content-around">
@@ -56,4 +56,4 @@
 
 </section>
 
-<?php include('../Elements/_05_select_page.php');?>
+<?php include('../module/select_page.php');?>

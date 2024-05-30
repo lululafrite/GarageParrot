@@ -1,29 +1,10 @@
 <?php
 
 //***********************************************************************************************
-// traitement droits utilisateur : renvoi vers la page erro_page.php si l'utilisateur et un Guest
-//***********************************************************************************************
-
-    if ($_SESSION['userConnected'] != "Administrator"){
-
-        if($_SESSION['local']===true){
-
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
-        
-        }
-        else{
-
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
-        
-        }
-        exit();
-    }
-
-//***********************************************************************************************
 // Daclaration de variables
 //***********************************************************************************************
 
-    include_once('../Model/user.class.php');
+    include_once('../model/user.class.php');
     
     $_SESSION['theTable'] = 'user';
 
@@ -133,7 +114,7 @@
         }
         
         //Traiment de la BD pour récupérer les données destinées à l'input liste type
-        include('../Model/type.class.php');
+        include('../model/type.class.php');
         $Types = new Type();
         $MyType = $Types->get(1,'type', 'ASC', 0, 50);
         unset($Types);

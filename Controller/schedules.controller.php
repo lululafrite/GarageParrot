@@ -1,5 +1,5 @@
 <?php
-    include('../Model/schedules.class.php');
+    include('../model/schedules.class.php');
     $scheldules_ = new Schedules();
     if(isset($_POST['bt_schedules'])){
         

@@ -4,6 +4,8 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
+include_once('../controller/ConfigConnGP.php');
+
 	class Schedules
 	{
 
@@ -196,12 +198,12 @@ use function PHPSTORM_META\type;
 		private $theSchedules;
 		public function getSchedules($îdSchedules)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`schedules`.`id_schedules`,
 										`schedules`.`lundiMatin`,
 										`schedules`.`lundiAM`,
@@ -232,7 +234,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -240,11 +242,12 @@ use function PHPSTORM_META\type;
 		private $brandList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+			    $sql = $conn->query("SELECT
 										`schedules`.`id_schedules`,
 										`schedules`.`lundiMatin`,
 										`schedules`.`lundiAM`,
@@ -276,17 +279,18 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function addSchedules()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try{
-				$bdd->exec("INSERT INTO `schedules`(`id_schedules`,`lundiMatin`,`lundiAM`,`mardiMatin`,`mardiAM`,
+				$conn->exec("INSERT INTO `schedules`(`id_schedules`,`lundiMatin`,`lundiAM`,`mardiMatin`,`mardiAM`,
 													`mercrediMatin`,`mercrediAM`,`jeudiMatin`,`jeudiAM`,
 													`vendrediMatin`,`vendrediAM`, `samediMatin`,`samediAM`,
 													`dimancheMatin`,`dimancheAM`)
@@ -308,7 +312,7 @@ use function PHPSTORM_META\type;
 								)
 							");
 
-				$sql = $bdd->query("SELECT MAX(`id_schedules`) FROM `schedules`");
+				$sql = $conn->query("SELECT MAX(`id_schedules`) FROM `schedules`");
 				$id_schedule = $sql->fetch();
 				$this->id_schedules = intval($id_schedule['id_schedules']);
 
@@ -320,17 +324,19 @@ use function PHPSTORM_META\type;
 
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function updateSchedules()
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
+
 			try
 			{
-				$bdd->exec("UPDATE `schedules`
+				$conn->exec("UPDATE `schedules`
 							SET `lundiMatin` =  '" . $this->lundiMatin . "',
 								`lundiAM` =  '" . $this->lundiAM . "',
 								`mardiMatin` =  '" . $this->mardiMatin . "',
@@ -356,18 +362,19 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		public function deleteSchedules($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			$conn = connectDB();
+            date_default_timezone_set($_SESSION['timeZone']);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM schedules WHERE id_schedules=' . $id);
+			    $conn->exec('DELETE FROM schedules WHERE id_schedules=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
 			catch (Exception $e)
@@ -375,7 +382,7 @@ use function PHPSTORM_META\type;
 				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$bdd=null;
+			$conn=null;
 		}
 
         //__Ajouter user?___________________________________________
