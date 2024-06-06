@@ -6,6 +6,9 @@
     
     if (!isset($_SESSION['userConnected'])) {
         
+        // Token JWT
+        $_SESSION['SECRET_KEY'] = "93082d283829273c47737cd555841ce33af04a29c791c2424df8e0f74a6d3afb";
+        
         $_SESSION['userConnected'] = 'Guest';
         $_SESSION['pseudoUser'] = 'Guest';
         $_SESSION['connexion'] = false;

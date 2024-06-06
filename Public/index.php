@@ -13,7 +13,7 @@
     <?php include_once '../module/header.php'; ?>
     <?php include_once '../module/main.php'; ?>
     <?php include_once '../module/footer.php'; ?>
-    <?php include_once '../module/libraryJS.php'; ?>
+    <?php include_once 'js/libraryJS.php'; ?>
 
 </body>
 

@@ -18,16 +18,17 @@
         $_SESSION['ligneParPage'] = 3;
         $_SESSION['nbOfPage'] = 1;
 
-        $_SESSION['criteriaBrand'] = isset($_POST['select_car_brand']) ? escapeInput($_POST['select_car_brand']) : '';
+        $_SESSION['criteriaBrand'] = isset($_POST['select_car_brand']) ? filterInput('select_car_brand') : '';
         unset($_POST['select_car_brand']);
         
-        $_SESSION['criteriaModel'] = isset($_POST['select_car_model']) ? escapeInput($_POST['select_car_model']) : '';
+        $_SESSION['criteriaModel'] = isset($_POST['select_car_model']) ? filterInput('select_car_model') : '';
         unset($_POST['select_car_model']);
         
-        $_SESSION['criteriaMileage'] = isset($_POST['select_car_mileage']) ? escapeInput($_POST['select_car_mileage']) : '';
+        $_SESSION['criteriaMileage'] = isset($_POST['select_car_mileage']) ? filterInput('select_car_mileage') : '';
+        
         unset($_POST['select_car_mileage']);
         
-        $_SESSION['criteriaPrice'] = isset($_POST['select_car_price']) ? escapeInput($_POST['select_car_price']) : '';
+        $_SESSION['criteriaPrice'] = isset($_POST['select_car_price']) ? filterInput('select_car_price') : '';
         unset($_POST['select_car_price']);
 
     }else if(isset($_POST['nbOfPage'])){

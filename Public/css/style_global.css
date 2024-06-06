@@ -116,12 +116,12 @@ input, textarea{
 
 .rating i {
   font-size: 24px;
-  color: #d7d7d7;/* #ffd700;*/ /* Couleur jaune pour les étoiles */
+  color: #d7d7d7;
   transition: color 0.3s ease;
   cursor: pointer;
 }
 
 .rating i:hover,
 .rating i.active {
-  color: #ffcc00; /* Couleur jaune clair au survol */
+  color: #ffcc00;
 }

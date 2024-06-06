@@ -2,19 +2,8 @@
 
 include_once('../controller/ConfigConnGP.php');
 
-use Symfony\Component\Intl\Scripts;
-
-use function PHPSTORM_META\type;
-
 	class Home
 	{
-
-		function __construct()
-		{
-		}
-
-		//-----------------------------------------------------------------------
-
 		private $id_home;
 		public function getId()
 		{

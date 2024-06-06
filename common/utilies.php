@@ -12,11 +12,13 @@
             
         $value_Is = false;
 
-        if(isset($_POST[$varCsrf]) && isset($_SESSION[$varCsrf]) && $_POST[$varCsrf] === $_SESSION[$varCsrf]){
+        if(isset($_POST[$varCsrf]) && $_POST[$varCsrf] === $_SESSION[$varCsrf]){
+            
             $value_Is = true;
+
         }
 
-        if(empty($_SESSION[$varCsrf]) || (!$_SESSION['newUser'] && !$_SESSION['bt_userEdit_save'])){
+        if(empty($_SESSION[$varCsrf])){
 
             $csrf = bin2hex(random_bytes(32));
             $_SESSION[$varCsrf] = $csrf;
@@ -146,6 +148,36 @@
         else{
             
             echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user";</script>';
+        
+        }
+        exit();
+    }
+
+    // Route to carEdit page
+    function routeToCarEditPage(){
+        if($_SESSION['local']){
+
+            echo '<script>window.location.href = "http://garageparrot/index.php?page=carEdit";</script>';
+        
+        }
+        else{
+            
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=carEdit";</script>';
+        
+        }
+        exit();
+    }
+
+    // Route to car page
+    function routeToCarPage(){
+        if($_SESSION['local']){
+
+            echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
+        
+        }
+        else{
+            
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=car";</script>';
         
         }
         exit();

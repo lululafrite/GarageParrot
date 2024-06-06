@@ -3,10 +3,15 @@
 
 <form action="" method="post">
 
+	<!-- input hidden csrf -->
+	<input type="hidden" name="csrfHome" value="<?php echo $_SESSION['csrfHome'];?>">
+
 	<div class="container pt-3">
+
 		<div class="col-12 bg-dark d-flex justify-content-center text-light mx-auto mb-3 rounded-3">
 
 			<h2 class="px-0 py-3 m-0 w-100">
+
 				<input
 					class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'text-light bg-transparent';} ?> "
 					type="text"
@@ -15,16 +20,21 @@
 					<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';}?>
 					value="<?php echo escapeInput($Home[0]['titre1']); ?>"
 				>
+
 			</h2>
 
 		</div>
+
 	</div>
 
 	<div class="container">
+
 		<div class="row">
+
 			<div class="col-12">
 
 				<p>
+
 					<textarea
 						class="text-left <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>"
 						name="txt_intro_chapter1"
@@ -32,14 +42,14 @@
 						rows="4"
 						<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
 						style="text-align: justify;"
-					>
-<?php echo escapeInput($Home[0]['intro_chapter1']); ?>
-					</textarea>
+					><?php echo escapeInput($Home[0]['intro_chapter1']); ?></textarea>
+
 				</p>
 
 				<hr>
 
 				<p>
+
 					<textarea
 						class="text-left <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>" 
 						name="txt_intro_chapter2"
@@ -47,13 +57,14 @@
 						rows="4"
 						<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
 						style="text-align: justify;"
-					>
-<?php echo escapeInput($Home[0]['intro_chapter2']); ?>
-					</textarea>
+					><?php echo escapeInput($Home[0]['intro_chapter2']); ?></textarea>
+
 				</p>
 
 			</div>
+
 		</div>
+
 	</div>
 	
 	<?php
@@ -74,9 +85,11 @@
 	?>
 
 	<div class="container pt-3">
+
 		<div class="col-12 bg-dark d-flex justify-content-center text-light mx-auto mb-3 rounded-3">
 
 			<h2 class="px-0 py-3 m-0 w-100">
+
 				<input
 					class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'text-light bg-transparent';} ?>" 
 					type="text"
@@ -85,12 +98,15 @@
 					value="<?php echo escapeInput($Home[0]['titre2']); ?>"
 					<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
 				>
+
 			</h2>
 
 		</div>
+
 	</div>
 
 	<div class="container pb-0 pb-lg-3">
+
 		<div class="row">
 
 			<div class="d-flex flex-column flex-lg-row justify-content-center p-0 p-lg-5 m-0">
@@ -98,6 +114,7 @@
 				<div class="col-12 col-lg-8 d-flex flex-column justify-content-center bg-light m-0 pe-0 pe-lg-5">
 
 					<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>">
+
 						<input
 							class="text-center fw-bold"
 							id="txt_article1_titre"
@@ -106,6 +123,7 @@
 							value="<?php echo escapeInput($Home[0]['article1_titre']); ?>"
 							<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
 						>
+
 					</h2>
 
 					<textarea
@@ -114,9 +132,8 @@
 						id="txt_article1_chapter1"
 						rows="6"
 						<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
-					èf>
-<?php echo escapeInput($Home[0]['article1_chapter1']); ?>
-					</textarea>
+						style="text-align: justify;"
+					><?php echo escapeInput($Home[0]['article1_chapter1']); ?></textarea>
 
 				</div>
 
@@ -129,11 +146,15 @@
 			</div>
 
 			<hr>
+
 		</div>
+
 	</div>
 
 	<div class="container pb-0 pb-lg-3">
+
 		<div class="row">
+
 			<div class="d-flex flex-column flex-lg-row justify-content-center p-0 p-lg-5 m-0">
 
 				<img
@@ -145,6 +166,7 @@
 				<div class="col-12 col-lg-8 d-flex flex-column justify-content-center bg-light m-0 ps-0 ps-lg-5">
 
 					<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>">
+
 						<input
 							class="text-center fw-bold"
 							id="txt_article1_titre2"
@@ -153,6 +175,7 @@
 							<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
 							value="<?php echo escapeInput($Home[0]['article1_titre2']); ?>"
 						>
+
 					</h2>
 
 					<textarea
@@ -161,18 +184,21 @@
 						id="txt_article1_chapter2"
 						rows="6"
 						<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
-					>
-<?php echo escapeInput($Home[0]['article1_chapter2']); ?>
-					</textarea>
+						style="text-align: justify;"
+					><?php echo escapeInput($Home[0]['article1_chapter2']); ?></textarea>
 
 				</div>
 
 			</div>
+
 			<hr>
+
 		</div>
+
 	</div>
 
 	<div class="container pb-0 pb-lg-3">
+
 		<div class="row">
 
 			<div class="d-flex flex-column flex-lg-row justify-content-center p-0 p-lg-5 m-0">
@@ -180,6 +206,7 @@
 				<div class="col-12 col-lg-8 d-flex flex-column justify-content-center bg-light m-0 pe-0 pe-lg-5">
 
 					<h2 class="text-center pt-3 pt-lg-0 <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>">
+
 						<input
 							class="text-center fw-bold"
 							id="txt_article2_titre"
@@ -188,6 +215,7 @@
 							<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
 							value="<?php echo escapeInput($Home[0]['article2_titre']); ?>"
 						>
+
 					</h2>
 
 					<textarea
@@ -196,9 +224,8 @@
 						id="txt_article2_chapter1"
 						rows="6"
 						<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
-					>
-<?php echo escapeInput($Home[0]['article2_chapter1']); ?>
-					</textarea>
+						style="text-align: justify;"
+					><?php echo escapeInput($Home[0]['article2_chapter1']); ?></textarea>
 
 				</div>
 
@@ -211,10 +238,13 @@
 			</div>
 
 			<hr>
+
 		</div>
+
 	</div>
 
 	<div class="container pb-0 pb-lg-3">
+
 		<div class="row">
 
 			<div class="d-flex flex-column flex-lg-row justify-content-center p-0 p-lg-5 ps-lg-0 m-0">
@@ -228,6 +258,7 @@
 				<div class="col-12 col-lg-8 d-flex flex-column justify-content-center bg-light m-0 ps-0 ps-lg-5">
 					
 					<h2 class="text-center <?php if($_SESSION['userConnected'] != 'Administrator'){echo 'bg-transparent';} ?>">
+
 						<input
 							class="text-center fw-bold"
 							id="txt_article2_titre2"
@@ -236,6 +267,7 @@
 							<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
 							value="<?php echo escapeInput($Home[0]['article2_titre2']); ?>"
 						>
+
 					</h2>
 
 					<textarea
@@ -244,19 +276,21 @@
 						id="txt_article2_chapter2"
 						rows="6"
 						<?php if($_SESSION['userConnected'] != 'Administrator'){echo 'readonly disabled';} ?>
-					>
-<?php echo escapeInput($Home[0]['article2_chapter2']); ?>
-					</textarea>
+						style="text-align: justify;"
+					><?php echo escapeInput($Home[0]['article2_chapter2']); ?></textarea>
 
 				</div>
 
 			</div>
 
 		</div>
+
 	</div>
+
 	<?php
 	if($_SESSION['userConnected'] === 'Administrator'){
 	?>
+
 		<div class="container text-center">
 
 			<button
@@ -268,6 +302,7 @@
 			</button>
 
 		</div>
+
 	<?php
 	}
 	?>

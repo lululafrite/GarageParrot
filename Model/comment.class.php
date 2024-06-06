@@ -1,19 +1,9 @@
 <?php
 
-use Symfony\Component\Intl\Scripts;
-
-use function PHPSTORM_META\type;
-
 include_once('../controller/ConfigConnGP.php');
 
 	class Comment
 	{
-
-		function __construct()
-		{
-		}
-
-		//-----------------------------------------------------------------------
 
 		private $id;
 		public function getId()
@@ -99,9 +89,10 @@ include_once('../controller/ConfigConnGP.php');
 				$this->theComment[] = $sql->fetch();
 				return $this->theComment;
 			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+			catch (Exception $e){
+				
+				echo '<script>alert("' . $e->getMessage() . '");</script>';
+
 			}
 
 			$conn=null;
@@ -134,25 +125,25 @@ include_once('../controller/ConfigConnGP.php');
 				while ($this->CommentList[] = $sql->fetch());
 				return $this->CommentList;
 			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+			catch (Exception $e){
+				
+				echo '<script>alert("' . $e->getMessage() . '");</script>';
+
 			}
 
 			$conn=null;
 		}
 
 		//-----------------------------------------------------------------------
-		private $idComment;
+		
 		public function addComment()
 		{
 			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
 
 			try{
-
 				// Requête préparée
-				$query = $conn->prepare("SELECT `comment`.`id_comment`
+				$sql = $conn->prepare("SELECT `comment`.`id_comment`
 										FROM  `comment`
 										WHERE `comment`.`date_` = :date_
 										AND `comment`.`pseudo` = :pseudo
@@ -160,30 +151,30 @@ include_once('../controller/ConfigConnGP.php');
 										AND `comment`.`comment` = :comment");
 
 				// Liaison des valeurs
-				$query->bindParam(':date_', $this->date_);
-				$query->bindParam(':pseudo', $this->pseudo);
-				$query->bindParam(':rating', $this->rating);
-				$query->bindParam(':comment', $this->comment);
+				$sql->bindParam(':date_', $this->date_);
+				$sql->bindParam(':pseudo', $this->pseudo);
+				$sql->bindParam(':rating', $this->rating);
+				$sql->bindParam(':comment', $this->comment);
 
 				// Exécution de la requête
-				$query->execute();
+				$sql->execute();
 
 				// Récupération du résultat
-				$result = $query->fetch(PDO::FETCH_ASSOC);
+				$result = $sql->fetch(PDO::FETCH_ASSOC);
 
 				if (!$result) {
 
-
-					$query = $conn->prepare("INSERT INTO `comment` (`date_`, `pseudo`, `rating`, `comment`) VALUES (:date_, :pseudo, :rating, :comment)");
-
+					$sql = $conn->prepare("INSERT INTO `comment` (`date_`, `pseudo`, `rating`, `comment`)
+											VALUES (:date_, :pseudo, :rating, :comment)");
+											
 					// Liaison des valeurs
-					$query->bindParam(':date_', $this->date_);
-					$query->bindParam(':pseudo', $this->pseudo);
-					$query->bindParam(':rating', $this->rating);
-					$query->bindParam(':comment', $this->comment);
+					$sql->bindParam(':date_', $this->date_);
+					$sql->bindParam(':pseudo', $this->pseudo);
+					$sql->bindParam(':rating', $this->rating);
+					$sql->bindParam(':comment', $this->comment);
 
 					// Exécution de la requête
-					$query->execute();
+					$sql->execute();
 					
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$sql = $conn->query("SELECT MAX(`id_comment`) AS idMax FROM `comment`");
@@ -195,7 +186,7 @@ include_once('../controller/ConfigConnGP.php');
 
 			}catch (Exception $e){
 				
-				echo "Erreur de la requête : " . $e->getMessage();
+				echo '<script>alert("' . $e->getMessage() . '");</script>';
 
 			}
 
@@ -204,7 +195,7 @@ include_once('../controller/ConfigConnGP.php');
 
 		//-----------------------------------------------------------------------
 
-		public function updateComment($idComment)
+		public function updateComment($id)
 		{
 			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
@@ -212,28 +203,30 @@ include_once('../controller/ConfigConnGP.php');
 			try
 			{
 				// Requête préparée
-				$query = $conn->prepare("UPDATE `comment`
-				SET `date_` = :date_,
-					`pseudo` = :pseudo,
-					`rating` = :rating,
-					`comment` = :comment
-				WHERE `id_comment` = :idComment");
+				$sql = $conn->prepare("UPDATE `comment`
+											SET `date_` = :date_,
+												`pseudo` = :pseudo,
+												`rating` = :rating,
+												`comment` = :comment
+											WHERE `id_comment` = :id"
+										);
 
 				// Liaison des valeurs
-				$query->bindParam(':date_', $this->date_);
-				$query->bindParam(':pseudo', $this->pseudo);
-				$query->bindParam(':rating', $this->rating);
-				$query->bindParam(':comment', $this->comment);
-				$query->bindParam(':idComment', $idComment);
+				$sql->bindParam(':date_', $this->date_);
+				$sql->bindParam(':pseudo', $this->pseudo);
+				$sql->bindParam(':rating', $this->rating);
+				$sql->bindParam(':comment', $this->comment);
+				$sql->bindParam(':id', $id);
 
 				// Exécution de la requête
-				$query->execute();
+				$sql->execute();
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+			catch (Exception $e){
+				
+				echo '<script>alert("' . $e->getMessage() . '");</script>';
+
 			}
 
 			$conn=null;
@@ -248,29 +241,29 @@ include_once('../controller/ConfigConnGP.php');
 
 			try {
 				// Requête préparée pour la sélection
-				$query = $conn->prepare("SELECT `comment`.`id_comment`
+				$sql = $conn->prepare("SELECT `comment`.`id_comment`
 										FROM  `comment`
 										WHERE `comment`.`id_comment` = :id");
 
 				// Liaison de la valeur
-				$query->bindParam(':id', $id);
+				$sql->bindParam(':id', $id);
 
 				// Exécution de la requête
-				$query->execute();
+				$sql->execute();
 
 				// Récupération du résultat
-				$id_comment = $query->fetch(PDO::FETCH_COLUMN);
+				$result = $sql->fetch(PDO::FETCH_ASSOC);
 
 				// Vérification si l'ID existe
-				if ($id_comment !== false) {
+				if ($result) {
 					// Requête préparée pour la suppression
-					$deleteQuery = $conn->prepare('DELETE FROM comment WHERE id_comment = :id_comment');
+					$sql = $conn->prepare('DELETE FROM comment WHERE id_comment = :id_comment');
 
 					// Liaison de la valeur
-					$deleteQuery->bindParam(':id_comment', $id_comment);
+					$sql->bindParam(':id_comment', $id);
 
 					// Exécution de la requête de suppression
-					$deleteQuery->execute();
+					$sql->execute();
 
 					echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 				} else {
@@ -278,7 +271,9 @@ include_once('../controller/ConfigConnGP.php');
 					echo '<script>alert("L\'enregistrement avec cet ID n\'existe pas!");</script>';
 				}
 			} catch (Exception $e) {
-				echo "Erreur de la requête : " . $e->getMessage();
+				
+				echo '<script>alert("' . $e->getMessage() . '");</script>';
+
 			}
 
 			$conn = null;

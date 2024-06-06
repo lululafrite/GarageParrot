@@ -6,7 +6,8 @@
 
     $changeImage = false;
 
-    include('../model/car.class.php');
+    include_once('../common/utilies.php');
+    include_once('../model/car.class.php');
     
     $_SESSION['theTable'] = 'car';
     $MyCar = new Car();
@@ -85,104 +86,89 @@
         $changeImage = true;
     }
 
-//***********************************************************************************************
-// traitement du téléchargement des images 
-//***********************************************************************************************
+    //***********************************************************************************************
+    // traitement de l'enregistrement de données (nouveau, modifier et supprimer)
+    //***********************************************************************************************
+    
+    // Vérification du token CSRF
+    if(verifCsrf('csrfHome') && $_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    if(isset($_POST['bt_carEdit_save']) && $_SESSION['errorFormCar'] === false)
-    {
-        //Récupération des valeurs des input du formulaire
-        $MyCar->setBrand(strtoupper($_POST["list_carEdit_brand"]));
-        $MyCar->setModel(strtolower($_POST["list_carEdit_model"]));
-        $MyCar->setMotorization(strtolower($_POST["list_carEdit_motorization"]));
-        $MyCar->setYear($_POST["txt_carEdit_year"]);
-        $MyCar->setMileage($_POST['txt_carEdit_mileage']);
-        $MyCar->setPrice($_POST["txt_carEdit_price"]);
-        $MyCar->setSold(ucfirst(strtolower($_POST["list_carEdit_sold"])));
-        $MyCar->setDescription($_POST["txt_carEdit_description"]);
-        $MyCar->setImage1($_POST["txt_carEdit_image1"]);
-        $MyCar->setImage2($_POST["txt_carEdit_image2"]);
-        $MyCar->setImage3($_POST["txt_carEdit_image3"]);
-        $MyCar->setImage4($_POST["txt_carEdit_image4"]);
-        $MyCar->setImage5($_POST["txt_carEdit_image5"]);
-        
-        if($_SESSION['newCar'] === true){
-            // $req est la valeur retournée par la requete permettent de vérifier si ce véhicule n'est pas déjà existant en BD. 1 = exitant, 0 = non existant
-            $req = $MyCar->verifCar($MyCar->getBrand(), $MyCar->getModel(), $MyCar->getMotorization(), $MyCar->getYear(), $MyCar->getMileage(), $MyCar->getPrice());
+        if(isset($_POST['bt_carEdit_save']) && $_SESSION['errorFormCar'] === false)
+        {
+            //Récupération et filtrage des caratères des valeurs des inputs du formulaire
+            $MyCar->setBrand(isset($_POST["list_carEdit_brand"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setModel(isset($_POST["list_carEdit_model"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setMotorization(isset($_POST["list_carEdit_motorization"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setYear(isset($_POST["txt_carEdit_year"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setMileage(isset($_POST['txt_carEdit_mileage']) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setPrice(isset($_POST["txt_carEdit_price"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setSold(isset($_POST["list_carEdit_sold"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setDescription(isset($_POST["txt_carEdit_description"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setImage1(isset($_POST["txt_carEdit_image1"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setImage2(isset($_POST["txt_carEdit_image2"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setImage3(isset($_POST["txt_carEdit_image3"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setImage4(isset($_POST["txt_carEdit_image4"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setImage5(isset($_POST["txt_carEdit_image5"]) ? filterInput('list_carEdit_brand') : '');
             
-            if($req === 0){
+            if($_SESSION['newCar'] === true){
+                // $req est la valeur retournée par la requete permettent de vérifier si ce véhicule n'est pas déjà existant en BD. 1 = exitant, 0 = non existant
+                $req = $MyCar->verifCar($MyCar->getBrand(), $MyCar->getModel(), $MyCar->getMotorization(), $MyCar->getYear(), $MyCar->getMileage(), $MyCar->getPrice());
                 
-                $MyCar->setId($MyCar->addCar()); // Requete qui ajoute le véhicule
-                $_SESSION['newCar'] = false;
-				echo '<script>alert("L\'enregistrement est effectué!");</script>';
+                if($req === 0){
+                    
+                    $MyCar->setId($MyCar->addCar()); // Requete qui ajoute le véhicule
+                    $_SESSION['newCar'] = false;
+                    echo '<script>alert("L\'enregistrement est effectué!");</script>';
+
+                }else{
+                    
+                    echo '<script>alert("Ce véhicule existe déjà en base de donnée. Changez une valeur pour pouvoir l\'enregistrer (ex : +/-1km ou +/- 1€");</script>';
+                
+                }
 
             }else{
-                
-                echo '<script>alert("Ce véhicule existe déjà en base de donnée. Changez une valeur pour pouvoir l\'enregistrer (ex : +/-1km ou +/- 1€");</script>';
-            
+                // requete qui met à jour le véhicule
+                $MyCar->updateCar($_POST['txt_carEdit_id']);
+
             }
 
-        }else{
-            // requete qui met à jour le véhicule
-            $MyCar->updateCar($_POST['txt_carEdit_id']);
-
-        }
-
-    }else if(isset($_POST['nav_new_car']) || isset($_POST['bt_carEdit_new'])){
-        
-        if ($_SESSION['errorFormCar'] === false){
-            // Vide le tableau pour que les input du formulaire soient vides après avoir cliqué sur le bouton nouveau
-            $car = array(
-                "id_car" => '',
-                "brand" => '',
-                "model" => '',
-                "motorization" => '',
-                "year" => '',
-                "mileage" => '',
-                "price" => '',
-                "sold" => '',
-                "description" => '',
-                "image1" => '_.webp',
-                "image2" => '_.webp',
-                "image3" => '_.webp',
-                "image4" => '_.webp',
-                "image5" => '_.webp'
-            );
-            $Cars[0] = $car;
-
-            $_SESSION['newCar'] = true;
+        }else if(isset($_POST['nav_new_car']) || isset($_POST['bt_carEdit_new'])){
             
+            if ($_SESSION['errorFormCar'] === false){
+                // Vide le tableau pour que les input du formulaire soient vides après avoir cliqué sur le bouton nouveau
+                $car = array(
+                    "id_car" => '',
+                    "brand" => '',
+                    "model" => '',
+                    "motorization" => '',
+                    "year" => '',
+                    "mileage" => '',
+                    "price" => '',
+                    "sold" => '',
+                    "description" => '',
+                    "image1" => '_.webp',
+                    "image2" => '_.webp',
+                    "image3" => '_.webp',
+                    "image4" => '_.webp',
+                    "image5" => '_.webp'
+                );
+                $Cars[0] = $car;
+
+                $_SESSION['newCar'] = true;
+                
+            }
+
+        }else if(isset($_POST['bt_carEdit_delete'])){
+            // requete qui supprime le véhicule
+            $MyCar->deleteCar($_POST["txt_carEdit_id"]);
+            routeToCarPage();
+
+        }else if(isset($_POST['bt_carEdit_cancel'])){
+            
+            $_SESSION['newCar'] = false;
+            routeToCarPage();
+
         }
-
-    }else if(isset($_POST['bt_carEdit_delete'])){
-        // requete qui supprime le véhicule
-        $MyCar->deleteCar($_POST["txt_carEdit_id"]);
-
-        if($_SESSION['local']===true){
-
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
-        
-        }else{
-
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=car";</script>';
-
-        }
-        exit();
-
-    }else if(isset($_POST['bt_carEdit_cancel'])){
-        
-        $_SESSION['newCar'] = false;
-
-        if($_SESSION['local']===true){
-
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
-        
-        }else{
-
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=car";</script>';
-
-        }
-        exit();
 
     }
 
