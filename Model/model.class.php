@@ -60,9 +60,9 @@ include_once('../controller/ConfigConnGP.php');
 				$this->theModel[] = $sql->fetch();
 				return $this->theModel;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -78,22 +78,31 @@ include_once('../controller/ConfigConnGP.php');
 			
 			try
 			{
-			    $sql = $conn->query("SELECT
+			    $sql = $conn->prepare("SELECT
 										`model`.`id_model`,
-										`model`.`name`
-									FROM
-										`model`
-									WHERE $whereClause
-									ORDER BY $orderBy $ascOrDesc
-									LIMIT $firstLine, $linePerPage
-								");
+										`model`.`name`,
+										`model`.`id_brand`
 
-				while ($this->modelList[] = $sql->fetch());
+										FROM `model`
+
+										WHERE $whereClause
+										ORDER BY $orderBy $ascOrDesc
+										LIMIT :firstLine, :linePerPage
+									");
+
+				$sql->bindParam(':firstLine', $firstLine, PDO::PARAM_INT);
+				$sql->bindParam(':linePerPage', $linePerPage, PDO::PARAM_INT);
+				$sql->execute();
+				
+				$this->modelList = $sql->fetchAll(PDO::FETCH_ASSOC);
 				return $this->modelList;
+
+				/*while ($this->modelList[] = $sql->fetch());
+				return $this->modelList;*/
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -116,7 +125,7 @@ include_once('../controller/ConfigConnGP.php');
 
 				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
-			} catch (Exception $e) {
+			} catch (PDOException $e) {
 				
 				echo "Erreur de la requête : " . $e->getMessage();
 
@@ -140,9 +149,9 @@ include_once('../controller/ConfigConnGP.php');
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -160,9 +169,9 @@ include_once('../controller/ConfigConnGP.php');
 			    $conn->exec('DELETE FROM model WHERE id_model=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;

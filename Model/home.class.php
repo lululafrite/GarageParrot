@@ -249,7 +249,7 @@ include_once('../controller/ConfigConnGP.php');
 			}
 			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -301,7 +301,7 @@ include_once('../controller/ConfigConnGP.php');
 			}
 			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -309,12 +309,11 @@ include_once('../controller/ConfigConnGP.php');
 
 		//-----------------------------------------------------------------------
 
-		public function updateHome($idHome)
-		{
+		public function updateHome($idHome){
 			$conn = connectDB();
 			date_default_timezone_set($_SESSION['timeZone']);
 
-			try {
+			try{
 				$sql = $conn->prepare("UPDATE `home`
 										SET `titre1` = :titre1,
 											`intro_chapter1` = :intro_chapter1,
@@ -348,8 +347,11 @@ include_once('../controller/ConfigConnGP.php');
 				$sql->execute();
 								
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
-			} catch (PDOException $e) {
-				echo "Erreur de la requête : " . $e->getMessage();
+
+			}catch(PDOException $e){
+				
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+
 			}
 
 			$conn = null;
@@ -357,8 +359,8 @@ include_once('../controller/ConfigConnGP.php');
 		
 		//-----------------------------------------------------------------------
 
-		public function deleteHome($id)
-		{
+		public function deleteHome($id){
+
 			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
 
@@ -373,10 +375,11 @@ include_once('../controller/ConfigConnGP.php');
 			}
 			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
+
 		}
 
 	}

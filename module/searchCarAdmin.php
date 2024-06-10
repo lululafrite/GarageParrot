@@ -1,5 +1,8 @@
 <form action="" method="post">
 
+    <!-- input hidden csrf -->
+    <input type="hidden" name="tokenCsrf" value="<?php echo $_SESSION['tokenCsrf'];?>">
+
     <div class="d-sm-flex justify-content-sm-between p-3 mx-2 mb-2 mt-2 mx-md-5 bgDark border border-secondary border-3 rounded-4">
 
         <div class="container d-flex flex-column">
@@ -41,9 +44,13 @@
 
                 include('../model/model.class.php');
                 $Models = new Model();
-                $MyModel = $Models->get(1,'name', 'ASC', 0, 50);
+                if($_SESSION['criteriaBrand'] != 'Selectionnez une marque'){
+                    $MyModel = $Models->get('`model`.`id_brand` = (SELECT `brand`.`id_brand` FROM `brand` WHERE `brand`.`name` = \'' . $_SESSION['criteriaBrand'] . '\')','name', 'ASC', 0, 50);
+                }else{
+                    $MyModel = $Models->get(1,'name', 'ASC', 0, 50);
+                }
                 unset($Models);
-                for($i=0;$i != count($MyModel)-1;$i++) { ?>
+                for($i=0;$i != count($MyModel);$i++) { ?>
                     <option value="<?php echo $MyModel[$i]['name']; ?>"><?php echo $MyModel[$i]['name']; ?></option>
             <?php } ?>
             </select>

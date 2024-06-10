@@ -117,9 +117,9 @@ include_once('../controller/ConfigConnGP.php');
                     $this->countLine = $conn->query("SELECT count(*) FROM `" . $theTable . "` WHERE " . $_SESSION['whereClause'])->fetchColumn();
                 }
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;

@@ -161,7 +161,7 @@
     let allCars = [];
 
     // Utiliser fetch pour récupérer les données de l'API de manière asynchrone
-    fetch('http://garageparrot/api/car.api.php')
+    fetch('../api/car.api.php')
         .then(response => response.json())
         .then(data => {
             allCars = data;

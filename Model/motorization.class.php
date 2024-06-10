@@ -60,9 +60,9 @@ include_once('../controller/ConfigConnGP.php');
 				$this->theMotorization[] = $sql->fetch();
 				return $this->theMotorization;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -91,9 +91,9 @@ include_once('../controller/ConfigConnGP.php');
 				while ($this->motorizationList[] = $sql->fetch());
 				return $this->motorizationList;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -116,7 +116,7 @@ include_once('../controller/ConfigConnGP.php');
 
 				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
-			} catch (Exception $e) {
+			} catch (PDOException $e) {
 				
 				echo "Erreur de la requête : " . $e->getMessage();
 
@@ -140,9 +140,9 @@ include_once('../controller/ConfigConnGP.php');
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -160,9 +160,9 @@ include_once('../controller/ConfigConnGP.php');
 			    $conn->exec('DELETE FROM motorization WHERE id_motorization=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;

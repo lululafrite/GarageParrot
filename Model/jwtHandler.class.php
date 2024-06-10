@@ -25,7 +25,7 @@
             try {
                 $decoded = JWT::decode($token, new Key($this->secretKey, 'HS256'));
                 return (array) $decoded;
-            } catch (Exception $e) {
+            } catch (PDOException $e) {
                 return false;
             }
         }

@@ -7,7 +7,7 @@
     <form action="" method="post" id="formCarEdit" enctype="multipart/form-data">
 
         <!-- input hidden csrf -->
-        <input type="hidden" name="csrfCar" value="<?php echo $_SESSION['csrfCar'];?>">
+        <input type="hidden" name="tokenCsrf" value="<?php echo $_SESSION['tokenCsrf'];?>">
 
         <table class="w-100">
 
@@ -139,7 +139,7 @@
                     <datalist id="datalist_carEdit_brand">
 
                         <?php
-                            for($i=0;$i != count($MyBrand)-1;$i++) { ?>
+                            for($i=0;$i != count($MyBrand);$i++) { ?>
                             <option value="<?php echo $MyBrand[$i]['name']; ?>">
                         <?php } ?>
 
@@ -184,7 +184,7 @@
 
                     <datalist id="datalist_carEdit_model">
 
-                        <?php for($i=0;$i != count($MyModel)-1;$i++) { ?>
+                        <?php for($i=0;$i != count($MyModel);$i++) { ?>
                             <option value="<?php echo $MyModel[$i]['name']; ?>">
                         <?php } ?>
 
@@ -229,7 +229,7 @@
 
                     <datalist id="datalist_carEdit_motorization">
 
-                        <?php for($i=0;$i != count($MyMotorization)-1;$i++) { ?>
+                        <?php for($i=0;$i != count($MyMotorization);$i++) { ?>
                             <option value="<?php echo $MyMotorization[$i]['name']; ?>">
                         <?php } ?>
 
@@ -423,8 +423,7 @@
                         rows="3"
                         placeholder="Saisissez les options et une description"
                         oninput="validateInput('txt_carEdit_description','','labelMessageDescription','Saisissez les options et une description.')"
-                    ><?php echo $Cars[0]['description'];?>
-                    </textarea>
+                    ><?php echo $Cars[0]['description'];?></textarea>
 
                 </td>
 

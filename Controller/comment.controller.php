@@ -5,7 +5,7 @@
     $comments = new Comment();
 
     // Vérification du token CSRF
-    if(verifCsrf('csrfComment') && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(verifCsrf('tokenCsrf') && $_SERVER['REQUEST_METHOD'] === 'POST'){
 
         if(isset($_POST['bt_save_comment'])){
             

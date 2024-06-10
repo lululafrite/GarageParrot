@@ -1,59 +1,43 @@
 <?php
-
-include_once('../controller/ConfigConnGP.php');
-
 	class userConnect
     {
-        public function __construct()
-        {
-        }
-        
-        private $userConnected;
-        public function getUserConnect()
-        {
-            if(is_null($this->userConnected)) //is_null($_SESSION['userConnected']))
-            {
-                $this->userConnected = 'Guest';
-                $_SESSION['userConnected'] = 'Guest';
-            }
-            return $this->userConnected; // $_SESSION['userConnected'];
-        }
-
-        public function SetUserConnect($new)
-        {
-            $_SESSION['userConnected'] = $new;
-            $this->userConnected = $new;
-        }
-        
-        private $connexion;
-        public function getConnexion()
-        {
-            $_SESSION['connexion'] = $this->connexion;
-            return $_SESSION['connexion'];
-        }
-
-        public function SetConnexion($new)
-        {
-            $_SESSION['connexion'] = $new;
-            $this->connexion = $new;
-        }
-
         private $dataConnect;
-        public function queryConnect($email,$pw){
-
-			$conn = connectDB();
+        public function queryConnect($email, $pw)
+        {
+            include_once('../controller/ConfigConnGP.php');
+            $conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
 
-            $resultat2 = $conn->query("SELECT `pseudo`, `user_type`.`type` AS `type`
+            try {
+                $stmt = $conn->prepare("SELECT
+                                        `pseudo`,
+                                        `user_type`.`type` AS `type`
+                                       
                                         FROM `user`
+
                                         LEFT JOIN `user_type`
                                         ON `user`.`id_type` = `user_type`.`id_type`
-                                        WHERE `email`='" . $email . "' AND `password`='" . $pw . "'");
 
-            $this->dataConnect = $resultat2->fetch();
+                                        WHERE `email` = :email AND `password` = :pw");
 
-            return $this->dataConnect;
+                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                $stmt->bindParam(':pw', $pw, PDO::PARAM_STR);
 
+                $stmt->execute();
+
+                $this->dataConnect = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                return $this->dataConnect;
+
+            }catch (PDOException $e){
+
+                echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+                return null;
+
+            }
+
+            $conn = null;
         }
+
     }
 ?>

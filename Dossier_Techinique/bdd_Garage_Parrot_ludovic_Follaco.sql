@@ -64,8 +64,8 @@ CREATE TABLE `car` (
   `id_model` int(11) NOT NULL DEFAULT 1,
   `id_motorization` int(11) NOT NULL DEFAULT 1,
   `year` year(4) NOT NULL DEFAULT year(curdate()),
-  `mileage` mediumint(9) NOT NULL DEFAULT 0,
-  `price` mediumint(9) NOT NULL DEFAULT 0,
+  `mileage` int(9) NOT NULL DEFAULT 0,
+  `price` int(9) NOT NULL DEFAULT 0,
   `sold` enum('Oui','Non') NOT NULL DEFAULT 'Non',
   `description` text NOT NULL DEFAULT '\'Options et description\'',
   `image1` varchar(255) NOT NULL DEFAULT 'image.webp',
@@ -80,7 +80,7 @@ CREATE TABLE `car` (
   CONSTRAINT `rel_car_id_brand` FOREIGN KEY (`id_brand`) REFERENCES `brand` (`id_brand`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `rel_car_id_model` FOREIGN KEY (`id_model`) REFERENCES `model` (`id_model`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `rel_car_id_motorization` FOREIGN KEY (`id_motorization`) REFERENCES `motorization` (`id_motorization`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table des voitures à vendre ou vendu';
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,9 +145,11 @@ CREATE TABLE `comment` (
   `date_` date NOT NULL,
   `pseudo` varchar(30) NOT NULL,
   `rating` int(11) NOT NULL DEFAULT 5,
-  `comment` varchar(255) NOT NULL,
+  `comment` text NOT NULL,
+  `publication` tinyint(1) NOT NULL DEFAULT 0,
+  `image` varchar(255) NOT NULL DEFAULT 'avatar.webp',
   PRIMARY KEY (`id_comment`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,10 +159,9 @@ CREATE TABLE `comment` (
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
 INSERT INTO `comment` VALUES
-(1,'2024-01-02','Patrick92',5,'Top!'),
-(2,'2024-01-08','Ornella',4,'Accueillant professionnel et honnete. Je recommande!'),
-(3,'2024-01-15','Cobra',5,'Un passionne de bagnole! Ca fait plaisir!'),
-(4,'2024-01-18','Lili2002',5,'Rapide, efficace et pret de voiture. Trop bien!');
+(44,'2024-01-02','Patrick92',5,'Top!',1,'_.webp'),
+(45,'2024-01-08','Ornella',4,'Accueillant professionnel et honnete. Je recommande!',1,'_.webp'),
+(46,'2024-01-15','Cobra',5,'Un passionne de bagnole! Ca fait plaisir!',1,'_.webp');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,9 +206,9 @@ DROP TABLE IF EXISTS `home`;
 CREATE TABLE `home` (
   `id_home` int(11) NOT NULL AUTO_INCREMENT,
   `titre1` varchar(255) NOT NULL,
+  `titre2` varchar(255) NOT NULL,
   `intro_chapter1` text NOT NULL,
   `intro_chapter2` text NOT NULL,
-  `titre2` varchar(255) NOT NULL,
   `article1_titre` varchar(255) NOT NULL,
   `article1_chapter1` text NOT NULL,
   `article1_image1` varchar(255) NOT NULL,
@@ -231,7 +232,7 @@ CREATE TABLE `home` (
 LOCK TABLES `home` WRITE;
 /*!40000 ALTER TABLE `home` DISABLE KEYS */;
 INSERT INTO `home` VALUES
-(1,'Histoire du Garage et message de Vincent PARROT','Fort de mes 15 années d\'expérience dans la réparation de véhicules automobiles. J\'ai ouvert mon propre garage en 2021 à Toulouse, pour proposer des prestations modernes et de qualités. Depuis 3 ans, je propose une large gamme de services en terme de réparation de carrosserie, de mécanique et d\'entretien courant. Ma devise : garantir un travail bien fait pour assurer la longévité des véhicules de mes clients et leur permettre de rouler en toute sécurité. Le succès a été immédiat, c\'est pourquoi je propose à présent des véhicules d\'occasion soigneusement sélectionnés et ainsi satisfaire d\'avantage nos clients.','Je considère mon atelier comme un véritable lieu de confiance pour mes clients. Leurs voitures doivent être entre les mains de professionnels reconnus sur le marché. Ce nouveau site web vous permettra d\'être plus facilement en lien avec nous. Depuis ce site, vous pourrez visualiser tous nos les véhicules d\'occasions actuellement disponibles, mais aussi, prendre rendez-vous pour tous les services que nous proposons (révision, réparation, essai véhicule, ...).\r\nMerci pour votre confiance,','Nous garantissons un service de qualité','DERNIERES TECHOLOGIES','Nos mécaniciens hautement qualifiés utilisent les dernières technologies pour vous garantir une réparation rapide et efficace. Qu\'il s\'agisse de remplacer des plaquettes de frein ou une courroie, nous mettons tout en œuvre pour minimiser votre temps d\'immobilisation. toto','machine_technology.jpg','HAUTE EXPÉRIENCE','Notre équipe d\'experts en carrosserie possède une vaste expérience dans la réparation des dégâts de tous types. Que vous ayez besoin d\'une peinture et de retouches ou que votre véhicule ait subi des dégâts plus importants, nous vous garantissons un travail de qualité supérieure.','high_experience.jpg','SÉCURITÉ AVANT TOUT','Offrez à votre véhicule une révision complète chez nous. Que vous ayez besoin d\'une révision annuelle ou sur mesure, nous veillerons à ce que votre véhicule soit toujours en parfait état de marche. Nous croyons en la prévention plutôt que dans la réparation.','cars_security.jpg','CERTIFICATION ET GARANTIE','Votre opinion compte pour nous. Nous apprécions les retours de nos clients et nous utilisons vos avis pour améliorer continuellement nos services. Si vous avez déjà fait affaire avec nous, nous vous invitons à laisser un avis et à partager votre expérience.','qualite.jpg');
+(1,'Histoire du Garage et message de Vincent PARROT','Nous garantissons un service de qualité','Fort de mes 15 années d\'expérience dans la réparation de véhicules automobiles. J\'ai ouvert mon propre garage en 2021 à Toulouse, pour proposer des prestations modernes et de qualités. Depuis 3 ans, je propose une large gamme de services en terme de réparation de carrosserie, de mécanique et d\'entretien courant. Ma devise : garantir un travail bien fait pour assurer la longévité des véhicules de mes clients et leur permettre de rouler en toute sécurité. Le succès a été immédiat, c\'est pourquoi je propose à présent des véhicules d\'occasion soigneusement sélectionnés et ainsi satisfaire d\'avantage nos clients.','Je considère mon atelier comme un véritable lieu de confiance pour mes clients. Leurs voitures doivent être entre les mains de professionnels reconnus sur le marché. Ce nouveau site web vous permettra d\'être plus facilement en lien avec nous. Depuis ce site, vous pourrez visualiser tous nos les véhicules d\'occasions actuellement disponibles, mais aussi, prendre rendez-vous pour tous les services que nous proposons (révision, réparation, essai véhicule, ...).\r\nMerci pour votre confiance,','DERNIERES TECHOLOGIES','Nos mécaniciens hautement qualifiés utilisent les dernières technologies pour vous garantir une réparation rapide et efficace. Qu\'il s\'agisse de remplacer des plaquettes de frein ou une courroie, nous mettons tout en œuvre pour minimiser votre temps d\'immobilisation.','machine_technology.jpg','HAUTE EXPÉRIENCE','Notre équipe d\'experts en carrosserie possède une vaste expérience dans la réparation des dégâts de tous types. Que vous ayez besoin d\'une peinture et de retouches ou que votre véhicule ait subi des dégâts plus importants, nous vous garantissons un travail de qualité supérieure.','high_experience.jpg','SÉCURITÉ AVANT TOUT','Offrez à votre véhicule une révision complète chez nous. Que vous ayez besoin d\'une révision annuelle ou sur mesure, nous veillerons à ce que votre véhicule soit toujours en parfait état de marche. Nous croyons en la prévention plutôt que dans la réparation.','cars_security.jpg','CERTIFICATION ET GARANTIE','Votre opinion compte pour nous. Nous apprécions les retours de nos clients et nous utilisons vos avis pour améliorer continuellement nos services. Si vous avez déjà fait affaire avec nous, nous vous invitons à laisser un avis et à partager votre expérience.','qualite.jpg');
 /*!40000 ALTER TABLE `home` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +246,10 @@ DROP TABLE IF EXISTS `model`;
 CREATE TABLE `model` (
   `id_model` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT 'modèle_voiture',
-  PRIMARY KEY (`id_model`)
+  `id_brand` int(11) NOT NULL,
+  PRIMARY KEY (`id_model`),
+  KEY `id_brand` (`id_brand`),
+  CONSTRAINT `id_brand` FOREIGN KEY (`id_brand`) REFERENCES `brand` (`id_brand`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Modèle de voiture (Scénic, A3, Golf, etc)';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -256,38 +260,38 @@ CREATE TABLE `model` (
 LOCK TABLES `model` WRITE;
 /*!40000 ALTER TABLE `model` DISABLE KEYS */;
 INSERT INTO `model` VALUES
-(1,'_'),
-(2,'208'),
-(3,'308'),
-(4,'408'),
-(5,'508'),
-(6,'A1'),
-(7,'A2'),
-(8,'A3'),
-(9,'A4'),
-(10,'A6'),
-(11,'A8'),
-(12,'CLASSE A'),
-(13,'CLASSE B'),
-(14,'CLASSE C'),
-(15,'ESPACE'),
-(16,'GOLF'),
-(17,'MEGANE'),
-(18,'PASSAT'),
-(19,'POLO'),
-(20,'SCENIC'),
-(21,'SIROCCO'),
-(22,'TWINGO'),
-(24,'SANDERO'),
-(25,'JOGGER'),
-(27,'Q4 E-TRON'),
-(29,'C4'),
-(31,'CLIO'),
-(33,'MEGANE E-TECH'),
-(35,'CAPTUR'),
-(37,'A110'),
-(39,'i8'),
-(40,'SERIE1');
+(1,'_',1),
+(2,'208',3),
+(3,'308',3),
+(4,'408',3),
+(5,'508',3),
+(6,'A1',12),
+(7,'A2',12),
+(8,'A3',12),
+(9,'A4',12),
+(10,'A6',12),
+(11,'A8',12),
+(12,'CLASSE A',8),
+(13,'CLASSE B',8),
+(14,'CLASSE C',8),
+(15,'ESPACE',2),
+(16,'GOLF',7),
+(17,'MEGANE',2),
+(18,'PASSAT',7),
+(19,'POLO',7),
+(20,'SCENIC',2),
+(21,'SIROCCO',7),
+(22,'TWINGO',2),
+(24,'SANDERO',10),
+(25,'JOGGER',10),
+(27,'Q4 E-TRON',12),
+(29,'C4',4),
+(31,'CLIO',2),
+(33,'MEGANE E-TECH',2),
+(35,'CAPTUR',2),
+(37,'A110',6),
+(39,'i8',12),
+(40,'SERIE1',9);
 /*!40000 ALTER TABLE `model` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,9 +386,9 @@ CREATE TABLE `user` (
   `surname` varchar(50) NOT NULL DEFAULT 'Prénom',
   `pseudo` varchar(20) NOT NULL DEFAULT '''pseudo''',
   `email` varchar(255) NOT NULL DEFAULT 'nom.prenom@domaine.com',
-  `phone` varchar(18) NOT NULL DEFAULT '## ## ## ## :##',
+  `phone` varchar(18) NOT NULL DEFAULT '## ## ## ## ##',
   `password` varchar(255) NOT NULL DEFAULT 'Mot de passe',
-  `id_type` int(11) NOT NULL DEFAULT 2,
+  `id_type` int(11) NOT NULL DEFAULT 4,
   PRIMARY KEY (`id_user`),
   KEY `index_user_id_type` (`id_type`),
   CONSTRAINT `rel_user_id_type` FOREIGN KEY (`id_type`) REFERENCES `user_type` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -426,8 +430,6 @@ LOCK TABLES `user_type` WRITE;
 /*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
 INSERT INTO `user_type` VALUES
 (1,'Administrator'),
-(2,'Customer'),
-(3,'Guest'),
 (4,'User');
 /*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -441,4 +443,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-21 12:27:11
+-- Dump completed on 2024-06-10 18:06:54

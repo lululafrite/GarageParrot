@@ -26,11 +26,11 @@
         
         $uploadDirectory = './img/vehicle/';
 
-        $_SESSION['uploadImage1'] = $_POST['txt_carEdit_image1'];
-        $_SESSION['uploadImage2'] = $_POST['txt_carEdit_image2'];
-        $_SESSION['uploadImage3'] = $_POST['txt_carEdit_image3'];
-        $_SESSION['uploadImage4'] = $_POST['txt_carEdit_image4'];
-        $_SESSION['uploadImage5'] = $_POST['txt_carEdit_image5'];
+        $_SESSION['uploadImage1'] = isset($_POST['txt_carEdit_image1']) ? filterInput('txt_carEdit_image1') : '';
+        $_SESSION['uploadImage2'] = isset($_POST['txt_carEdit_image2']) ? filterInput('txt_carEdit_image2') : '';
+        $_SESSION['uploadImage3'] = isset($_POST['txt_carEdit_image3']) ? filterInput('txt_carEdit_image3') : '';
+        $_SESSION['uploadImage4'] = isset($_POST['txt_carEdit_image4']) ? filterInput('txt_carEdit_image4') : '';
+        $_SESSION['uploadImage5'] = isset($_POST['txt_carEdit_image5']) ? filterInput('txt_carEdit_image5') : '';
 
         if (isset($_FILES["fileInput1"]) && $_FILES["fileInput1"]["error"] == UPLOAD_ERR_OK){
 
@@ -91,30 +91,30 @@
     //***********************************************************************************************
     
     // Vérification du token CSRF
-    if(verifCsrf('csrfHome') && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(verifCsrf('tokenCsrf') && $_SERVER['REQUEST_METHOD'] === 'POST'){
 
         if(isset($_POST['bt_carEdit_save']) && $_SESSION['errorFormCar'] === false)
         {
             //Récupération et filtrage des caratères des valeurs des inputs du formulaire
             $MyCar->setBrand(isset($_POST["list_carEdit_brand"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setModel(isset($_POST["list_carEdit_model"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setMotorization(isset($_POST["list_carEdit_motorization"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setYear(isset($_POST["txt_carEdit_year"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setMileage(isset($_POST['txt_carEdit_mileage']) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setPrice(isset($_POST["txt_carEdit_price"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setSold(isset($_POST["list_carEdit_sold"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setDescription(isset($_POST["txt_carEdit_description"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setImage1(isset($_POST["txt_carEdit_image1"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setImage2(isset($_POST["txt_carEdit_image2"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setImage3(isset($_POST["txt_carEdit_image3"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setImage4(isset($_POST["txt_carEdit_image4"]) ? filterInput('list_carEdit_brand') : '');
-            $MyCar->setImage5(isset($_POST["txt_carEdit_image5"]) ? filterInput('list_carEdit_brand') : '');
+            $MyCar->setModel(isset($_POST["list_carEdit_model"]) ? filterInput('list_carEdit_model') : '');
+            $MyCar->setMotorization(isset($_POST["list_carEdit_motorization"]) ? filterInput('list_carEdit_motorization') : '');
+            $MyCar->setYear(isset($_POST["txt_carEdit_year"]) ? filterInput('txt_carEdit_year') : '');
+            $MyCar->setMileage(isset($_POST['txt_carEdit_mileage']) ? filterInput('txt_carEdit_mileage') : '');
+            $MyCar->setPrice(isset($_POST["txt_carEdit_price"]) ? filterInput('txt_carEdit_price') : '');
+            $MyCar->setSold(isset($_POST["list_carEdit_sold"]) ? filterInput('list_carEdit_sold') : '');
+            $MyCar->setDescription(isset($_POST["txt_carEdit_description"]) ? filterInput('txt_carEdit_description') : '');
+            $MyCar->setImage1(isset($_POST["txt_carEdit_image1"]) ? filterInput('txt_carEdit_image1') : '');
+            $MyCar->setImage2(isset($_POST["txt_carEdit_image2"]) ? filterInput('txt_carEdit_image2') : '');
+            $MyCar->setImage3(isset($_POST["txt_carEdit_image3"]) ? filterInput('txt_carEdit_image3') : '');
+            $MyCar->setImage4(isset($_POST["txt_carEdit_image4"]) ? filterInput('txt_carEdit_image4') : '');
+            $MyCar->setImage5(isset($_POST["txt_carEdit_image5"]) ? filterInput('txt_carEdit_image5') : '');
             
             if($_SESSION['newCar'] === true){
                 // $req est la valeur retournée par la requete permettent de vérifier si ce véhicule n'est pas déjà existant en BD. 1 = exitant, 0 = non existant
                 $req = $MyCar->verifCar($MyCar->getBrand(), $MyCar->getModel(), $MyCar->getMotorization(), $MyCar->getYear(), $MyCar->getMileage(), $MyCar->getPrice());
                 
-                if($req === 0){
+                if(!$req){
                     
                     $MyCar->setId($MyCar->addCar()); // Requete qui ajoute le véhicule
                     $_SESSION['newCar'] = false;
@@ -122,14 +122,31 @@
 
                 }else{
                     
+                    $Cars[0]['id_car'] = '0';
+                    $Cars[0]['brand'] = isset($_POST['list_carEdit_brand']) ? filterInput('list_carEdit_brand') : '';
+                    $Cars[0]['model'] = isset($_POST['list_carEdit_model']) ? filterInput('list_carEdit_model') : '';
+                    $Cars[0]['motorization'] = isset($_POST['list_carEdit_motorization']) ? filterInput('list_carEdit_motorization') : '';
+                    $Cars[0]['year'] = isset($_POST['txt_carEdit_year']) ? filterInput('txt_carEdit_year') : '';
+                    $Cars[0]['mileage'] = isset($_POST['txt_carEdit_mileage']) ? filterInput('txt_carEdit_mileage') : '';
+                    $Cars[0]['price'] = isset($_POST['txt_carEdit_price']) ? filterInput('txt_carEdit_price') : '';
+                    $Cars[0]['sold'] = isset($_POST['list_carEdit_sold']) ? filterInput('list_carEdit_sold') : '';
+                    $Cars[0]['description'] = isset($_POST['txt_carEdit_description']) ? filterInput('txt_carEdit_description') : '';
+        
+                    $Cars[0]['image1'] = isset($_POST['txt_carEdit_image1']) ? filterInput('txt_carEdit_image1') : '';
+                    $Cars[0]['image2'] = isset($_POST['txt_carEdit_image2']) ? filterInput('txt_carEdit_image2') : '';
+                    $Cars[0]['image3'] = isset($_POST['txt_carEdit_image3']) ? filterInput('txt_carEdit_image3') : '';
+                    $Cars[0]['image4'] = isset($_POST['txt_carEdit_image4']) ? filterInput('txt_carEdit_image4') : '';
+                    $Cars[0]['image5'] = isset($_POST['txt_carEdit_image5']) ? filterInput('txt_carEdit_image5') : '';
+                    
                     echo '<script>alert("Ce véhicule existe déjà en base de donnée. Changez une valeur pour pouvoir l\'enregistrer (ex : +/-1km ou +/- 1€");</script>';
-                
+
                 }
 
             }else{
-                // requete qui met à jour le véhicule
-                $MyCar->updateCar($_POST['txt_carEdit_id']);
 
+                $MyCar->updateCar($_POST['txt_carEdit_id']);
+                echo '<script>alert("Les modifications sont effectuées!");</script>';
+                
             }
 
         }else if(isset($_POST['nav_new_car']) || isset($_POST['bt_carEdit_new'])){
@@ -160,7 +177,8 @@
 
         }else if(isset($_POST['bt_carEdit_delete'])){
             // requete qui supprime le véhicule
-            $MyCar->deleteCar($_POST["txt_carEdit_id"]);
+            $idDelete = isset($_POST['txt_carEdit_id']) ? filterInput('txt_carEdit_id') : '';
+            $MyCar->deleteCar($idDelete);
             routeToCarPage();
 
         }else if(isset($_POST['bt_carEdit_cancel'])){
@@ -192,14 +210,14 @@
         if($changeImage === true){
 
             $Cars[0]['id_car'] = '0';
-            $Cars[0]['brand'] = $_POST['list_carEdit_brand'];
-            $Cars[0]['model'] = $_POST['list_carEdit_model'];
-            $Cars[0]['motorization'] = $_POST['list_carEdit_motorization'];
-            $Cars[0]['year'] = $_POST['txt_carEdit_year'];
-            $Cars[0]['mileage'] = $_POST['txt_carEdit_mileage'];
-            $Cars[0]['price'] = $_POST['txt_carEdit_price'];
-            $Cars[0]['sold'] = $_POST['list_carEdit_sold'];
-            $Cars[0]['description'] = $_POST['txt_carEdit_description'];
+            $Cars[0]['brand'] = isset($_POST['list_carEdit_brand']) ? filterInput('list_carEdit_brand') : '';
+            $Cars[0]['model'] = isset($_POST['list_carEdit_model']) ? filterInput('list_carEdit_model') : '';
+            $Cars[0]['motorization'] = isset($_POST['list_carEdit_motorization']) ? filterInput('list_carEdit_motorization') : '';
+            $Cars[0]['year'] = isset($_POST['txt_carEdit_year']) ? filterInput('txt_carEdit_year') : '';
+            $Cars[0]['mileage'] = isset($_POST['txt_carEdit_mileage']) ? filterInput('txt_carEdit_mileage') : '';
+            $Cars[0]['price'] = isset($_POST['txt_carEdit_price']) ? filterInput('txt_carEdit_price') : '';
+            $Cars[0]['sold'] = isset($_POST['list_carEdit_sold']) ? filterInput('list_carEdit_sold') : '';
+            $Cars[0]['description'] = isset($_POST['txt_carEdit_description']) ? filterInput('txt_carEdit_description') : '';
 
             $Cars[0]['image1'] = $_SESSION['uploadImage1'];
             $Cars[0]['image2'] = $_SESSION['uploadImage2'];

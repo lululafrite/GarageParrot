@@ -60,9 +60,9 @@ include_once('../controller/ConfigConnGP.php');
 				$this->theBrand[] = $sql->fetch();
 				return $this->theBrand;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -91,9 +91,9 @@ include_once('../controller/ConfigConnGP.php');
 				while ($this->brandList[] = $sql->fetch());
 				return $this->brandList;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -116,7 +116,7 @@ include_once('../controller/ConfigConnGP.php');
 
 				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
-			} catch (Exception $e) {
+			} catch (PDOException $e) {
 				
 				echo "Erreur de la requête : " . $e->getMessage();
 
@@ -140,9 +140,9 @@ include_once('../controller/ConfigConnGP.php');
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -160,9 +160,9 @@ include_once('../controller/ConfigConnGP.php');
 			    $conn->exec('DELETE FROM brand WHERE id_brand=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;

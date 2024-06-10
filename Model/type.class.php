@@ -59,9 +59,9 @@ include_once('../controller/ConfigConnGP.php');
 				$this->theType[] = $sql->fetch();
 				return $this->theType;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -90,9 +90,9 @@ include_once('../controller/ConfigConnGP.php');
 				while ($this->userTypeList[] = $sql->fetch());
 				return $this->userTypeList;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -115,9 +115,9 @@ include_once('../controller/ConfigConnGP.php');
 
 				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
-			} catch (Exception $e) {
+			} catch (PDOException $e) {
 				
-				echo "Erreur de la requête : " . $e->getMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 
 			}
 
@@ -139,9 +139,9 @@ include_once('../controller/ConfigConnGP.php');
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -159,9 +159,9 @@ include_once('../controller/ConfigConnGP.php');
 			    $conn->exec('DELETE FROM user_type WHERE id_type=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;

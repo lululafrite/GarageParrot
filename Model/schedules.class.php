@@ -229,9 +229,9 @@ include_once('../controller/ConfigConnGP.php');
 				$this->theSchedules[] = $sql->fetch();
 				return $this->theSchedules;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -274,9 +274,9 @@ include_once('../controller/ConfigConnGP.php');
 				while ($this->brandList[] = $sql->fetch());
 				return $this->brandList;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -318,7 +318,7 @@ include_once('../controller/ConfigConnGP.php');
 
 				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
-			} catch (Exception $e) {
+			} catch (PDOException $e) {
 				
 				echo "Erreur de la requête : " . $e->getMessage();
 
@@ -357,9 +357,9 @@ include_once('../controller/ConfigConnGP.php');
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -377,9 +377,9 @@ include_once('../controller/ConfigConnGP.php');
 			    $conn->exec('DELETE FROM schedules WHERE id_schedules=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;

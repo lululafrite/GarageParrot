@@ -165,11 +165,21 @@
 
     $_SESSION['whereClause'] =  $whereClause;
 
+
     // Executer la requete SELECT pour rechercher les contacts en fonction de la clause WHERE
     if($_SESSION['errorFormCar']===false && $MyCar->getNewCar() === false ){
         
         include_once('../controller/page.controller.php');
-        $Cars = $MyCar->get($whereClause, 'price', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
+        // Vérification du token CSRF
+        if(verifCsrf('tokenCsrf') && $_SERVER['REQUEST_METHOD'] === 'POST'){
+
+            $Cars = $MyCar->get($whereClause, 'price', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
+        
+        }else{
+
+            $Cars = $MyCar->get('1', 'price', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
+
+        }
         
     }
 

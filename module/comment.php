@@ -29,7 +29,7 @@
                 <form action="" method="post">
                     
                     <!-- input hidden csrf -->
-                    <input type="hidden" name="csrfComment" value="<?php echo $_SESSION['csrfComment'];?>">
+                    <input type="hidden" name="tokenCsrf" value="<?php echo $_SESSION['tokenCsrf'];?>">
 
                     <tbody>
 
@@ -146,7 +146,7 @@
                     <div class="row">
 
                     <?php
-                     for($i=0;$i != count($Comment)-1;$i++){ 
+                     for($i=0;$i != count($Comment);$i++){ 
                     ?>
                         <div class="col-12 px-0">
 
@@ -155,7 +155,7 @@
                                 <form action="" method="post">
                                     
                                 <!-- input hidden csrf -->
-                                <input type="hidden" name="csrfComment" value="<?php echo $_SESSION['csrfComment'];?>">
+                                <input type="hidden" name="tokenCsrf" value="<?php echo $_SESSION['tokenCsrf'];?>">
 
                                     <div class="card-header fs-4">
 

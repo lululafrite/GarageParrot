@@ -18,6 +18,15 @@
         if (isset($_POST['next']) || isset($_POST['previous'])){
             include_once('../controller/page.controller.php');
         }
+        /*
+        if ($page === 'car' && $_SESSION['userConnected'] === 'Administrator'){
+            include('../module/searchCarAdmin.php');
+        }
+        
+        if ($page === 'user'){
+            include('../module/searchUser.php');
+        }
+        */
 
     ?>
 

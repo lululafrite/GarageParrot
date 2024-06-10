@@ -46,17 +46,22 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>    
-                                    <a class="dropdown-item Nav_Span1" href="index.php?page=user">
+                                    <a class="dropdown-item Nav_Span1" href="index.php?page=userBtn">
                                         <img class="p-2 h-75" src="img/icon/search.svg" alt="icone du bouton s'identifier">
                                         Profils
                                     </a>
                                 </li>
                                 <li>
                                     <form action="index.php?page=user_edit" method="post">
+
+                                        <!-- input hidden csrf -->
+                                        <input type="hidden" name="tokenCsrf" value="<?php echo $_SESSION['tokenCsrf'];?>">
+
                                         <button class="dropdown-item Nav_Span1" id="nav_new_user" name="nav_new_user" type="submit">
                                             <img class="p-2 h-75" src="img/icon/person-plus.svg" alt="icone du bouton s'identifier">
                                             Nouveau
                                         </button>
+
                                     </form>
                                 </li>
                             </ul>
@@ -76,7 +81,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>    
-                                <a class="dropdown-item Nav_Span1" href="index.php?page=car">
+                                <a class="dropdown-item Nav_Span1" href="index.php?page=carBtn">
                                     <img class="p-2 h-75" src="img/icon/car-front.svg" alt="icone du bouton s'identifier">
                                     Nos occasions
                                 </a>
@@ -87,12 +92,17 @@
                     {
                     ?>
                             <form action="index.php?page=car_edit" method="post">
+
+                                <!-- input hidden csrf -->
+                                <input type="hidden" name="tokenCsrf" value="<?php echo $_SESSION['tokenCsrf'];?>">
+
                                 <li>
                                     <button class="dropdown-item Nav_Span1" id="nav_new_car" name="nav_new_car" type="submit">
                                         <img class="p-2" src="img/icon/car-front-fill.svg" alt="icone du bouton s'identifier">
                                         Nouveau
                                     </button>
                                 </li>
+
                             </form>
                     <?php
                     }

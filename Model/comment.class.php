@@ -89,7 +89,7 @@ include_once('../controller/ConfigConnGP.php');
 				$this->theComment[] = $sql->fetch();
 				return $this->theComment;
 			}
-			catch (Exception $e){
+			catch (PDOException $e){
 				
 				echo '<script>alert("' . $e->getMessage() . '");</script>';
 
@@ -108,24 +108,29 @@ include_once('../controller/ConfigConnGP.php');
 			
 			try
 			{
-			    $sql = $conn->query("SELECT
-										`comment`.`id_comment`,
-										`comment`.`date_`,
-										`comment`.`pseudo`,
-										`comment`.`rating`,
-										`comment`.`comment`
+				$stmt = $conn->prepare("SELECT
+											`comment`.`id_comment`,
+											`comment`.`date_`,
+											`comment`.`pseudo`,
+											`comment`.`rating`,
+											`comment`.`comment`
+										
+										FROM `comment`
 
-									FROM `comment`
+										WHERE $whereClause
+										ORDER BY $orderBy $ascOrDesc
+										LIMIT :firstLine, :linePerPage");
 
-									WHERE $whereClause
-									ORDER BY $orderBy $ascOrDesc
-									LIMIT $firstLine, $linePerPage
-								");
+				$stmt->bindParam(':firstLine', $firstLine, PDO::PARAM_INT);
+				$stmt->bindParam(':linePerPage', $linePerPage, PDO::PARAM_INT);
 
-				while ($this->CommentList[] = $sql->fetch());
+				$stmt->execute();
+
+				$this->CommentList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				return $this->CommentList;
+
 			}
-			catch (Exception $e){
+			catch (PDOException $e){
 				
 				echo '<script>alert("' . $e->getMessage() . '");</script>';
 
@@ -184,7 +189,7 @@ include_once('../controller/ConfigConnGP.php');
 					echo '<script>alert("L\'enregistrement est effectué!");</script>';
 				}
 
-			}catch (Exception $e){
+			}catch (PDOException $e){
 				
 				echo '<script>alert("' . $e->getMessage() . '");</script>';
 
@@ -223,7 +228,7 @@ include_once('../controller/ConfigConnGP.php');
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
-			catch (Exception $e){
+			catch (PDOException $e){
 				
 				echo '<script>alert("' . $e->getMessage() . '");</script>';
 
@@ -270,7 +275,7 @@ include_once('../controller/ConfigConnGP.php');
 					// L'ID n'existe pas, gestion de l'erreur si nécessaire
 					echo '<script>alert("L\'enregistrement avec cet ID n\'existe pas!");</script>';
 				}
-			} catch (Exception $e) {
+			} catch (PDOException $e) {
 				
 				echo '<script>alert("' . $e->getMessage() . '");</script>';
 

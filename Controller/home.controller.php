@@ -5,7 +5,7 @@
     $homes = new Home();
 
     // Vérification du token CSRF
-    if(verifCsrf('csrfHome') && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(verifCsrf('tokenCsrf') && $_SERVER['REQUEST_METHOD'] === 'POST'){
 
         if(isset($_POST['bt_home'])){
             

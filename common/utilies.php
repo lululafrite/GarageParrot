@@ -1,12 +1,5 @@
 <?php
 
-    // Genered key 32 bytes
-    function generate32ByteKey(){
-        $key = bin2hex(random_bytes(32));
-        //echo $key;
-        return $key;
-    }
-
     // Create and verification of CSRF token
     function verifCsrf($varCsrf) {
             
@@ -20,12 +13,19 @@
 
         if(empty($_SESSION[$varCsrf])){
 
-            $csrf = bin2hex(random_bytes(32));
-            $_SESSION[$varCsrf] = $csrf;
+            $_SESSION[$varCsrf] = generate32ByteKey();
 
         }
 
         return $value_Is;
+    }
+
+    // Genered key 32 bytes
+    function generate32ByteKey(){
+
+        $key = bin2hex(random_bytes(32));
+        return $key;
+        
     }
 
     //escape Input
@@ -184,6 +184,21 @@
     }
 
     // Route to disconnect page
+    function routeToConnexionPage(){
+        if($_SESSION['local']){
+
+            echo '<script>window.location.href = "http://garageparrot/index.php?page=connexion";</script>';
+        
+        }
+        else{
+            
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=connexion";</script>';
+        
+        }
+        exit();
+    }
+
+    // Route to disconnect page
     function routeToDisconnectPage(){
         if($_SESSION['local']){
 
@@ -224,6 +239,44 @@
             routeToDisconnectPage();
             
         }
+    }
+
+    function resetVariableCar(){
+
+        $_SESSION['criteriaBrand'] = 'Selectionnez une marque';
+        $_SESSION['criteriaModel'] = 'Selectionnez un modele';
+        $_SESSION['criteriaMileage'] = 'Selectionnez un kilometrage maxi';
+        $_SESSION['criteriaPrice'] = 'Selectionnez un prix maxi';
+
+        $_SESSION['newCars'] = false;
+        $_SESSION['whereClause'] =  '1';
+
+        $_SESSION['errorFormCar'] = false;
+
+    }
+
+    function resetVariableUser(){
+
+        $_SESSION['whereClause'] =  '1';
+
+        $_SESSION['criteriaName'] = '';
+        $_SESSION['criteriaPseudo'] = '';
+        $_SESSION['criteriaType'] = 'Selectionnez un type';
+
+        $_SESSION['newUser'] = false;
+
+        $_SESSION['errorFormUser'] = false;
+
+    }
+
+    function resetVariablePage(){
+
+        $_SESSION['laPage'] = 1;
+        $_SESSION['firstLine'] = 0;
+        $_SESSION['ligneParPage'] = 3;
+        $_SESSION['nbOfPage'] = 1;
+
+        
     }
 
 ?>

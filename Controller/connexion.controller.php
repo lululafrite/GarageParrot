@@ -2,45 +2,40 @@
 
     if (isset($_POST['envoyer'])) {
         
-        include('../model/connexion.class.php');
-        $MyUserConnect = new userConnect();
+        include_once('../model/connexion.class.php');
+        include_once('../common/utilies.php');
 
-        if ($_POST["email"] != null && $_POST["password"] != null ) {
+        $email_ = isset($_POST['email']) ? filterInput('email') : '';
+        $pw_ = isset($_POST['password']) ? filterInput('password') : '';
+        
+        if(!empty($email_) && !empty($pw_)){
 
-            try {
-                
-                $data = $MyUserConnect->queryConnect($_POST["email"],$_POST["password"]);
-                
-                $MyUserConnect->SetUserConnect($data['type']);
-                $_SESSION['pseudoUser']=$data['pseudo'];
-                
-                $MyUserConnect->SetConnexion(true);
+            $MyUserConnect = new userConnect();
+            $data = $MyUserConnect->queryConnect($email_,$pw_);
 
-            }catch (Exception $e){
+            if(!$data){
                 
-                echo "error in the query : " . $e->getMessage();
-                $MyUserConnect->SetConnexion(false);
+                $_SESSION['userConnected'] = 'Guest';
+                $_SESSION['connexion'] = false;
+                $_SESSION['message'] = 'CONNEXION IMPOSSIBLE!!!<br>Votre email ou votre<br>mot de passe sont incorrects!';
+                
+            }else{
+                
+                $_SESSION['userConnected'] = $data['type'];
+                $_SESSION['pseudoUser'] = $data['pseudo'];
+                $_SESSION['connexion'] = true;
+                routeToHomePage();
 
             }
 
         }else{
 
-            $MyUserConnect->SetUserConnect('guest');
-            $MyUserConnect->SetConnexion(false);
+            $_SESSION['userConnected'] = 'Guest';
+            $_SESSION['connexion'] = false;
+            $_SESSION['message'] = 'L\'un des champs est vide!!!<br>Saisissez email et mot de passe.';
 
         }
-
-        if($_SESSION['local']===true){
-
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=home";</script>';
-            
-
-        }else{
-
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=home";</script>';
-
-        }
-        exit();
 
     }
+
 ?>

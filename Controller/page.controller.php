@@ -1,6 +1,6 @@
 <?php
     
-    require('../Model/page.class.php');
+    require('../model/page.class.php');
     
     $MyPage = new Page();
 

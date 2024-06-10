@@ -4,6 +4,7 @@ public/img_save/
 ### My files ###
 zz_notes.txt
 *.pptx
+*.neon
 
 ### nodeJs ###
 node_modules/

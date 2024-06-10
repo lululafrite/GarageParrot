@@ -1,5 +1,4 @@
 <?php
-    
     // La variable $_SESSION['local'] mettre à false si online et à true si serveur local
     // Cette variable agit sur le controleur 'ConfigConnGP.php' pour les paramètres de connexion
     $_SESSION['local']=true;
@@ -20,6 +19,8 @@
         $_SESSION['nbOfProduct'] = 1;
         $_SESSION['NextOrPrevious'] = false;
 
+        $_SESSION['message'] = '';
+
         $_SESSION['theTable'] = 'car';
 
         $_SESSION['addCar'] = false;
@@ -34,7 +35,7 @@
         $_SESSION['uploadImage3'] = '_.png';
         $_SESSION['uploadImage4'] = '_.png';
         $_SESSION['uploadImage5'] = '_.png';
-        //Variable critères de recharche car
+        //Variable critères de recherche car
         $_SESSION['criteriaBrand'] = 'Selectionnez une marque';
         $_SESSION['criteriaModel'] = 'Selectionnez un modele';
         $_SESSION['criteriaMileage'] = 'Selectionnez un kilometrage maxi';
@@ -58,5 +59,4 @@
         //$_SESSION['local']=true;
         $_SESSION['timeZone']="Europe/Paris";
     }
-
 ?>

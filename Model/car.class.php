@@ -1,16 +1,9 @@
 <?php
 
-include_once('../controller/ConfigConnGP.php');
+	include_once('../controller/ConfigConnGP.php');
 
 	class Car
 	{
-
-		function __construct()
-		{
-		}
-
-		//-----------------------------------------------------------------------
-
 		private $id_car;
 		public function getId()
 		{
@@ -196,51 +189,52 @@ include_once('../controller/ConfigConnGP.php');
 		//-----------------------------------------------------------------------
 
 		private $theCar;
-		public function getCar($îdCar)
+		public function getCar($idCar)
 		{
 			$conn = connectDB();
-            date_default_timezone_set($_SESSION['timeZone']);
-			
-			try
-			{
-			    $sql = $conn->query("SELECT
-										`car`.`id_car`,
-										`brand`.`name` AS `brand`,
-										`model`.`name` AS `model`,
-										`motorization`.`name` AS `motorization`,
-										`car`.`year`,
-										`car`.`mileage`,
-										`car`.`price`,
-										`car`.`description`,
-										`car`.`sold`,
-										`car`.`image1`,
-										`car`.`image2`,
-										`car`.`image3`,
-										`car`.`image4`,
-										`car`.`image5`
+			date_default_timezone_set($_SESSION['timeZone']);
 
-									FROM `car`
+			try {
+				$stmt = $conn->prepare("SELECT
+											`car`.`id_car`,
+											`brand`.`name` AS `brand`,
+											`model`.`name` AS `model`,
+											`motorization`.`name` AS `motorization`,
+											`car`.`year`,
+											`car`.`mileage`,
+											`car`.`price`,
+											`car`.`description`,
+											`car`.`sold`,
+											`car`.`image1`,
+											`car`.`image2`,
+											`car`.`image3`,
+											`car`.`image4`,
+											`car`.`image5`
+										
+										FROM `car`
 
-									LEFT JOIN `brand`
-										ON `car`.`id_brand` = `brand`.`id_brand`
-									LEFT JOIN `model`
-										ON `car`.`id_model` = `model`.`id_model`
-									LEFT JOIN `motorization`
-										ON `car`.`id_motorization` = `motorization`.`id_motorization`
-									
-									WHERE `car`.`id_car`=$îdCar
-								");
+										LEFT JOIN `brand`
+											ON `car`.`id_brand` = `brand`.`id_brand`
+										LEFT JOIN `model`
+											ON `car`.`id_model` = `model`.`id_model`
+										LEFT JOIN `motorization`
+											ON `car`.`id_motorization` = `motorization`.`id_motorization`
+										WHERE `car`.`id_car` = :idCar");
 
-				/*while ($this->theContact[] = $sql->fetch());*/
-				$this->theCar[] = $sql->fetch();
+				$stmt->bindParam(':idCar', $idCar, PDO::PARAM_INT);
+				$stmt->execute();
+
+				$this->theCar = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				return $this->theCar;
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+
+			}catch(PDOException $e){
+
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+
 			}
 
-			$conn=null;
+			$conn = null;
+
 		}
 
 		//-----------------------------------------------------------------------
@@ -253,7 +247,7 @@ include_once('../controller/ConfigConnGP.php');
 
 			try
 			{
-			    $sql = $conn->query("SELECT
+			    $sql = $conn->prepare("SELECT
 										`car`.`id_car`,
 										`brand`.`name` AS `brand`,
 										`model`.`name` AS `model`,
@@ -280,15 +274,20 @@ include_once('../controller/ConfigConnGP.php');
 
 									WHERE $whereClause
 									ORDER BY `$orderBy` $ascOrDesc
-									LIMIT $firstLine, $linePerPage
+									LIMIT :firstLine, :linePerPage
 								");
+				
+				$sql->bindParam(':firstLine', $firstLine, PDO::PARAM_INT);
+				$sql->bindParam(':linePerPage', $linePerPage, PDO::PARAM_INT);
+				$sql->execute();
+				
 
-				while ($this->carList[] = $sql->fetch());
+				$this->carList = $sql->fetchAll(PDO::FETCH_ASSOC);
 				return $this->carList;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -301,38 +300,65 @@ include_once('../controller/ConfigConnGP.php');
 			$conn = connectDB();
             date_default_timezone_set($_SESSION['timeZone']);
 
-			try {
-					$stmt = $conn->prepare("INSERT INTO `car` 
-											(`id_brand`, `id_model`, `id_motorization`, `year`, `mileage`, `price`, `sold`, `description`, `image1`, `image2`, `image3`, `image4`, `image5`)
-											VALUES (
-													(SELECT `id_brand` FROM `brand` WHERE `name` = ?),
-													(SELECT `id_model` FROM `model` WHERE `name` = ?),
-													(SELECT `id_motorization` FROM `motorization` WHERE `name` = ?),
-													?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-													)");
+			try{
+				$stmt = $conn->prepare("INSERT INTO `car` (`id_brand`,
+															`id_model`,
+															`id_motorization`,
+															`year`, `mileage`,
+															`price`,
+															`sold`,
+															`description`,
+															`image1`,
+															`image2`,
+															`image3`,
+															`image4`,
+															`image5`)
+										VALUES ((SELECT `id_brand` FROM `brand` WHERE `name` = :brand),
+												(SELECT `id_model` FROM `model` WHERE `name` = :model),
+												(SELECT `id_motorization` FROM `motorization` WHERE `name` = :motorization),
+												:year_,
+												:mileage,
+												:price,
+												:sold,
+												:description_,
+												:image1,
+												:image2,
+												:image3,
+												:image4,
+												:image5)");
 
-											$stmt->execute([$this->brand,
-													$this->model,
-													$this->motorization,
-													$this->year,
-													$this->mileage,
-													$this->price,
-													$this->sold,
-													$this->description,
-													$this->image1,
-													$this->image2,
-													$this->image3,
-													$this->image4,
-													$this->image5]);
-
-				$sql = $conn->query("SELECT MAX(`id_car`) FROM `car`");
-				$id_car_ = $sql->fetch();
-				$this->id_car = intval($id_car_[0]);
-				return intval($id_car_[0]);
-
-			} catch (Exception $e) {
+				// Liaison des valeurs
+				$stmt->bindParam(':brand', $this->brand, PDO::PARAM_STR);
+				$stmt->bindParam(':model', $this->model, PDO::PARAM_STR);
+				$stmt->bindParam(':motorization', $this->motorization, PDO::PARAM_STR);
 				
-				echo "Erreur de la requête : " . $e->getMessage();
+				$yearInt = intval($this->year);
+				$stmt->bindParam(':year_', $yearInt, PDO::PARAM_INT);
+				
+				$mileageInt = intval($this->mileage);
+				$stmt->bindParam(':mileage', $mileageInt, PDO::PARAM_INT);
+				
+				$priceInt = intval($this->price);
+				$stmt->bindParam(':price', $priceInt, PDO::PARAM_INT);
+
+				$stmt->bindParam(':sold', $this->sold, PDO::PARAM_STR);
+				$stmt->bindParam(':description_', $this->description, PDO::PARAM_STR);
+				$stmt->bindParam(':image1', $this->image1, PDO::PARAM_STR);
+				$stmt->bindParam(':image2', $this->image2, PDO::PARAM_STR);
+				$stmt->bindParam(':image3', $this->image3, PDO::PARAM_STR);
+				$stmt->bindParam(':image4', $this->image4, PDO::PARAM_STR);
+				$stmt->bindParam(':image5', $this->image5, PDO::PARAM_STR);
+				
+				$stmt->execute();
+
+				$stmt = $conn->query("SELECT MAX(`id_car`) FROM `car`");
+				$maxId = $stmt->fetchColumn();
+				$this->id_car = intval($maxId);
+				return $this->id_car;
+
+			}catch(PDOException $e){
+				
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 
 			}
 
@@ -344,108 +370,137 @@ include_once('../controller/ConfigConnGP.php');
 		public function updateCar($idCar)
 		{
 			$conn = connectDB();
-            date_default_timezone_set($_SESSION['timeZone']);
-			
-			try
-			{
-				$idCar = intval($idCar);
-				
-			    $stmt = $conn->prepare("UPDATE `car`
+			date_default_timezone_set($_SESSION['timeZone']);
+
+			try {
+				$stmt = $conn->prepare("UPDATE `car`
 										SET 
-												`id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name` = ?),
-												`id_model` = (SELECT `id_model` FROM `model` WHERE `name` = ?),
-												`id_motorization` = (SELECT `id_motorization` FROM `motorization` WHERE `name` = ?),
-												`year` = ?,
-												`mileage` = ?,
-												`price` = ?,
-												`sold` = ?,
-												`description` = ?,
-												`image1` = ?,
-												`image2` = ?,
-												`image3` = ?,
-												`image4` = ?,
-												`image5` = ?
-
-										WHERE `id_car` = ?"
-									);
-
-						$stmt->execute([$this->brand,
-								$this->model,
-								$this->motorization,
-								$this->year,
-								$this->mileage,
-								$this->price,
-								$this->sold,
-								$this->description,
-								$this->image1,
-								$this->image2,
-								$this->image3,
-								$this->image4,
-								$this->image5,
-								$idCar]);
+											`id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name` = :brand),
+											`id_model` = (SELECT `id_model` FROM `model` WHERE `name` = :model),
+											`id_motorization` = (SELECT `id_motorization` FROM `motorization` WHERE `name` = :motorization),
+											`year` = :year_,
+											`mileage` = :mileage,
+											`price` = :price,
+											`sold` = :sold,
+											`description` = :description_,
+											`image1` = :image1,
+											`image2` = :image2,
+											`image3` = :image3,
+											`image4` = :image4,
+											`image5` = :image5
+										WHERE `id_car` = :idCar");
 				
+				$stmt->bindParam(':brand', $this->brand, PDO::PARAM_STR);
+				$stmt->bindParam(':model', $this->model, PDO::PARAM_STR);
+				$stmt->bindParam(':motorization', $this->motorization, PDO::PARAM_STR);
+				
+				$yearInt = intval($this->year);
+				$stmt->bindParam(':year_', $yearInt, PDO::PARAM_INT);
+				
+				$mileageInt = intval($this->mileage);
+				$stmt->bindParam(':mileage', $mileageInt, PDO::PARAM_INT);
+				
+				$priceInt = intval($this->price);
+				$stmt->bindParam(':price', $priceInt, PDO::PARAM_INT);
+
+				$stmt->bindParam(':sold', $this->sold, PDO::PARAM_STR);
+				$stmt->bindParam(':description_', $this->description, PDO::PARAM_STR);
+				$stmt->bindParam(':image1', $this->image1, PDO::PARAM_STR);
+				$stmt->bindParam(':image2', $this->image2, PDO::PARAM_STR);
+				$stmt->bindParam(':image3', $this->image3, PDO::PARAM_STR);
+				$stmt->bindParam(':image4', $this->image4, PDO::PARAM_STR);
+				$stmt->bindParam(':image5', $this->image5, PDO::PARAM_STR);
+				
+				$idCar = intval($idCar);
+				$stmt->bindParam(':idCar', $idCar, PDO::PARAM_INT);
+
+				$stmt->execute();
+
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+
+			} catch (PDOException $e) {
+
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+
 			}
 
-			$conn=null;
+			$conn = null;
+
 		}
+
 
 		//-----------------------------------------------------------------------
 
 		public function deleteCar($id)
 		{
 			$conn = connectDB();
-            date_default_timezone_set($_SESSION['timeZone']);
+			date_default_timezone_set($_SESSION['timeZone']);
 
-			try
-			{
-			    $conn->exec('DELETE FROM car WHERE id_car=' . $id);
+			try{
+				$stmt = $conn->prepare('DELETE FROM car WHERE id_car = :idCar');
+
+				$id = intval($id);
+				$stmt->bindParam(':idCar', $id, PDO::PARAM_INT);
+
+				$stmt->execute();
+
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+
+			}catch(PDOException $e){
+
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+
 			}
 
-			$conn=null;
+			$conn = null;
 		}
+
 
 		//-----------------------------------------------------------------------
 		private $carExist;
 		public function verifCar($brand, $model, $motorization, $year, $mileage, $price)
 		{
 			$conn = connectDB();
-            date_default_timezone_set($_SESSION['timeZone']);
+			date_default_timezone_set($_SESSION['timeZone']);
 
-			try
-			{
-			    $sql = $conn->query("SELECT COUNT(*) AS `number`
-									FROM
-										`car`
-									WHERE
-										`id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name` = '" . $brand . "')
-										AND `id_model` = (SELECT `id_model` FROM `model` WHERE `name` = '" . $model . "')
-										AND `id_motorization` = (SELECT `id_motorization` FROM `motorization` WHERE `name` = '" . $motorization . "')
-										AND `year` = '" . $year . "'
-										AND `mileage` = '" . $mileage . "'
-										AND `price` = '" . $price . "';
-								");
+			try{
+				$stmt = $conn->prepare("SELECT COUNT(*) AS `number`
+										FROM `car`
+										WHERE `id_brand` = (SELECT `id_brand` FROM `brand` WHERE `name` = :brand)
+										AND `id_model` = (SELECT `id_model` FROM `model` WHERE `name` = :model)
+										AND `id_motorization` = (SELECT `id_motorization` FROM `motorization` WHERE `name` = :motorization)
+										AND `year` = :year_
+										AND `mileage` = :mileage
+										AND `price` = :price");
 
-				while ($this->carExist[] = $sql->fetch());
-				return $this->carExist[0][0];
-				//$id_car_ = $sql->fetch();
-				//$this->id_car = intval($id_car_[0]);
+				$stmt->bindParam(':brand', $brand, PDO::PARAM_STR);
+				$stmt->bindParam(':model', $model, PDO::PARAM_STR);
+				$stmt->bindParam(':motorization', $motorization, PDO::PARAM_STR);
+
+				$yearInt = intval($year);
+				$stmt->bindParam(':year_', $yearInt, PDO::PARAM_INT);
+
+				$mileageInt = intval($mileage);
+				$stmt->bindParam(':mileage', $mileageInt, PDO::PARAM_INT);
+
+				$priceInt = intval($price);
+				$stmt->bindParam(':price', $priceInt, PDO::PARAM_INT);
+
+				$stmt->execute();
+
+				//$this->carExist = $stmt->fetch(PDO::FETCH_ASSOC);
+				//return $this->carExist['number'];
+
+				$count = $stmt->fetchColumn();
+				return $count > 0;
+
+			}catch(PDOException $e){
+
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+
 			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
-			}
 
-			$conn=null;
+			$conn = null;
 		}
 
         //__Ajouter car?___________________________________________

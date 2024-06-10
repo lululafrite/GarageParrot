@@ -141,9 +141,9 @@ include_once('../controller/ConfigConnGP.php');
 				while ($this->listPseudo[] = $sql->fetch());
 				return $this->listPseudo;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -182,9 +182,9 @@ include_once('../controller/ConfigConnGP.php');
 				$this->theUser[] = $sql->fetch();
 				return $this->theUser;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -220,9 +220,9 @@ include_once('../controller/ConfigConnGP.php');
 				while ($this->userList[] = $sql->fetch());
 				return $this->userList;
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -250,7 +250,7 @@ include_once('../controller/ConfigConnGP.php');
 				$this->id_user = intval($id_user['id_user']);
 				return intval($id_user['id_user']);
 
-			} catch (Exception $e) {
+			} catch (PDOException $e) {
 				
 				echo "Erreur de la requête : " . $e->getMessage();
 
@@ -281,9 +281,9 @@ include_once('../controller/ConfigConnGP.php');
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$this->setType('Administrator');
@@ -305,9 +305,9 @@ include_once('../controller/ConfigConnGP.php');
 				echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
 				echo '<script>window.location.href = "http://www.follaco.fr/index.php?page=user";</script>';
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
@@ -331,9 +331,9 @@ include_once('../controller/ConfigConnGP.php');
 				while ($this->userExist[] = $sql->fetch());
 				return $this->userExist[0][0];
 			}
-			catch (Exception $e)
+			catch (PDOException $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
 			}
 
 			$conn=null;
