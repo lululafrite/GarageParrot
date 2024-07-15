@@ -1,209 +1,123 @@
 <?php
 
-include_once('../controller/ConfigConnGP.php');
-
 	class Home
 	{
-		private $id_home;
-		public function getId()
+		private $homeId;
+		public function getHomeId()
 		{
-			return $this->id_home;
+			return $this->homeId;
 		}
-		public function setId($new)
+		public function setHomeId($new)
 		{
-			$this->id_home = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $titre1;
-		public function getTitre1()
-		{
-			return $this->titre1;
-		}
-		public function setTitre1($new)
-		{
-			$this->titre1 = $new;
+			$this->homeId = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $intro_chapter1;
-		public function getIntro_chapter1()
+		private $homeTitle;
+		public function getHomeTitle()
 		{
-			return $this->intro_chapter1;
+			return $this->homeTitle;
 		}
-		public function setIntro_chapter1($new)
+		public function setHomeTitle($new)
 		{
-			$this->intro_chapter1 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $intro_chapter2;
-		public function getIntro_chapter2()
-		{
-			return $this->intro_chapter2;
-		}
-		public function setIntro_chapter2($new)
-		{
-			$this->intro_chapter2 = $new;
+			$this->homeTitle = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $titre2;
-		public function getTitre2()
+		private $homeSubtitle;
+		public function getHomeSubtitle()
 		{
-			return $this->titre2;
+			return $this->homeSubtitle;
 		}
-		public function setTitre2($new)
+		public function setHomeSubtitle($new)
 		{
-			$this->titre2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article1_titre;
-		public function getArticle1_titre()
-		{
-			return $this->article1_titre;
-		}
-		public function setArticle1_titre($new)
-		{
-			$this->article1_titre = $new;
+			$this->homeSubtitle = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article1_chapter1;
-		public function getArticle1_chapter1()
+		private $homeTitlePage;
+		public function getHomeTitlePage()
 		{
-			return $this->article1_chapter1;
+			return $this->homeTitlePage;
 		}
-		public function setArticle1_chapter1($new)
+		public function setHomeTitlePage($new)
 		{
-			$this->article1_chapter1 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article1_image1;
-		public function getArticle1_image1()
-		{
-			return $this->article1_image1;
-		}
-		public function setArticle1_image1($new)
-		{
-			$this->article1_image1 = $new;
+			$this->homeTitlePage = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article1_titre2;
-		public function getArticle1_titre2()
+		private $homeArticle1Title;
+		public function getHomeArticle1Title()
 		{
-			return $this->article1_titre2;
+			return $this->homeArticle1Title;
 		}
-		public function setArticle1_titre2($new)
+		public function setHomeArticle1Title($new)
 		{
-			$this->article1_titre2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article1_chapter2;
-		public function getArticle1_chapter2()
-		{
-			return $this->article1_chapter2;
-		}
-		public function setArticle1_chapter2($new)
-		{
-			$this->article1_chapter2 = $new;
+			$this->homeArticle1Title = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article1_image2;
-		public function getArticle1_image2()
+		private $homeArticle1;
+		public function getHomeArticle1()
 		{
-			return $this->article1_image2;
+			return $this->homeArticle1;
 		}
-		public function setArticle1_image2($new)
+		public function setHomeArticle1($new)
 		{
-			$this->article1_image2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article2_titre;
-		public function getArticle2_titre()
-		{
-			return $this->article2_titre;
-		}
-		public function setArticle2_titre($new)
-		{
-			$this->article2_titre = $new;
+			$this->homeArticle1 = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article2_chapter1;
-		public function getArticle2_chapter1()
+		private $homeArticle1Img;
+		public function getHomeArticle1Img()
 		{
-			return $this->article2_chapter1;
+			return $this->homeArticle1Img;
 		}
-		public function setArticle2_chapter1($new)
+		public function setHomeArticle1Img($new)
 		{
-			$this->article2_chapter1 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article2_image1;
-		public function getArticle2_image1()
-		{
-			return $this->article2_image1;
-		}
-		public function setArticle2_image1($new)
-		{
-			$this->article2_image1 = $new;
+			$this->homeArticle1Img = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article2_titre2;
-		public function getArticle2_titre2()
+		private $homeArticle2Title;
+		public function getHomeArticle2Title()
 		{
-			return $this->article2_titre2;
+			return $this->homeArticle2Title;
 		}
-		public function setArticle2_titre2($new)
+		public function setHomeArticle2Title($new)
 		{
-			$this->article2_titre2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article2_chapter2;
-		public function getArticle2_chapter2()
-		{
-			return $this->article2_chapter2;
-		}
-		public function setArticle2_chapter2($new)
-		{
-			$this->article2_chapter2 = $new;
+			$this->homeArticle2Title = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article2_image2;
-		public function getArticle2_image2()
+		private $homeArticle2;
+		public function getHomeArticle2()
 		{
-			return $this->article2_image2;
+			return $this->homeArticle2;
 		}
-		public function setArticle2_image2($new)
+		public function setHomeArticle2($new)
 		{
-			$this->article2_image2 = $new;
+			$this->homeArticle2 = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $homeArticle2Img;
+		public function getHomeArticle2Img()
+		{
+			return $this->homeArticle2Img;
+		}
+		public function setHomeArticle2Img($new)
+		{
+			$this->homeArticle2Img = $new;
 		}
 
 		//-----------------------------------------------------------------------
@@ -211,175 +125,200 @@ include_once('../controller/ConfigConnGP.php');
 		private $theHome;
 		public function getHome($idHome)
 		{
-			$conn = connectDB();
-            date_default_timezone_set($_SESSION['timeZone']);
+			include_once('../model/dbConnect.class.php');
+			
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
+
+			date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $conn->prepare("SELECT
-										`home`.`id_home`,
-										`home`.`titre1`,
-										`home`.`intro_chapter1`,
-										`home`.`intro_chapter2`,
-										`home`.`titre2`,
-										`home`.`article1_titre`,
-										`home`.`article1_chapter1`,
-										`home`.`article1_image1`,
-										`home`.`article1_titre2`,
-										`home`.`article1_chapter2`,
-										`home`.`article1_image2`,
-										`home`.`article2_titre`,
-										`home`.`article2_chapter1`,
-										`home`.`article2_image1`,
-										`home`.`article2_titre2`,
-										`home`.`article2_chapter2`,
-										`home`.`article2_image2`
+				$stmt = $bdd->prepare("SELECT
+											`home`.`home_id`,
+											`home`.`home_title`,
+											`home`.`home_subtitle`,
+											`home`.`home_title_page`,
+											`home`.`home_article1_title`,
+											`home`.`home_article1`,
+											`home`.`home_article1_img`,
+											`home`.`home_article2_title`,
+											`home`.`home_article2`,
+											`home`.`home_article2_img`
+										FROM `home`
+										WHERE `home`.`home_id` = :idHome");
+				$stmt->bindParam(':idHome', $idHome, PDO::PARAM_INT);
+				$stmt->execute();
 
-									FROM `home`
-
-									WHERE `home`.`id_home`=:idHome
-								");
-
-				$sql->bindParam(':idHome', $idHome, PDO::PARAM_INT);
-				$sql->execute();
-
-				$this->theHome = $sql->fetch(PDO::FETCH_ASSOC);
+				$this->theHome = $stmt->fetch(PDO::FETCH_ASSOC);
 				return $this->theHome;
-
 			}
 			catch (PDOException $e)
 			{
-				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+				echo "Erreur de la requête :" . $e->getMessage();
 			}
 
-			$conn=null;
+			$bdd = null;
 		}
+
 
 		//-----------------------------------------------------------------------
 
 		private $homeList;
-		public function get($whereClause, $orderBy = 'id_home', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
+		public function get($whereClause, $orderBy = 'home_id', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			$conn = connectDB();
-            date_default_timezone_set($_SESSION['timeZone']);
+			include_once('../model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 			
 			try
 			{
-			    $sql = $conn->prepare("SELECT
-										`home`.`id_home`,
-										`home`.`titre1`,
-										`home`.`intro_chapter1`,
-										`home`.`intro_chapter2`,
-										`home`.`titre2`,
-										`home`.`article1_titre`,
-										`home`.`article1_chapter1`,
-										`home`.`article1_image1`,
-										`home`.`article1_titre2`,
-										`home`.`article1_chapter2`,
-										`home`.`article1_image2`,
-										`home`.`article2_titre`,
-										`home`.`article2_chapter1`,
-										`home`.`article2_image1`,
-										`home`.`article2_titre2`,
-										`home`.`article2_chapter2`,
-										`home`.`article2_image2`
+				$stmt = $bdd->prepare("SELECT
+											`home`.`home_id`,
+											`home`.`home_title`,
+											`home`.`home_subtitle`,
+											`home`.`home_title_page`,
+											`home`.`home_article1_title`,
+											`home`.`home_article1`,
+											`home`.`home_article1_img`,
+											`home`.`home_article2_title`,
+											`home`.`home_article2`,
+											`home`.`home_article2_img`
+										FROM `home`
+										WHERE $whereClause
+										ORDER BY $orderBy $ascOrDesc
+										LIMIT :firstLine, :linePerPage");
+				$stmt->bindParam(':firstLine', $firstLine, PDO::PARAM_INT);
+				$stmt->bindParam(':linePerPage', $linePerPage, PDO::PARAM_INT);
+				$stmt->execute();
 
-									FROM `home`
-
-									WHERE $whereClause
-									ORDER BY $orderBy $ascOrDesc
-									LIMIT :firstLine, :linePerPage
-								");
-
-				$sql->bindParam(':firstLine', $firstLine, PDO::PARAM_INT);
-				$sql->bindParam(':linePerPage', $linePerPage, PDO::PARAM_INT);
-				$sql->execute();
-
-				$this->homeList = $sql->fetchAll(PDO::FETCH_ASSOC);
+				$this->homeList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				return $this->homeList;
-
 			}
 			catch (PDOException $e)
 			{
-				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+				echo "Erreur de la requête :" . $e->getMessage();
 			}
 
-			$conn=null;
+			$bdd = null;
 		}
+
 
 		//-----------------------------------------------------------------------
 
-		public function updateHome($idHome){
-			$conn = connectDB();
-			date_default_timezone_set($_SESSION['timeZone']);
+		public function updateHome($homeId)
+		{
+			include_once('../model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try{
-				$sql = $conn->prepare("UPDATE `home`
-										SET `titre1` = :titre1,
-											`intro_chapter1` = :intro_chapter1,
-											`intro_chapter2` = :intro_chapter2,
-											`titre2` = :titre2,
-											`article1_titre` = :article1_titre,
-											`article1_chapter1` = :article1_chapter1,
-											`article1_titre2` = :article1_titre2,
-											`article1_chapter2` = :article1_chapter2,
-											`article2_titre` = :article2_titre,
-											`article2_chapter1` = :article2_chapter1,
-											`article2_titre2` = :article2_titre2,
-											`article2_chapter2` = :article2_chapter2
-										WHERE `id_home` = :id_home"
-									);
-
-				$sql->bindParam(':titre1', $this->titre1, PDO::PARAM_STR);
-				$sql->bindParam(':intro_chapter1', $this->intro_chapter1, PDO::PARAM_STR);
-				$sql->bindParam(':intro_chapter2', $this->intro_chapter2, PDO::PARAM_STR);
-				$sql->bindParam(':titre2', $this->titre2, PDO::PARAM_STR);
-				$sql->bindParam(':article1_titre', $this->article1_titre, PDO::PARAM_STR);
-				$sql->bindParam(':article1_chapter1', $this->article1_chapter1, PDO::PARAM_STR);
-				$sql->bindParam(':article1_titre2', $this->article1_titre2, PDO::PARAM_STR);
-				$sql->bindParam(':article1_chapter2', $this->article1_chapter2, PDO::PARAM_STR);
-				$sql->bindParam(':article2_titre', $this->article2_titre, PDO::PARAM_STR);
-				$sql->bindParam(':article2_chapter1', $this->article2_chapter1, PDO::PARAM_STR);
-				$sql->bindParam(':article2_titre2', $this->article2_titre2, PDO::PARAM_STR);
-				$sql->bindParam(':article2_chapter2', $this->article2_chapter2, PDO::PARAM_STR);
-				$sql->bindParam(':id_home', $idHome, PDO::PARAM_INT);
-
-				$sql->execute();
-								
-				echo '<script>alert("Les modifications sont enregistrées!");</script>';
-
-			}catch(PDOException $e){
+				$stmt = $bdd->prepare("UPDATE `home`
+										SET `home_title` = :homeTitle,
+											`home_subtitle` = :homeSubtitle,
+											`home_title_page` = :homeTitlePage,
+											`home_article1_title` = :homeArticle1Title,
+											`home_article1` = :homeArticle1,
+											`home_article1_img` = :homeArticle1Img,
+											`home_article2_title` = :homeArticle2Title,
+											`home_article2` = :homeArticle2,
+											`home_article2_img` = :homeArticle2Img
+											
+										WHERE `home_id` = :homeId");
 				
-				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
-
+				$stmt->bindParam(':homeTitle', $this->homeTitle, PDO::PARAM_STR);
+				$stmt->bindParam(':homeSubtitle', $this->homeSubtitle, PDO::PARAM_STR);
+				$stmt->bindParam(':homeTitlePage', $this->homeTitlePage, PDO::PARAM_STR);
+				$stmt->bindParam(':homeArticle1Title', $this->homeArticle1Title, PDO::PARAM_STR);
+				$stmt->bindParam(':homeArticle1', $this->homeArticle1, PDO::PARAM_STR);
+				$stmt->bindParam(':homeArticle1Img', $this->homeArticle1Img, PDO::PARAM_STR);
+				$stmt->bindParam(':homeArticle2Title', $this->homeArticle2Title, PDO::PARAM_STR);
+				$stmt->bindParam(':homeArticle2', $this->homeArticle2, PDO::PARAM_STR);
+				$stmt->bindParam(':homeArticle2Img', $this->homeArticle2Img, PDO::PARAM_STR);
+				$stmt->bindParam(':homeId', $homeId, PDO::PARAM_INT);
+				
+				$stmt->execute();
+							
+				//echo '<script>alert("Les modifications sont enregistrées!");</script>';
+			}
+			catch (PDOException $e)
+			{
+				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$conn = null;
+			$bdd=null;
 		}
-		
+
 		//-----------------------------------------------------------------------
 
-		public function deleteHome($id){
-
-			$conn = connectDB();
-            date_default_timezone_set($_SESSION['timeZone']);
-
+		public function deleteHome($id)
+		{
+			include_once('../model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
+			
 			try
 			{
-			    $sql = $conn->prepare('DELETE FROM home WHERE id_home = :id');
-				
-				$sql->bindParam(':id', $id, PDO::PARAM_INT);
-				$sql->execute();
+				$stmt = $bdd->prepare('DELETE FROM home WHERE home_id = :id');
+				$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+				$stmt->execute();
 
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
 			catch (PDOException $e)
 			{
-				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+				echo "Erreur de la requete :" . $e->getMessage();
 			}
 
-			$conn=null;
+			$bdd = null;
+		}
 
+		public function newHome()
+		{
+			include_once('../model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
+	
+			try
+			{
+				$stmt = $bdd->prepare("INSERT INTO `home` (`titre1`,
+															`titre_chapter1`,
+															`chapter1`,
+															`img_chapter1`,
+															`titre_chapter2`,
+															`chapter2`,
+															`img_chapter2`) 
+										VALUES (:titre1,
+												:titreChapter1,
+												:chapter1,
+												:imgChapter1,
+												:titreChapter2,
+												:chapter2,
+												:imgChapter2)");
+	
+				$stmt->bindParam(':titre1', $this->titre1, PDO::PARAM_STR);
+				$stmt->bindParam(':titreChapter1', $this->titre_chapter1, PDO::PARAM_STR);
+				$stmt->bindParam(':chapter1', $this->chapter1, PDO::PARAM_STR);
+				$stmt->bindParam(':imgChapter1', $this->img_chapter1, PDO::PARAM_STR);
+				$stmt->bindParam(':titreChapter2', $this->titre_chapter2, PDO::PARAM_STR);
+				$stmt->bindParam(':chapter2', $this->chapter2, PDO::PARAM_STR);
+				$stmt->bindParam(':imgChapter2', $this->img_chapter2, PDO::PARAM_STR);
+	
+				$stmt->execute();
+				
+				echo "Nouvel enregistrement créé avec succès.";
+			}
+			catch (PDOException $e)
+			{
+				echo "Erreur de la requête : " . $e->getMessage();
+			}
+	
+			$bdd = null;
 		}
 
 	}

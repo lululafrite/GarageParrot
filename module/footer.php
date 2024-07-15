@@ -1,29 +1,34 @@
-<footer class="container-fluid pt-5 mt-5" style="background-image: url('img/baniere/carbone_1920x450.jpg'); background-size: cover; background-position: center; height: auto; width:auto;">
-    <div class="d-flex justify-content-center">
-        <div class="container">
-            <div class="row">
-                <!-- <div class="col-12 col-lg-5 mx-auto ms-lg-0 text-center "> -->
-                <div class="col-12 col-lg-5 mx-auto ms-lg-0">
-                    <?php include ('../module/schedules.php'); ?>
-                </div>
-                <!-- <div class="col-12 col-lg-5 mx-auto me-lg-0 text-center "> -->
-                <div class="col-12 col-lg-5 mx-auto me-lg-0">
-                    <?php include ('../module/contact.php'); ?>
-                </div>
-            </div>
-        </div>
+<footer class='d-flex flex-column m-auto p-0'>
+
+    <div class="d-flex justify-content-center justify-item-center m-auto">
+
+        <section class="d-flex flex-column flex-sm-row justify-content-center">
+            
+            <article class="border-end"></article>
+
+            <article class="d-flex justify-content-center me-0 me-sm-5">
+                <ul class="text-light m-0 p-0 px-sm-3">
+                    <li class="text-danger"><strong>Nous recommandons</strong></li>
+                    <li>Jeu vidéo : <a href="https://www.youtube.com/watch?v=huxntHu4rkU&list=PLkqP2Oulr-MS12SAsTzLeoSWjCGdxBhJ6&index=8" target="_blank">Microids</a><li>
+                    <li>Histoire : <a href="https://fr.wikipedia.org/wiki/Goldorak" target="_blank">Wikipédia</a><li>
+                    <li>Blog :  <a href="https://www.goldorakgo.com/wiki/index.php?title=GOLDORAK" target="_blank">Wikirak</a></li>
+                </ul>
+            </article>
+            <hr>
+            <article class="border-end"></article>
+            
+            <article class="d-flex justify-content-center me-0 me-sm-5">
+                <ul class="text-light m-0 p-0 px-sm-3">
+                    <li class="text-danger"><strong>Nous contacter</strong></li>
+                    <li>Email : <a href="mailto:ludovic.follaco@free.fr">ludovic.follaco@free.fr</a><li>
+                    <li>Tel : <a href="tel:+33608818390">+33 (0)6.08.81.83.90</a><li>
+                    <li>Adresse :<br>20, Hameau de Thiron<br>78980 Bréval</li>
+                </ul>
+            </article>
+
+            <article class="border-end"></article>
+        </section>
+
     </div>
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div  class="col-3 text-center bg-dark bg-gradient rounded-5 px-0 py-2 mx-0 mt-5">
-                <img class="pb-3 pb-md-0" src="img/icon/youtube_white_77x60.webp" alt="logo youtube" style="height: 40px;">
-                <img class="pb-3 pb-md-0" src="img/icon/twitter_white_60x60.webp" alt="logo txitter ou x" style="height: 40px;">
-                <img class="pb-3 pb-md-0" src="img/icon/instagram.png" alt="logo instagram" style="height: 40px;">
-                <img class="pb-3 pb-md-0" src="img/icon/tiktok.webp" alt="logo txitter ou x" style="height: 40px;">
-            </div>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center text-light fs-4 mt-4 mb-0">
-        <p class="text-center">© 2024 Ludovic FOLLACO tous droits réservés. Contacter le webmaster +33(0)6.08.81.83.90</p>
-    </div>
+
 </footer>

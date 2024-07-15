@@ -1,5 +1,25 @@
 <?php
 
+    use Firebase\JWT\JWT;
+
+    // Creating of JWT token
+
+    function tokenJwt ($pseudo, $key){
+            
+        $payload = array(
+
+            "user_pseudo" => $pseudo,
+            "delay" => time() + 30,
+            "key" => $key
+
+        );
+
+        $value = JWT::jsonEncode($payload);
+
+        return $value;
+
+    }
+
     // Create and verification of CSRF token
     function verifCsrf($varCsrf) {
             
@@ -77,7 +97,7 @@
             
         if($_SESSION['local']){
 
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=error_page";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=error_page";</script>';
         
         }else{
 
@@ -93,7 +113,7 @@
             
         if($_SESSION['local']){
             
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=unknownPage";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=unknownPage";</script>';
         
         }
         else{
@@ -107,17 +127,52 @@
 
     // Rerouted if page does not exist 
     function timeExpired(){
+
+        $current_url = $_SERVER['REQUEST_URI'];
+        $goldorak = '/goldorak/';
+        $garageParrot = '/garageparrot/';
+    
+        if(preg_match($goldorak, $current_url)){
             
-        if($_SESSION['local']){
+            if($_SESSION['local']){
+
+                echo '<script>window.location.href = "http://mycv/goldorak/index.php?page=timeExpired";</script>';
             
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=timeExpired";</script>';
+            }
+            else{
+
+                echo '<script>window.location.href = "https://www.follaco.fr/goldorak/index.php?page=timeExpired";</script>';
+            
+            }
+
+        }else if(preg_match($garageParrot, $current_url)){
+            
+            if($_SESSION['local']){
+
+                echo '<script>window.location.href = "http://mycv/garageparrot/index.php?page=timeExpired";</script>';
         
-        }
-        else{
+            }
+            else{
+
+                echo '<script>window.location.href = "https://www.follaco.fr/garageparrot/index.php?page=timeExpired";</script>';
             
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=timeExpired";</script>';
+            }
+
+        }else{
+            
+            if($_SESSION['local']){
+
+                echo '<script>window.location.href = "http://mycv/index.php?page=timeExpired";</script>';
         
+            }
+            else{
+
+                echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=timeExpired";</script>';
+            
+            }
+
         }
+
         exit();
         
     }
@@ -127,7 +182,7 @@
             
         if($_SESSION['local']){
             
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=home";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=home";</script>';
         
 
         }else{
@@ -138,11 +193,43 @@
         exit();
     }
 
+    // Route to home page
+    function routeToHomePageGarageParrot(){
+            
+        if($_SESSION['local']){
+            
+            echo '<script>window.location.href = "http://mycv/garageparrot/index.php?page=home";</script>';
+        
+
+        }else{
+
+            echo '<script>window.location.href = "https://www.follaco.fr/garageparrot/index.php?page=home";</script>';
+
+        }
+        exit();
+    }
+
+    // Route to home page
+    function routeToHomePageGoldorak(){
+            
+        if($_SESSION['local']){
+            
+            echo '<script>window.location.href = "http://mycv/goldorak/index.php?page=home";</script>';
+        
+
+        }else{
+
+            echo '<script>window.location.href = "https://www.follaco.fr/goldorak/index.php?page=home";</script>';
+
+        }
+        //exit();
+    }
+
     // Route to user page
     function routeToUserPage(){
         if($_SESSION['local']){
 
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=user";</script>';
         
         }
         else{
@@ -157,7 +244,7 @@
     function routeToCarEditPage(){
         if($_SESSION['local']){
 
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=carEdit";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=carEdit";</script>';
         
         }
         else{
@@ -172,7 +259,7 @@
     function routeToCarPage(){
         if($_SESSION['local']){
 
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=car";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=car";</script>';
         
         }
         else{
@@ -187,7 +274,7 @@
     function routeToConnexionPage(){
         if($_SESSION['local']){
 
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=connexion";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=connexion";</script>';
         
         }
         else{
@@ -202,7 +289,7 @@
     function routeToDisconnectPage(){
         if($_SESSION['local']){
 
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=disconnect";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=disconnect";</script>';
         
         }
         else{
@@ -217,7 +304,7 @@
     function returnNewError(){
         if($_SESSION['local']){
 
-            echo '<script>window.location.href = "http://garageparrot/index.php?page=user_edit&newError=true";</script>';
+            echo '<script>window.location.href = "http://mycv/index.php?page=user_edit&newError=true";</script>';
 
         }else{
 
@@ -276,6 +363,14 @@
         $_SESSION['ligneParPage'] = 3;
         $_SESSION['nbOfPage'] = 1;
 
+        
+    }
+
+    function resetVariableGoldorak(){
+
+        $_SESSION['updateMoncompte'] = false;
+        $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
         
     }
 

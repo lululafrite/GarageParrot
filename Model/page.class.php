@@ -1,19 +1,7 @@
 <?php
 
-include_once('../controller/ConfigConnGP.php');
-
 	class Page
-    {
-        //*******************************************************************
-        // Classe de gestion des pages
-        //*******************************************************************
-
-        // __CONSTRUCTEUR de la CLASS
-
-        public function __construct()
-        {
-        }
-        
+    {        
         // __Nombre de ligne__________________________________________
 
         public function getNbOfLine()
@@ -106,23 +94,25 @@ include_once('../controller/ConfigConnGP.php');
 		}
 		public function setCountLine($theTable)
 		{
-			$conn = connectDB();
-            date_default_timezone_set($_SESSION['timeZone']);
+			include_once('../model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
                 if(empty($_SESSION['whereClause'])){
-                    $this->countLine = $conn->query('SELECT count(*) FROM ' . $theTable)->fetchColumn();
+                    $this->countLine = $bdd->query('SELECT count(*) FROM ' . $theTable)->fetchColumn();
                 }else{
-                    $this->countLine = $conn->query("SELECT count(*) FROM `" . $theTable . "` WHERE " . $_SESSION['whereClause'])->fetchColumn();
+                    $this->countLine = $bdd->query("SELECT count(*) FROM `" . $theTable . "` WHERE " . $_SESSION['whereClause'])->fetchColumn();
                 }
 			}
-			catch (PDOException $e)
+			catch (Exception $e)
 			{
-				echo '<script>alert("Erreur de la requête : ' . $e->getMessage() . '");</script>';
+				echo "Erreur de la requete :" . $e->GetMessage();
 			}
 
-			$conn=null;
+			$bdd=null;
 		}
     }
 

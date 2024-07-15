@@ -1,35 +1,84 @@
-<header class="container-fluid m-0 mb-5 p-0 pb-1" style="background-image: url('img/baniere/Black-Car-Wallpaper_1300x428.jpg'); background-size: cover; background-position: center; height: auto; width:auto ">
+<?php include_once ("../controller/home.controller.php");?>
+
+<header class="d-flex flex-column m-auto p-0">
 
     <div class="container-fluid m-0 p-0">
         <?php include_once('../module/navBar.php'); ?>
     </div>
     
-    <div class="d-sm-flex justify-content-sm-between p-3">
-        
-        <div class="container-fluid text-center m-auto">
-            <h1 class="text-light">GARAGE V.PARROT</h1>
-            <h2 class="text-light">Des véhicules de qualité selectionnés par des experts</h2>
-        </div>
+    <div class="container-fluid text-center justify-item-center m-auto">
+
+        <form method="post" id="formHome" enctype="multipart/form-data">
+            
+            <!-- input hidden csrf -->
+            <input
+                type="hidden"
+                name="csrfHome"
+                value="<?php echo $_SESSION['csrfHome'];?>"
+            >
+
+            <?php if ($_SESSION['typeConnect']!='Administrator'){ ?>
+
+                <h1 class="text-light"><?php echo escapeInput($home[0]['home_title']); ?></h1>
+                <h2 class="text-light"><?php echo escapeInput($home[0]['home_subtitle']); ?></h2>
+
+            <?php }else if ($_SESSION['typeConnect']==='Administrator'){ ?>
+
+                <h1>
+
+                    <input
+                        class="text-center"
+                        type="text"
+                        id="text_home_title"
+                        name="text_home_title"
+                        value="<?php echo escapeInput($home[0]['home_title']); ?>"
+                    >
+
+                </h1>
+                <h2>
+
+                    <input
+                        class="text-center"
+                        type="text"
+                        id="text_home_subtitle"
+                        name="text_home_subtitle"
+                        value="<?php echo escapeInput($home[0]['home_subtitle']); ?>"
+                    >
+
+                </h2>
+
+            <?php } ?>
+
+            <?php if($_SESSION['typeConnect'] === 'Administrator'){ ?>
+
+                <div class="container d-flex justify-content-center mt-5">
+
+                    <div class="row">
+
+                        <!-- Start button Save -->
+
+                        <div class="container d-flex justify-content-center mb-2">
+
+                            <input
+                                class="btn btn-lg btn-success w-100"
+                                type="button"
+                                name="btn_save_header"
+                                id="btn_save_header"
+                                value="Enregistrer"
+                            >
+
+                        </div>
+
+                        <!-- End button Save -->
+
+                    </div>
+
+                </div>
+
+            <?php } ?>
+
+        <!-- </form> -->
 
     </div>
-    
-    <?php
-        
-        if (isset($_POST['next']) || isset($_POST['previous'])){
-            include_once('../controller/page.controller.php');
-        }
-        /*
-        if ($page === 'car' && $_SESSION['userConnected'] === 'Administrator'){
-            include('../module/searchCarAdmin.php');
-        }
-        
-        if ($page === 'user'){
-            include('../module/searchUser.php');
-        }
-        */
-
-    ?>
 
 </header>
-
-

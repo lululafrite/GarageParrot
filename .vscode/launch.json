@@ -1,3 +1,43 @@
+//Le tuto Xdebug est après de la configuration ci-dessous
+//Le tuto Debug javascript est après le tuto XDEBUG
+
+{
+    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
+    // Pointez pour afficher la description des attributs existants.
+    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Lancer node",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/public"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Lancer Chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}/public"
+        },
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Lancer Edge",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}/public"
+        },
+        {
+            "type": "php",
+            "request": "launch",
+            "name": "Lancer Xdebug",
+            "port": 9003
+        }
+    ]
+}
+
 //************************************************************
 // DEBOGAGE AVEC XDEBUG pour PHP
 //************************************************************
@@ -51,18 +91,30 @@
 // Fin tuto Xdebug
 //************************************************************
 
-{
-    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
-    // Pointez pour afficher la description des attributs existants.
-    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
 
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Listen for Xdebug",
-            "type": "php",
-            "request": "launch",
-            "port": 9003
+//************************************************************
+// Tuto Debug Javascript
+//************************************************************
+/*
+Installez les extentions suivantes :
+
+    - JavaScript Debugger (Nightly) edité par Microsoft
+    - JavaScript Debugger edité par Microsoft
+
+Créez (à la racine du projet) et configurez le fichier package.json :
+
+    {
+        "name": "NomDuProjet", //Remplacez NomDuProjet par le nom de votre projet
+        "version": "1.0.0",
+        "description": "Description du projet",  //Remplacez la description par celle de votre projet
+        "main": "home.php",
+        "scripts": {
+            "start": "php -S 0.0.0.0:8080 -t public"
         }
-    ]
-}
+    }
+
+Ouvrir un terminal : Javascript Debug Terminal
+Executez la commande : npm run start
+Lancer le débugeur Edge ou Chrome : lancer Edge ou Lancer Chrome
+
+*/
